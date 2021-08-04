@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Logo from "../images/logo.png";
-import { social } from "./social";
+import Social from "./social";
 const navigation = {
   learn_more: [
     { name: "Success Stories", href: "#" },
@@ -39,16 +39,7 @@ export default function Footer() {
             </div>
 
             <div className="flex space-x-6">
-              {social.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className=" hover:text-gray-500"
-                >
-                  <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-6 w-6" aria-hidden="true" />
-                </a>
-              ))}
+              <Social classProps="h-6 w-6 text-gray-500 hover:text-gray-800 cursor-pointer" />
             </div>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">

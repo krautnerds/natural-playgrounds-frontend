@@ -3,6 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import Logo from "../images/logo.png";
 import Image from "next/image";
+import { useCart } from "../hooks/use-cart";
 import {
   ShoppingCartIcon,
   MenuIcon,
@@ -31,6 +32,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const { totalItems } = useCart();
   return (
     <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
@@ -40,13 +42,13 @@ export default function Example() {
               <div className="relative h-28 flex justify-between">
                 <div className="relative z-10 px-2 flex lg:px-0">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link href="/">
+                    <Link href="/" passHref>
                       <Image
                         className="h-16"
                         src={Logo}
                         alt="Natural Playgrounds Logo"
-                        width="175px"
-                        height="85px"
+                        width="161px"
+                        height="100px"
                       />
                     </Link>
                   </div>
@@ -85,23 +87,32 @@ export default function Example() {
                   </Disclosure.Button>
                 </div>
                 <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center space-x-4">
-                  <Link href="/cart/">
+                  <Link href="/cart/" passHref>
                     <a className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500">
                       <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                         <span className="sr-only">View Shopping Cart</span>
-                        <ShoppingCartIcon
-                          className="h-6 w-6"
-                          aria-hidden="true"
-                        />
+                        <span className="inline-block relative">
+                          <ShoppingCartIcon
+                            className="h-8 w-8"
+                            aria-hidden="true"
+                          />
+                          {totalItems > 0 && (
+                            <span className="absolute top-0 right-0 block h-5 w-5 transform -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white bg-dark-green flex justify-center items-center">
+                              <span className="text-xs text-white">
+                                {totalItems}
+                              </span>
+                            </span>
+                          )}
+                        </span>
                       </button>
                       <p>Shopping Cart</p>
                     </a>
                   </Link>
-                  <Link href="/account/">
+                  <Link href="/account/" passHref>
                     <a className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500">
                       <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                         <span className="sr-only">View notifications</span>
-                        <UserIcon className="h-6 w-6" aria-hidden="true" />
+                        <UserIcon className="h-8 w-8" aria-hidden="true" />
                       </button>
                       <p>My Account</p>
                     </a>
@@ -118,7 +129,7 @@ export default function Example() {
                     aria-label="Global"
                   >
                     {navigation.map((item) => (
-                      <Link href={item.href} key={item.name}>
+                      <Link href={item.href} key={item.name} passHref>
                         <a
                           className={
                             "rounded-md py-2 px-3 inline-flex items-center text-sm uppercase font-medium text-white"
@@ -138,9 +149,8 @@ export default function Example() {
           <Disclosure.Panel as="nav" className="lg:hidden" aria-label="Global">
             <div className="pt-2 pb-3 px-2 space-y-1">
               {mobileNavigation.map((item) => (
-                <Link href={item.href}>
+                <Link href={item.href} key={item.name} passHref>
                   <a
-                    key={item.name}
                     className="block rounded-md py-2 px-3 text-base font-medium"
                     aria-current={item.current ? "page" : undefined}
                   >
