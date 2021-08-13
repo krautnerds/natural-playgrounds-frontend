@@ -82,7 +82,7 @@ export default function Product({ product }) {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `${process.env.API_URL}/api/products/${params.slug}/`
+    `${process.env.API_URL}/api/products/${params.slug}/?format=json`
   );
 
   return {
@@ -92,7 +92,7 @@ export async function getStaticProps({ params }) {
   };
 }
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.API_URL}/api/products/`);
+  const res = await fetch(`${process.env.API_URL}/api/products/?format=json`);
   const products = await res.json();
   const paths = products.map((product) => {
     return {
