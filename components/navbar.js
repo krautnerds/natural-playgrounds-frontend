@@ -43,13 +43,15 @@ export default function Example() {
                 <div className="relative px-2 flex lg:px-0">
                   <div className="flex-shrink-0 flex items-center">
                     <Link href="/" passHref>
-                      <Image
-                        className="h-16 no-underline"
-                        src={Logo}
-                        alt="Natural Playgrounds Logo"
-                        width="161px"
-                        height="100px"
-                      />
+                      <a className="z-10">
+                        <Image
+                          className="h-16 no-underline"
+                          src={Logo}
+                          alt="Natural Playgrounds Logo"
+                          width="161px"
+                          height="100px"
+                        />
+                      </a>
                     </Link>
                   </div>
                 </div>

@@ -1,17 +1,14 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { PlusSmIcon } from "@heroicons/react/solid";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import Image from "next/image";
 
 export default function Search({ results, category }) {
   const [search, setSearch] = useState("");
   const [localResults, setLocalResults] = useState(results);
   const [filterable, setFilterable] = useState([]);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {}, []);
 
   const filterSelected = (value) => {
     // Save the filters
@@ -39,6 +36,7 @@ export default function Search({ results, category }) {
     } else {
       filteredResults = results;
     }
+    window.scrollTo(0, 0);
     setTimeout(
       function () {
         //Start the timer
@@ -55,7 +53,7 @@ export default function Search({ results, category }) {
         <aside>
           <h2 className="sr-only">Filters</h2>
 
-          <div className="block">
+          <div className="sticky top-16">
             <h3 className="text-2xl font-medium leading-6 text-gray-900 pb-4">
               Select a Category
             </h3>
@@ -102,8 +100,9 @@ export default function Search({ results, category }) {
                   className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden"
                 >
                   <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-64">
-                    <img
+                    <Image
                       src={product.image_url}
+                      alt={`Product Image for ${product.name}`}
                       className="w-full h-full object-center object-cover sm:w-full sm:h-full"
                     />
                   </div>

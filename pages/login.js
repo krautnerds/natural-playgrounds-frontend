@@ -48,11 +48,11 @@ const Login = () => {
       <div className="w-full flex flex-col items-center">
         <h1 className="text-center text-4xl">Please sign in to continue</h1>
         <p className="mt-8">
-          Don't have an account,{" "}
+          <span>Don&#39;t have an account,</span>
           <Link href="/register">
             <a>create one here</a>
           </Link>
-          .
+          <span>.</span>
         </p>
       </div>
       <div className="w-full max-w-2xl mx-auto">
