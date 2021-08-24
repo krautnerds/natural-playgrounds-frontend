@@ -36,7 +36,6 @@ export default function Search({ results, category }) {
     } else {
       filteredResults = results;
     }
-    window.scrollTo(0, 0);
     setTimeout(
       function () {
         //Start the timer
@@ -100,11 +99,15 @@ export default function Search({ results, category }) {
                   className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden"
                 >
                   <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-64">
-                    <Image
-                      src={product.image_url}
-                      alt={`Product Image for ${product.name}`}
-                      className="w-full h-full object-center object-cover sm:w-full sm:h-full"
-                    />
+                    {product.image_url ? (
+                      <Image
+                        src={product.image_url}
+                        alt={`Product Image for ${product.name}`}
+                        className="w-full h-full object-center object-cover sm:w-full sm:h-full"
+                      />
+                    ) : (
+                      <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
+                    )}
                   </div>
                   <div className="flex-1 p-4 space-y-2 flex flex-col">
                     <h3 className="text-sm font-medium text-gray-900">

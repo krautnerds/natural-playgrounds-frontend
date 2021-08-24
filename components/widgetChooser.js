@@ -1,5 +1,5 @@
 import Text from "./widget/text";
-import Image from "next/image";
+import Image from "./widget/images";
 export default function WidgetChooser({ obj }) {
   return (
     <>
@@ -8,20 +8,12 @@ export default function WidgetChooser({ obj }) {
           <div className="w-full md:w-1/2 h-full items-center align-center justify-center flex flex-col space-y-8">
             {obj.image_one_url && (
               <div className="relative w-full h-full">
-                <Image
-                  className="object-cover shadow-lg"
-                  src={obj.image_one_url}
-                  alt=""
-                />
+                <Image image={obj.image_one_url} obj={obj} />
               </div>
             )}
             {obj.image_two_url && (
               <div className="relative w-2/3 flex justify-center">
-                <Image
-                  className="object-cover shadow-lg"
-                  src={obj.image_two_url}
-                  alt=""
-                />
+                <Image image={obj.image_two_url} obj={obj} />
               </div>
             )}
           </div>
@@ -44,7 +36,7 @@ export default function WidgetChooser({ obj }) {
       {obj.widget_type === "Testimonial" && (
         <div className="container max-w-7xl mx-auto flex flex-col md:flex-row space-x-12">
           <div className="w-full md:w-1/2 h-full">
-            {obj.image_one_url && <Image obj={obj} />}
+            {obj.image_one_url && <Image obj={obj} image={obj.image_one_url} />}
           </div>
           <div className="w-full md:w-1/2 h-full">
             <Text obj={obj} />

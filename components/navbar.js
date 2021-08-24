@@ -89,34 +89,38 @@ export default function Example() {
                   </Disclosure.Button>
                 </div>
                 <div className="hidden lg:ml-4 lg:flex lg:items-center space-x-4">
-                  <Link href="/cart/" passHref>
-                    <a className="no-underline">
-                      <div
-                        className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline"
+                  <div className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline cursor-pointer  text-gray-400">
+                    <button className="">
+                      <span className="sr-only">View Shopping Cart</span>
+                      <span
+                        className="inline-block relative"
                         onClick={() => updateCartSlide(true)}
                       >
-                        <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400">
-                          <span className="sr-only">View Shopping Cart</span>
-                          <span className="inline-block relative">
-                            <ShoppingCartIcon
-                              className="h-8 w-8"
-                              aria-hidden="true"
-                            />
-                            {totalItems > 0 && (
-                              <span className="absolute top-0 right-0 h-5 w-5 transform -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white bg-dark-green flex justify-center items-center">
-                                <span className="text-xs text-white">
-                                  {totalItems}
-                                </span>
-                              </span>
-                            )}
+                        <ShoppingCartIcon
+                          className="h-8 w-8"
+                          aria-hidden="true"
+                        />
+                        {totalItems > 0 && (
+                          <span className="absolute top-0 right-0 h-5 w-5 transform -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white bg-dark-green flex justify-center items-center">
+                            <span className="text-xs text-white">
+                              {totalItems}
+                            </span>
                           </span>
-                        </button>
-                        <p>Shopping Cart</p>
-                      </div>
-                    </a>
-                  </Link>
+                        )}
+                      </span>
+                    </button>
+                    <span
+                      onClick={() => updateCartSlide(true)}
+                      style={{ zIndex: 1 }}
+                    >
+                      Shopping Cart
+                    </span>
+                  </div>
                   <Link href="/account/" passHref>
-                    <a className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline">
+                    <a
+                      className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline relative cursor-pointer"
+                      style={{ zIndex: 1 }}
+                    >
                       <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400">
                         <span className="sr-only">View notifications</span>
                         <UserIcon className="h-8 w-8" aria-hidden="true" />

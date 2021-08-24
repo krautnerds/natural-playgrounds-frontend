@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Search from "../components/search";
+import { Search } from "../components/search";
 
 export default function Page({ results, category }) {
   return (

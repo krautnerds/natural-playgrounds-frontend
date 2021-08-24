@@ -1,12 +1,8 @@
 import Image from "next/image";
-export default function Text({ obj }) {
+export default function Text({ obj, image }) {
   return (
     <div className="relative w-full h-full pt-12">
-      <Image
-        className="object-cover shadow-lg"
-        src={obj.image_one_url}
-        alt=""
-      />
+      {image && <Image className="object-cover shadow-lg" src={image} alt="" />}
     </div>
   );
 }
