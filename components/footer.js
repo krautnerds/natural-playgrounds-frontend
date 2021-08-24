@@ -21,7 +21,7 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-white" aria-labelledby="footer-heading">
+    <footer className="bg-white relative" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
@@ -53,7 +53,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-base text-light-green hover:text-dark-green"
+                        className="text-base text-light-green hover:text-dark-green no-underline"
                       >
                         {item.name}
                       </a>
@@ -70,7 +70,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-base text-light-green hover:text-dark-green"
+                        className="text-base text-light-green hover:text-dark-green  no-underline"
                       >
                         {item.name}
                       </a>
@@ -89,7 +89,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-base text-light-green hover:text-dark-green"
+                        className="text-base text-light-green hover:text-dark-green no-underline"
                       >
                         {item.name}
                       </a>

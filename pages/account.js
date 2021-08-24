@@ -3,6 +3,7 @@ import Router from "next/router";
 import nextCookie from "next-cookies";
 import Layout from "../components/layout";
 import { withAuthSync } from "../lib/auth";
+import axios from "axios";
 
 const Profile = (props) => {
   const { name, login, bio, avatarUrl } = this.props.data;
@@ -12,7 +13,8 @@ const Profile = (props) => {
 
 Profile.getInitialProps = async (ctx) => {
   const { token } = nextCookie(ctx);
-  const apiUrl = `${process.env.API_URL}/api/profile/`;
+  var environment = process.env.API_URL || "http://localhost:8000";
+  const apiUrl = `${environment}/api/account/`;
 
   const redirectOnError = () =>
     typeof window !== "undefined"
@@ -20,18 +22,16 @@ Profile.getInitialProps = async (ctx) => {
       : ctx.res.writeHead(302, { Location: "/login" }).end();
 
   try {
-    const response = await fetch(apiUrl, {
-      credentials: "include",
-      headers: {
-        Authorization: JSON.stringify({ token }),
-      },
+    const response = await axios.post(apiUrl, {
+      token: token,
     });
 
     if (response.ok) {
+      console.error("test");
       const js = await response.json();
-      console.log("js", js);
       return js;
     } else {
+      console.log(response);
       // https://github.com/developit/unfetch#caveats
       return await redirectOnError();
     }

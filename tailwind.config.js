@@ -8,6 +8,7 @@ module.exports = {
         "yellow-gray": "#e5ebe4",
         "dark-green": "#0d5352",
         "light-green": "#adc0ba",
+        "natural-red": "#b83a38",
         sand: "#f0e7de",
       },
       fontFamily: {
@@ -19,5 +20,9 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tailwindcss-container-bleed"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 };

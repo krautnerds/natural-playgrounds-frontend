@@ -4,6 +4,7 @@ const defaultCart = {
 };
 export const CartContext = createContext();
 export function useCartState() {
+  const [cartSlide, updateCartSlide] = useState(false);
   const [cart, updateCart] = useState(defaultCart);
   const cartItems = Object.keys(cart.products).map((key) => {
     return { ...cart.products[key] };
@@ -38,7 +39,14 @@ export function useCartState() {
       return cartState;
     });
   }
-  return { cart, updateCart, addToCart, totalItems };
+  return {
+    cart,
+    updateCart,
+    addToCart,
+    totalItems,
+    cartSlide,
+    updateCartSlide,
+  };
 }
 
 export function useCart() {

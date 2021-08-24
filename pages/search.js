@@ -1,9 +1,12 @@
-/* eslint-disable */
-import React from "react";
-import Search from "../../components/search";
+import Head from "next/head";
+import Search from "../components/search";
 
-export default function ProductIndex({ results, category }) {
-  return <Search results={results} category={category} />;
+export default function Page({ results, category }) {
+  return (
+    <div>
+      <Search results={results} category={category} />
+    </div>
+  );
 }
 
 export async function getStaticProps({ params }) {

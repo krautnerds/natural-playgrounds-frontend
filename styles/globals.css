@@ -41,3 +41,28 @@ h5 {
 .button {
   @apply bg-dark-green border border-transparent shadow-sm py-3 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500;
 }
+
+.hero {
+  position: relative;
+  right: 0;
+}
+
+.hero > div {
+  position: unset !important;
+  overflow: visible !important;
+}
+
+a:not(.no-underline) {
+  @apply underline cursor-pointer;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}

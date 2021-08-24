@@ -1,0 +1,44 @@
+import Head from "next/head";
+import Hero from "../components/hero";
+import WidgetChooser from "../components/widgetChooser";
+
+export default function Page({ page }) {
+  return (
+    <main>
+      <Hero title={page.title} sub_title={page.sub_title} />
+      <div className="flex flex-col space-y-16 relative">
+        {page.widgets &&
+          page.widgets.map((object, i) => (
+            <WidgetChooser obj={object} key={i} />
+          ))}
+      </div>
+    </main>
+  );
+}
+
+export async function getStaticProps({ params }) {
+  const res = await fetch(
+    `${process.env.API_URL}/api/pages/${params.slug}/?format=json`
+  );
+
+  return {
+    props: {
+      page: await res.json(),
+    },
+  };
+}
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.API_URL}/api/pages/?format=json`);
+  const pages = await res.json();
+  const paths = pages.map((page) => {
+    return {
+      params: {
+        slug: page.slug.toString(),
+      },
+    };
+  });
+  return {
+    paths,
+    fallback: false,
+  };
+}

@@ -13,12 +13,12 @@ export default function Contact() {
         <div className="hidden md:flex w-1/2 flex-row justify-end space-x-8">
           <div>
             <Link href="/contact/">
-              <a>Contact Us</a>
+              <a className="no-underline">Contact Us</a>
             </Link>
           </div>
           <div>
             <Link href="/products/">
-              <a>Shop</a>
+              <a className="no-underline">Shop</a>
             </Link>
           </div>
         </div>

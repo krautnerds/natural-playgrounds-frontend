@@ -32,7 +32,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const { totalItems } = useCart();
+  const { totalItems, updateCartSlide } = useCart();
   return (
     <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
@@ -40,11 +40,11 @@ export default function Example() {
           <div>
             <div className="wide-load">
               <div className="relative h-28 flex justify-between">
-                <div className="relative z-10 px-2 flex lg:px-0">
+                <div className="relative px-2 flex lg:px-0">
                   <div className="flex-shrink-0 flex items-center">
                     <Link href="/" passHref>
                       <Image
-                        className="h-16"
+                        className="h-16 no-underline"
                         src={Logo}
                         alt="Natural Playgrounds Logo"
                         width="161px"
@@ -75,7 +75,7 @@ export default function Example() {
                     </div>
                   </div>
                 </div>
-                <div className="relative z-10 flex items-center lg:hidden">
+                <div className="relative  flex items-center lg:hidden">
                   {/* Mobile menu button */}
                   <Disclosure.Button className="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
                     <span className="sr-only">Open menu</span>
@@ -86,31 +86,36 @@ export default function Example() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center space-x-4">
+                <div className="hidden lg:ml-4 lg:flex lg:items-center space-x-4">
                   <Link href="/cart/" passHref>
-                    <a className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500">
-                      <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        <span className="sr-only">View Shopping Cart</span>
-                        <span className="inline-block relative">
-                          <ShoppingCartIcon
-                            className="h-8 w-8"
-                            aria-hidden="true"
-                          />
-                          {totalItems > 0 && (
-                            <span className="absolute top-0 right-0 block h-5 w-5 transform -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white bg-dark-green flex justify-center items-center">
-                              <span className="text-xs text-white">
-                                {totalItems}
+                    <a className="no-underline">
+                      <div
+                        className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline"
+                        onClick={() => updateCartSlide(true)}
+                      >
+                        <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400">
+                          <span className="sr-only">View Shopping Cart</span>
+                          <span className="inline-block relative">
+                            <ShoppingCartIcon
+                              className="h-8 w-8"
+                              aria-hidden="true"
+                            />
+                            {totalItems > 0 && (
+                              <span className="absolute top-0 right-0 h-5 w-5 transform -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white bg-dark-green flex justify-center items-center">
+                                <span className="text-xs text-white">
+                                  {totalItems}
+                                </span>
                               </span>
-                            </span>
-                          )}
-                        </span>
-                      </button>
-                      <p>Shopping Cart</p>
+                            )}
+                          </span>
+                        </button>
+                        <p>Shopping Cart</p>
+                      </div>
                     </a>
                   </Link>
                   <Link href="/account/" passHref>
-                    <a className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500">
-                      <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    <a className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline">
+                      <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400">
                         <span className="sr-only">View notifications</span>
                         <UserIcon className="h-8 w-8" aria-hidden="true" />
                       </button>
@@ -132,7 +137,7 @@ export default function Example() {
                       <Link href={item.href} key={item.name} passHref>
                         <a
                           className={
-                            "rounded-md py-2 px-3 inline-flex items-center text-sm uppercase font-medium text-white"
+                            "rounded-md py-2 px-3 inline-flex items-center text-sm uppercase font-medium text-white  no-underline"
                           }
                           aria-current={item.current ? "page" : undefined}
                         >

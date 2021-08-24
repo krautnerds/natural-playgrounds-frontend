@@ -1,6 +1,6 @@
 export default function Connected() {
   return (
-    <div className="connected">
+    <div className="connected relative">
       <div className="flex flex-row py-4 wide-load space-x-8">
         <div className="w-1/2 flex flex-col">
           <h3>Keep Connected</h3>

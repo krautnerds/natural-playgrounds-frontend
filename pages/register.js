@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Router from "next/router";
-import Form from "../components/userForm";
+import Form from "../components/registerForm";
 import axios from "axios";
 import { login } from "../lib/auth";
-import Link from "next/link";
 
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -13,18 +12,16 @@ const Login = () => {
 
     if (errorMsg) setErrorMsg("");
 
-    const body = {
-      email: e.currentTarget.email.value,
-      password: e.currentTarget.password.value,
-    };
-
     try {
       var environment = process.env.API_URL || "http://localhost:8000";
-      const res = await axios.post(`${environment}/api/auth-token/`, {
-        username: e.currentTarget.email.value,
+      const res = await axios.post(`http://localhost:8000/api/register/`, {
+        email: e.currentTarget.email.value,
+        first_name: e.currentTarget.first_name.value,
+        last_name: e.currentTarget.last_name.value,
         password: e.currentTarget.password.value,
+        password2: e.currentTarget.password2.value,
       });
-      if (res.status === 200) {
+      if (res.status === 201) {
         const { token } = await res.data;
         await login({ token });
         Router.push("/account");
@@ -32,7 +29,6 @@ const Login = () => {
         throw new Error(await res.data);
       }
     } catch (error) {
-      console.error("An unexpected error happened occurred:", error);
       if (
         error.response &&
         error.response.data &&
@@ -44,19 +40,14 @@ const Login = () => {
   }
 
   return (
-    <div className="login wide-load py-12 lg:py-16 flex flex-col space-y-6">
-      <div className="w-full flex flex-col items-center">
-        <h1 className="text-center text-4xl">Please sign in to continue</h1>
-        <p className="mt-8">
-          Don't have an account,{" "}
-          <Link href="/register">
-            <a>create one here</a>
-          </Link>
-          .
-        </p>
+    <div className="login wide-load py-12 lg:py-16 flex flex-col space-y-12">
+      <div className="w-full">
+        <h1 className="text-center text-4xl">
+          Enter Your Information Below To Create An Account
+        </h1>
       </div>
       <div className="w-full max-w-2xl mx-auto">
-        <Form errorMessage={errorMsg} onSubmit={handleSubmit} />
+        <Form isLogin errorMessage={errorMsg} onSubmit={handleSubmit} />
       </div>
     </div>
   );
