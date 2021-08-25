@@ -47,7 +47,7 @@ export default function Search({ results, category }) {
   };
 
   return (
-    <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
+    <main className="max-w-2xl mx-auto px-4 lg:max-w-6xl lg:px-8">
       <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
         <aside>
           <h2 className="sr-only">Filters</h2>

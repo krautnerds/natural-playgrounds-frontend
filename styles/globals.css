@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .wide-load {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 @font-face {
   font-family: "Publica Play Regular";
@@ -97,7 +97,14 @@ h3.sub-title {
 }
 
 .wood.prose {
-  @apply max-w-7xl !important;
+  @apply max-w-6xl !important;
+}
+.full-text.prose {
+  @apply max-w-6xl !important;
+}
+
+.full-text.prose h3 {
+  @apply text-2xl mt-0;
 }
 
 .services {
@@ -106,6 +113,11 @@ h3.sub-title {
 
 .services h3 {
   @apply uppercase font-semibold text-xl text-brown;
+}
+
+.full-text.widget-title {
+  @apply text-3xl uppercase font-semibold text-black pb-4;
+  line-height: 1.25;
 }
 
 .learn-more.widget-title {

@@ -14,15 +14,17 @@ import {
 const navigation = [
   { name: "About", href: "/about/", current: true },
   { name: "Products", href: "/products/", current: false },
-  { name: "Design Services", href: "/design-services/", current: false },
+  { name: "Services", href: "/services/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
+  { name: "Learn", href: "/learn/", current: false },
 ];
 
 const mobileNavigation = [
   { name: "About", href: "/about/", current: true },
   { name: "Products", href: "/products/", current: false },
-  { name: "Design Services", href: "/design-services/", current: false },
+  { name: "Services", href: "/services/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
+  { name: "Learn", href: "/learn/", current: false },
   { name: "Shopping Cart", href: "/cart/", current: false },
   { name: "My Account", href: "/account/", current: false },
 ];
@@ -89,7 +91,7 @@ export default function Example() {
                   </Disclosure.Button>
                 </div>
                 <div className="hidden lg:ml-4 lg:flex lg:items-center space-x-4">
-                  <div className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline cursor-pointer  text-gray-400">
+                  <div className="flex flex-row justify-between space-x-1 items-center  no-underline cursor-pointer  text-black">
                     <button className="">
                       <span className="sr-only">View Shopping Cart</span>
                       <span
@@ -97,7 +99,7 @@ export default function Example() {
                         onClick={() => updateCartSlide(true)}
                       >
                         <ShoppingCartIcon
-                          className="h-8 w-8"
+                          className="h-6 w-6"
                           aria-hidden="true"
                         />
                         {totalItems > 0 && (
@@ -112,20 +114,21 @@ export default function Example() {
                     <span
                       onClick={() => updateCartSlide(true)}
                       style={{ zIndex: 1 }}
+                      className="uppercase text-sm"
                     >
                       Shopping Cart
                     </span>
                   </div>
                   <Link href="/account/" passHref>
                     <a
-                      className="flex flex-row justify-between space-x-1 items-center hover:text-gray-500  no-underline relative cursor-pointer"
+                      className="flex flex-row justify-between space-x-1 items-center h no-underline relative cursor-pointer text-black"
                       style={{ zIndex: 1 }}
                     >
-                      <button className="flex-shrink-0 bg-white rounded-full p-1 text-gray-400">
-                        <span className="sr-only">View notifications</span>
-                        <UserIcon className="h-8 w-8" aria-hidden="true" />
+                      <button className="flex-shrink-0 bg-white rounded-full p-">
+                        <span className="sr-only">View my account</span>
+                        <UserIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
-                      <p>My Account</p>
+                      <p className="uppercase text-sm">My Account</p>
                     </a>
                   </Link>
                 </div>
