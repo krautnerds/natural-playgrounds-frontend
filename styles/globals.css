@@ -66,3 +66,53 @@ a:not(.no-underline) {
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
+
+h1 {
+  @apply text-4xl font-medium  md:text-5xl uppercase;
+
+  line-height: 1.25;
+}
+
+h3.sub-title {
+  @apply text-base font-semibold text-black sm:mt-5 sm:max-w-xl sm:mx-auto md:mt-5 sm:text-lg md:text-2xl lg:mx-0 uppercase;
+}
+
+.prose ul {
+  @apply list-disc list-inside;
+}
+
+.prose ul li:before {
+  display: none;
+}
+
+.wood.prose {
+  @apply text-2xl;
+}
+.widget-title {
+  @apply text-4xl uppercase font-bold pb-8 text-brown;
+}
+.wood.widget-title {
+  @apply text-4xl uppercase font-semibold text-blue-green text-center;
+  line-height: 1.25;
+}
+
+.wood.prose {
+  @apply max-w-7xl !important;
+}
+
+.services {
+  background-color: #ebebeb;
+}
+
+.services h3 {
+  @apply uppercase font-semibold text-xl text-brown;
+}
+
+.learn-more.widget-title {
+  @apply text-3xl uppercase font-semibold text-brown text-center pb-4;
+  line-height: 1.25;
+}
+
+.learn-more p {
+  @apply uppercase text-brown text-center text-xl;
+}

@@ -1,10 +1,11 @@
-export default function Text({ obj }) {
+import Title from "./title";
+export default function Text({ title, content, added_class }) {
   return (
     <>
-      <h2>{obj.title}</h2>
+      <Title title={title} />
       <div
-        className="prose"
-        dangerouslySetInnerHTML={{ __html: obj.content }}
+        className={`prose ${added_class}`}
+        dangerouslySetInnerHTML={{ __html: content }}
       ></div>
     </>
   );

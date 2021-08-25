@@ -1,11 +1,18 @@
 import Head from "next/head";
 import Hero from "../components/hero";
+import WidgetChooser from "../components/widgetChooser";
 
 export default function Page({ page }) {
   return (
-    <div>
+    <main>
       <Hero title={page.title} sub_title={page.sub_title} />
-    </div>
+      <div className="flex flex-col space-y-16 relative">
+        {page.widgets &&
+          page.widgets.map((object, i) => (
+            <WidgetChooser obj={object} key={i} />
+          ))}
+      </div>
+    </main>
   );
 }
 

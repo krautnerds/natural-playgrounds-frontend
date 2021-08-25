@@ -7,13 +7,11 @@ export default function Hero({ title, sub_title }) {
         <div className="relative pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-xl lg:w-full lg:pb-28 xl:pb-32">
           <main className="pt-10 mx-auto max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20">
             <div className="sm:text-center lg:text-left">
-              <h1 className="text-4xl font-normal text-natural-red md:text-5xl uppercase leading-loose">
-                {title}
-              </h1>
+              <h1 className="text-natural-red">{title}</h1>
               {sub_title && (
-                <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 uppercase">
-                  {sub_title}
-                </p>
+                <div className="mt-3">
+                  <h3 className="sub-title">{sub_title}</h3>
+                </div>
               )}
             </div>
           </main>
