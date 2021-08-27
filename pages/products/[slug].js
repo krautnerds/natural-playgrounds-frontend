@@ -133,23 +133,29 @@ export default function Product({ product }) {
               </div>
 
               <div className="mt-10 flex sm:flex-col1">
-                <button
-                  type="button"
-                  className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"
-                  onClick={() => {
-                    addItem({
-                      id: option,
-                      quantity: 1,
-                      price: price,
-                      slug: product.slug,
-                      option: optionName,
-                      name: product.name,
-                      image: product.image_url,
-                    });
-                  }}
-                >
-                  Add to Cart
-                </button>
+                {price > 0 ? (
+                  <button
+                    type="button"
+                    className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"
+                    onClick={() => {
+                      addItem({
+                        id: option,
+                        quantity: 1,
+                        price: price,
+                        slug: product.slug,
+                        option: optionName,
+                        name: product.name,
+                        image: product.image_url,
+                      });
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                ) : (
+                  <div className="max-w-xs flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full cursor-not-allowed">
+                    Select an option to add to cart
+                  </div>
+                )}
 
                 <button
                   type="button"
@@ -161,6 +167,11 @@ export default function Product({ product }) {
                   />
                   <span className="sr-only">Add to favorites</span>
                 </button>
+                {price > 0 && (
+                  <div className="ml-4 h-full flex flex-col items-center align-center text-2xl pt-2 w-16">
+                    ${price}
+                  </div>
+                )}
               </div>
             </form>
 
@@ -219,7 +230,7 @@ export default function Product({ product }) {
             </section>
           </div>
         </div>
-        {product.og_bundles && (
+        {product.og_bundles.length > 0 && (
           <section
             aria-labelledby="related-heading"
             className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
@@ -270,7 +281,7 @@ export default function Product({ product }) {
             </div>
           </section>
         )}
-        {product.og && (
+        {product.og.length > 0 && (
           <section
             aria-labelledby="related-heading"
             className="mt-5 border-t border-gray-200 py-16 px-4 sm:px-0"
