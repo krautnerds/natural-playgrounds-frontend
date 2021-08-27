@@ -1,7 +1,9 @@
 import Text from "./widget/text";
 import NaturalImage from "./widget/images";
+import Link from "next/link";
 import Image from "next/image";
 import Title from "./widget/title";
+import Leaf from "../images/leaf.jpg";
 import Bark from "../images/bark.jpg";
 import Manufacturing from "../images/manufacturing.png";
 import Design from "../images/design.png";
@@ -144,16 +146,68 @@ export default function WidgetChooser({ obj }) {
           </div>
         </div>
       )}
+      {obj.widget_type === "Leafs" && (
+        <div className="relative">
+          <div className="wide-load flex flex-col space-y-6">
+            <div className="w-full justify-center flex flex-col items-center">
+              <Title title={obj.title} added_class="full-text" />
+            </div>
+            <div className="space-y-12 sm:grid grid-cols-1 sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
+              {Object.keys(obj.leafs).map((key) => (
+                <div className="relative flex items-start space-x-3">
+                  <div className="flex-shrink-0">
+                    <Image
+                      className="h-10 w-10 rounded-full"
+                      src={Leaf}
+                      alt=""
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="absolute inset-0" aria-hidden="true" />
+                    <p className="text-lg font-medium text-gray-900">
+                      {obj.leafs[key].content}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+      {obj.widget_type === "Full Width CTA" && (
+        <div className="relative">
+          <div className="wide-load flex flex-col space-y-6">
+            <div className="w-full justify-center flex flex-col items-center">
+              <Link href={obj.cta_link}>
+                <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
+                  <div className="absolute inset-0">
+                    <Image
+                      className="w-full h-full object-cover"
+                      src={Bark}
+                      alt="CTA Bark"
+                    />
+                  </div>
+                  <p className="relative font-bold text-lg uppercase">
+                    {obj.cta_text}
+                  </p>
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
       {obj.widget_type === "Full Width Image" && (
         <div>
           <div className="relative h-[500px]">
             <div className="absolute inset-0">
-              <Image
-                className="h-full w-full object-cover z-[10000]"
-                src={obj.image_one_url}
-                alt={obj.image_one_alt_text}
-                layout="fill"
-              />
+              {obj.image_one_url && (
+                <Image
+                  className="h-full w-full object-cover z-[10000]"
+                  src={obj.image_one_url}
+                  alt={obj.image_one_alt_text}
+                  layout="fill"
+                />
+              )}
               <div className="absolute inset-0"></div>
             </div>
             <div className="absolute top-[-16px] h-16 bg-tan w-[85%] mx-auto flex justify-center left-[10%]"></div>
