@@ -4,6 +4,7 @@ import Router from "next/router";
 import nextCookie from "next-cookies";
 import { withAuthSync } from "../lib/auth";
 import axios from "axios";
+import Image from "next/image";
 import Autocomplete from "react-google-autocomplete";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -342,33 +343,9 @@ const Profile = (props) => {
                                     </a>
                                   </div>
                                 </div>
-                                <div className="mt-6 font-medium">
-                                  {product.status === "delivered" ? (
-                                    <div className="flex space-x-2">
-                                      <CheckIcon
-                                        className="flex-none w-6 h-6 text-green-500"
-                                        aria-hidden="true"
-                                      />
-                                      <p>
-                                        Delivered
-                                        <span className="hidden sm:inline">
-                                          {" "}
-                                          on{" "}
-                                          <time dateTime={product.datetime}>
-                                            {product.date}
-                                          </time>
-                                        </span>
-                                      </p>
-                                    </div>
-                                  ) : product.status === "out-for-delivery" ? (
-                                    <p>Out for delivery</p>
-                                  ) : product.status === "cancelled" ? (
-                                    <p className="text-gray-500">Cancelled</p>
-                                  ) : null}
-                                </div>
                               </div>
                               <div className="ml-4 flex-shrink-0 sm:m-0 sm:mr-6 sm:order-first">
-                                <img
+                                <Image
                                   src={product.image}
                                   alt={`Product image for ${product.name}`}
                                   className="col-start-2 col-end-3 sm:col-start-1 sm:row-start-1 sm:row-span-2 w-20 h-20 rounded-lg object-center object-cover sm:w-40 sm:h-40 lg:w-52 lg:h-52"

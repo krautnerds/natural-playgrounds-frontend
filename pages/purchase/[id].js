@@ -1,6 +1,7 @@
 import nextCookie from "next-cookies";
 import { withAuthSync } from "../../lib/auth";
 import Router from "next/router";
+import Image from "next/image";
 import axios from "axios";
 const Purchase = (props) => {
   return (
@@ -11,7 +12,7 @@ const Purchase = (props) => {
             Thank you!
           </h1>
           <p className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
-            It's on the way!
+            It&lsquo;s on the way!
           </p>
           <p className="mt-2 text-base text-gray-500">
             Your order #{props.sale_number} has shipped and will be with you
@@ -51,8 +52,9 @@ const Purchase = (props) => {
                 key={product.id}
                 className="py-10 border-b border-gray-200 flex space-x-6"
               >
-                <img
+                <Image
                   src={product.image}
+                  alt={`Product image for ${product.name}`}
                   className="flex-none w-20 h-20 object-center object-cover bg-gray-100 rounded-lg sm:w-40 sm:h-40"
                 />
                 <div className="flex-auto flex flex-col">

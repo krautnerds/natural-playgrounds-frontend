@@ -33,11 +33,9 @@ export default function Product({ product }) {
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
-    console.log(option);
     for (var i in product.options) {
       if (product.options[i].id === option) {
         setPrice(product.options[i].current_price);
-        console.log(price);
         break; // If you want to break out of the loop once you've found a match
       }
     }
@@ -142,7 +140,9 @@ export default function Product({ product }) {
                     </option>
                     {product.options &&
                       product.options.map((option) => (
-                        <option value={option.id}>{option.name}</option>
+                        <option value={option.id} key={option.id}>
+                          {option.name}
+                        </option>
                       ))}
                   </select>
                 </div>

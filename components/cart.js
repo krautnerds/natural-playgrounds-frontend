@@ -3,6 +3,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { useCartSlide } from "../hooks/use-cart-slide.js";
 import { useCart } from "react-use-cart";
+import Image from "next/image";
+import Link from "next/link";
 import { ShoppingCartIcon } from "@heroicons/react/outline";
 export default function Cart() {
   const { cartSlide, updateCartSlide } = useCartSlide();
@@ -67,7 +69,7 @@ export default function Cart() {
                               <li key={product.id} className="py-6 flex">
                                 <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
                                   {product.image && (
-                                    <img
+                                    <Image
                                       src={product.image}
                                       alt={`Product Image of ${product.name}`}
                                       className="w-full h-full object-center object-cover"
@@ -80,12 +82,12 @@ export default function Cart() {
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <div>
                                         <h3 className="text-lg">
-                                          <a
+                                          <Link
                                             href={`/products/${product.slug}`}
                                             className="no-underline"
                                           >
                                             {product.name}
-                                          </a>
+                                          </Link>
                                         </h3>
                                       </div>
 
@@ -140,21 +142,24 @@ export default function Cart() {
                               </li>
                             ))
                           ) : (
-                            <a
+                            <Link
                               href="/products/"
                               className="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 no-underline"
+                              passHref
                             >
-                              <ShoppingCartIcon
-                                className="mx-auto h-12 w-12 text-gray-400"
-                                aria-hidden="true"
-                              />
-                              <span className="mt-2 block text-sm font-medium text-gray-900">
-                                Your cart is empty!
-                              </span>
-                              <span className="mt-2 block text-sm font-medium text-gray-900 underline">
-                                View our products
-                              </span>
-                            </a>
+                              <a>
+                                <ShoppingCartIcon
+                                  className="mx-auto h-12 w-12 text-gray-400"
+                                  aria-hidden="true"
+                                />
+                                <span className="mt-2 block text-sm font-medium text-gray-900">
+                                  Your cart is empty!
+                                </span>
+                                <span className="mt-2 block text-sm font-medium text-gray-900 underline">
+                                  View our products
+                                </span>
+                              </a>
+                            </Link>
                           )}
                         </ul>
                       </div>
@@ -170,12 +175,12 @@ export default function Cart() {
                       Shipping is estimated at checkout.
                     </p>
                     <div className="mt-6">
-                      <a
+                      <Link
                         href="/checkout/"
                         className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 no-underline"
                       >
                         Checkout
-                      </a>
+                      </Link>
                     </div>
                     <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
                       <p>

@@ -193,7 +193,11 @@ export default function WidgetChooser({ obj }) {
                 <div className="w-full md:w-1/3 flex justify-center">
                   <div className="relative w-3/4 h-64">
                     {obj.image_one_url && (
-                      <NaturalImage obj={obj} image={obj.image_one_url} />
+                      <NaturalImage
+                        obj={obj}
+                        image={obj.image_one_url}
+                        alt_text={obj.image_one_alt_text}
+                      />
                     )}
                   </div>
                 </div>
@@ -205,7 +209,11 @@ export default function WidgetChooser({ obj }) {
                 <div className="w-full md:w-1/3 flex justify-center">
                   <div className="relative w-3/4 h-64">
                     {obj.image_two_url && (
-                      <NaturalImage obj={obj} image={obj.image_two_url} />
+                      <NaturalImage
+                        obj={obj}
+                        image={obj.image_two_url}
+                        alt_text={obj.image_two_alt_text}
+                      />
                     )}
                   </div>
                 </div>

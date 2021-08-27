@@ -8,6 +8,8 @@ import { withAuthSync } from "../lib/auth";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import Router from "next/router";
+import Image from "next/image";
+import Link from "next/link";
 const Checkout = (props) => {
   const { cartTotal, items, removeItem, updateItemQuantity, emptyCart } =
     useCart();
@@ -308,7 +310,7 @@ const Checkout = (props) => {
                     <li key={item.id} className="flex py-6 px-4 sm:px-6">
                       <div className="flex-shrink-0">
                         {item.image && (
-                          <img
+                          <Image
                             src={item.image}
                             alt={`Product Image of ${item.name}`}
                             className="w-32 h-32 object-center object-cover"
@@ -320,12 +322,12 @@ const Checkout = (props) => {
                         <div className="flex">
                           <div className="min-w-0 flex-1">
                             <h4 className="text-sm">
-                              <a
+                              <Link
                                 href={`/products/${item.slug}`}
                                 className="font-medium text-gray-700 hover:text-gray-800"
                               >
                                 {item.name}
-                              </a>
+                              </Link>
                             </h4>
                             <p className="mt-1 text-sm text-gray-500">
                               {items.option}
@@ -391,10 +393,10 @@ const Checkout = (props) => {
                     <dt className="text-sm">
                       Shipping
                       <br />
-                      <div class="w-3/4 text-xs italic">
+                      <div className="w-3/4 text-xs italic">
                         This is our best guest. Due to the nature of our
                         products we put an estimate together. Once the product
-                        is ready to ship, we'll reach back out with actual
+                        is ready to ship, we&lsquo;ll reach back out with actual
                         shipping amounts. Your card will be charge then.
                       </div>
                     </dt>
