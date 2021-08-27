@@ -154,7 +154,7 @@ export default function WidgetChooser({ obj }) {
             </div>
             <div className="space-y-12 sm:grid grid-cols-1 sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
               {Object.keys(obj.leafs).map((key) => (
-                <div className="relative flex items-start space-x-3">
+                <div className="relative flex items-start space-x-3" key={key}>
                   <div className="flex-shrink-0">
                     <Image
                       className="h-10 w-10 rounded-full"
