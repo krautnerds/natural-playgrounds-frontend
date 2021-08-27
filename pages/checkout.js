@@ -314,6 +314,7 @@ const Checkout = (props) => {
                             src={item.image}
                             alt={`Product Image of ${item.name}`}
                             className="w-32 h-32 object-center object-cover"
+                            layout="fill"
                           />
                         )}
                       </div>

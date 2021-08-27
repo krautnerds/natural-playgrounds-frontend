@@ -67,11 +67,12 @@ export default function Cart() {
                           {items && items.length > 0 ? (
                             items.map((product) => (
                               <li key={product.id} className="py-6 flex">
-                                <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
+                                <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden relative">
                                   {product.image && (
                                     <Image
                                       src={product.image}
                                       alt={`Product Image of ${product.name}`}
+                                      layout="fill"
                                       className="w-full h-full object-center object-cover"
                                     />
                                   )}
@@ -175,11 +176,13 @@ export default function Cart() {
                       Shipping is estimated at checkout.
                     </p>
                     <div className="mt-6">
-                      <Link
-                        href="/checkout/"
-                        className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 no-underline"
-                      >
-                        Checkout
+                      <Link href="/checkout/" passHref>
+                        <a
+                          className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 no-underline"
+                          onClick={() => updateCartSlide(false)}
+                        >
+                          Checkout
+                        </a>
                       </Link>
                     </div>
                     <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
