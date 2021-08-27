@@ -162,7 +162,7 @@ export default function WidgetChooser({ obj }) {
         </div>
       )}
       {obj.widget_type === "Wood Section" && (
-        <div>
+        <div className="mt-0 pt-12">
           <div className="relative sm:overflow-hidden">
             <div className="absolute inset-0">
               <Image

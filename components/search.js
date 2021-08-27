@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { PlusSmIcon } from "@heroicons/react/solid";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Search({ results, category }) {
@@ -14,17 +15,17 @@ export default function Search({ results, category }) {
     // Save the filters
     var local_filters = [...filterable];
     var index = local_filters.indexOf(value);
-    if (index === -1) {
-      local_filters.push(value);
-    } else {
+    if (index === 1) {
       local_filters.splice(index, 1);
+    } else {
+      local_filters.push(value);
     }
     setFilterable(local_filters);
     // Now Filter the data
     let filteredResults = [];
     setLoading(true);
-    if (filterable.length !== 0) {
-      filterable.filter(function (_filter) {
+    if (local_filters.length !== 0) {
+      local_filters.filter(function (_filter) {
         results.filter(function (_result) {
           _result.category.filter(function (_category) {
             if (_category.name.includes(_filter)) {
@@ -36,6 +37,7 @@ export default function Search({ results, category }) {
     } else {
       filteredResults = results;
     }
+    console.log(filteredResults);
     setTimeout(
       function () {
         //Start the timer
@@ -94,38 +96,33 @@ export default function Search({ results, category }) {
           {!loading ? (
             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
               {localResults.map((product) => (
-                <div
-                  key={product.id}
-                  className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden"
-                >
-                  <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-64">
-                    {product.image_url ? (
-                      <Image
-                        src={product.image_url}
-                        alt={`Product Image for ${product.name}`}
-                        className="w-full h-full object-center object-cover sm:w-full sm:h-full"
-                      />
-                    ) : (
-                      <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
-                    )}
-                  </div>
-                  <div className="flex-1 p-4 space-y-2 flex flex-col">
-                    <h3 className="text-sm font-medium text-gray-900">
-                      <a href={product.link}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
-                      </a>
+                <Link key={product.id} href={product.link} className="group">
+                  <a>
+                    <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                      {product.image_url ? (
+                        <Image
+                          src={product.image_url}
+                          alt={`Product Image for ${product.name}`}
+                          className="w-full h-full object-center object-cover group-hover:opacity-75"
+                          layout="fill"
+                        />
+                      ) : (
+                        <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
+                      )}
+                    </div>
+                    <h3 className="mt-4 text-sm text-gray-700">
+                      {product.name}
                     </h3>
                     {product.search_description && (
                       <div
-                        className="prose text-sm text-gray-500"
+                        className="mt-1 text-lg font-medium text-gray-900"
                         dangerouslySetInnerHTML={{
                           __html: product.search_description,
                         }}
-                      ></div>
+                      />
                     )}
-                  </div>
-                </div>
+                  </a>
+                </Link>
               ))}
             </div>
           ) : (
