@@ -11,6 +11,8 @@ import {
   UserIcon,
 } from "@heroicons/react/outline";
 import { CartProvider, useCart } from "react-use-cart";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const navigation = [
   { name: "About", href: "/about/", current: true },
@@ -35,8 +37,10 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const router = useRouter();
   const { updateCartSlide } = useCartSlide();
   const { totalUniqueItems } = useCart();
+  const [searchTerm, setSearchTerm] = useState(router.query["search"] || "");
   return (
     <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
@@ -60,7 +64,10 @@ export default function Example() {
                   </div>
                 </div>
                 <div className="relative z-0 flex-1 px-2 flex items-center justify-center sm:absolute sm:inset-0">
-                  <div className="w-full sm:max-w-xs">
+                  <form
+                    className="w-full sm:max-w-xs hidden md:block"
+                    action="/products"
+                  >
                     <label htmlFor="search" className="sr-only">
                       Search
                     </label>
@@ -77,11 +84,12 @@ export default function Example() {
                         className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
                         placeholder="Search"
                         type="search"
+                        defaultValue={searchTerm}
                       />
                     </div>
-                  </div>
+                  </form>
                 </div>
-                <div className="relative  flex items-center lg:hidden">
+                <div className="relative flex items-center lg:hidden">
                   {/* Mobile menu button */}
                   <Disclosure.Button className="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
                     <span className="sr-only">Open menu</span>
