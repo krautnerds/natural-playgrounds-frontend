@@ -1,25 +1,9 @@
 import Head from "next/head";
-import { Fragment, useState, useEffect } from "react";
-import {
-  Dialog,
-  Disclosure,
-  Popover,
-  RadioGroup,
-  Tab,
-  Transition,
-} from "@headlessui/react";
-import {
-  HeartIcon,
-  MenuIcon,
-  MinusSmIcon,
-  PlusSmIcon,
-  SearchIcon,
-  ShoppingBagIcon,
-  UserIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { useState, useEffect } from "react";
+import { Disclosure, Tab } from "@headlessui/react";
+import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
 import Image from "next/image";
-import { StarIcon } from "@heroicons/react/solid";
+import Link from "next/link";
 
 import { CartProvider, useCart } from "react-use-cart";
 
@@ -235,7 +219,7 @@ export default function Product({ product }) {
             </section>
           </div>
         </div>
-        {product.related && (
+        {product.og_bundles && (
           <section
             aria-labelledby="related-heading"
             className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
@@ -244,12 +228,12 @@ export default function Product({ product }) {
               id="related-heading"
               className="text-xl font-bold text-gray-900"
             >
-              We recommend you purchase these products also:
+              This product is best when purchased with:
             </h2>
 
             <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-              {product.related &&
-                product.related.map((product) => (
+              {product.og_bundles &&
+                product.og_bundles.map((product) => (
                   <div key={product.id}>
                     <div className="relative">
                       <div className="relative w-full h-72 rounded-lg overflow-hidden">
@@ -263,41 +247,33 @@ export default function Product({ product }) {
                         )}
                       </div>
                       <div className="relative mt-4">
-                        <h3 className="text-sm font-medium text-gray-900">
+                        <h3 className="text-lg font-bold text-gray-900">
                           {product.name}
                         </h3>
-                        <p className="mt-1 text-sm text-gray-500">
-                          {product.color}
-                        </p>
                       </div>
                       <div className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
                         <div
                           aria-hidden="true"
                           className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
                         />
-                        <p className="relative text-lg font-semibold text-white">
-                          {product.price}
-                        </p>
                       </div>
                     </div>
-                    <div className="mt-6">
-                      <a
-                        href={product.href}
-                        className="relative flex bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
-                      >
-                        Add to bag
-                        <span className="sr-only">, {product.name}</span>
-                      </a>
+                    <div className="mt-2 flex flex-col justify-center align-center mx-auto">
+                      <Link href={product.href} passHref>
+                        <a className="button text-center no-underline">
+                          View Product
+                        </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
             </div>
           </section>
         )}
-        {product.related && (
+        {product.og && (
           <section
             aria-labelledby="related-heading"
-            className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
+            className="mt-5 border-t border-gray-200 py-16 px-4 sm:px-0"
           >
             <h2
               id="related-heading"
@@ -307,14 +283,14 @@ export default function Product({ product }) {
             </h2>
 
             <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-              {product.related &&
-                product.related.map((product) => (
-                  <div key={product.id}>
+              {product.og &&
+                product.og.map((related) => (
+                  <div key={related.id}>
                     <div className="relative">
                       <div className="relative w-full h-72 rounded-lg overflow-hidden">
-                        {product.image_url && (
+                        {related.image_url && (
                           <Image
-                            src={product.image_url}
+                            src={related.image_url}
                             alt={`Related Product`}
                             className="w-full h-full object-center object-cover"
                             layout="fill"
@@ -322,31 +298,17 @@ export default function Product({ product }) {
                         )}
                       </div>
                       <div className="relative mt-4">
-                        <h3 className="text-sm font-medium text-gray-900">
-                          {product.name}
+                        <h3 className="text-lg font-bold text-gray-900">
+                          {related.name}
                         </h3>
-                        <p className="mt-1 text-sm text-gray-500">
-                          {product.color}
-                        </p>
-                      </div>
-                      <div className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
-                        <div
-                          aria-hidden="true"
-                          className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
-                        />
-                        <p className="relative text-lg font-semibold text-white">
-                          {product.price}
-                        </p>
                       </div>
                     </div>
-                    <div className="mt-6">
-                      <a
-                        href={product.href}
-                        className="relative flex bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
-                      >
-                        Add to bag
-                        <span className="sr-only">, {product.name}</span>
-                      </a>
+                    <div className="mt-2 flex flex-col justify-center align-center mx-auto">
+                      <Link href={related.href} passHref>
+                        <a className="button text-center no-underline">
+                          View Product
+                        </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
