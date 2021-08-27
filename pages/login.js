@@ -4,9 +4,11 @@ import Form from "../components/userForm";
 import axios from "axios";
 import { login } from "../lib/auth";
 import Link from "next/link";
+import { useAuthState } from "../hooks/auth.js";
 
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState("");
+  const { updateIsLoggedIn, updateUserToken } = useAuthState();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,6 +28,8 @@ const Login = () => {
       });
       if (res.status === 200) {
         const { token } = await res.data;
+        updateIsLoggedIn(true);
+        updateUserToken(token);
         await login({ token });
         Router.push("/account");
       } else {
@@ -48,7 +52,7 @@ const Login = () => {
       <div className="w-full flex flex-col items-center">
         <h1 className="text-center text-4xl">Please sign in to continue</h1>
         <p className="mt-8">
-          <span>Don&#39;t have an account,</span>
+          <span>Don&#39;t have an account,&nbsp;</span>
           <Link href="/register">
             <a>create one here</a>
           </Link>

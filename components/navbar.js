@@ -3,13 +3,14 @@ import { Disclosure } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import Logo from "../images/logo.png";
 import Image from "next/image";
-import { useCart } from "../hooks/use-cart";
+import { useCartSlide } from "../hooks/use-cart-slide";
 import {
   ShoppingCartIcon,
   MenuIcon,
   XIcon,
   UserIcon,
 } from "@heroicons/react/outline";
+import { CartProvider, useCart } from "react-use-cart";
 
 const navigation = [
   { name: "About", href: "/about/", current: true },
@@ -34,7 +35,8 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const { totalItems, updateCartSlide } = useCart();
+  const { updateCartSlide } = useCartSlide();
+  const { totalUniqueItems } = useCart();
   return (
     <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
@@ -102,10 +104,10 @@ export default function Example() {
                           className="h-6 w-6"
                           aria-hidden="true"
                         />
-                        {totalItems > 0 && (
+                        {totalUniqueItems > 0 && (
                           <span className="absolute top-0 right-0 h-5 w-5 transform -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white bg-dark-green flex justify-center items-center">
                             <span className="text-xs text-white">
-                              {totalItems}
+                              {totalUniqueItems}
                             </span>
                           </span>
                         )}

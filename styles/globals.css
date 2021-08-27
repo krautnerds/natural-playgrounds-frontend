@@ -41,6 +41,9 @@ h5 {
 .button {
   @apply bg-dark-green border border-transparent shadow-sm py-3 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500;
 }
+.button-empty {
+  @apply bg-white border border-dark-green shadow-sm py-3 px-4 inline-flex justify-center text-sm font-medium text-dark-green  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500;
+}
 
 .hero {
   position: relative;
@@ -127,4 +130,8 @@ h3.sub-title {
 
 .learn-more p {
   @apply uppercase text-brown text-center text-xl;
+}
+
+.cc div {
+  width: 100% !important;
 }

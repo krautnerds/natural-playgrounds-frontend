@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import {
   Dialog,
   Disclosure,
@@ -21,14 +21,27 @@ import {
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/solid";
 
-import { useCart } from "../../hooks/use-cart.js";
+import { CartProvider, useCart } from "react-use-cart";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function Product({ product }) {
-  const { cart, updateCart, addToCart } = useCart();
+  const { addItem, inCart } = useCart();
+  const [option, setOption] = useState("");
+  const [optionName, setOptionName] = useState("");
+  const [price, setPrice] = useState(0);
 
+  useEffect(() => {
+    console.log(option);
+    for (var i in product.options) {
+      if (product.options[i].id === option) {
+        setPrice(product.options[i].current_price);
+        console.log(price);
+        break; // If you want to break out of the loop once you've found a match
+      }
+    }
+  }, [option]);
   return (
     <main className="max-w-6xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto lg:max-w-none">
@@ -53,6 +66,7 @@ export default function Product({ product }) {
                               src={image.image_url}
                               alt={`Product image of ${image.name}`}
                               className="w-full h-full object-center object-cover"
+                              layout="fill"
                             />
                           </span>
                           <span
@@ -77,6 +91,7 @@ export default function Product({ product }) {
                       src={image.image_url}
                       alt={`Product image of ${image.name}`}
                       className="w-full h-full object-center object-cover sm:rounded-lg"
+                      layout="fill"
                     />
                   </Tab.Panel>
                 ))}
@@ -93,7 +108,7 @@ export default function Product({ product }) {
               <h2 className="sr-only">Product information</h2>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-6 border-t border-gray-50">
               <h3 className="sr-only">Description</h3>
 
               <div
@@ -102,18 +117,51 @@ export default function Product({ product }) {
               />
             </div>
 
-            <form>
+            <form className="border-t border-gray-200 pt-6 mt-8">
               {/* Colors */}
               <div>
-                <h3 className="text-sm text-gray-600">Select Option</h3>
+                <h3 className="text-lg text-gray-600">Select Option</h3>
+                <div>
+                  <select
+                    id="location"
+                    name="location"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+                    value={option}
+                    onChange={(e) => {
+                      setOption(e.target.value);
+                      console.log(
+                        e.target.options[e.target.selectedIndex].text
+                      );
+                      setOptionName(
+                        e.target.options[e.target.selectedIndex].text
+                      );
+                    }}
+                  >
+                    <option value="" disabled selected>
+                      Select an Option
+                    </option>
+                    {product.options &&
+                      product.options.map((option) => (
+                        <option value={option.id}>{option.name}</option>
+                      ))}
+                  </select>
+                </div>
               </div>
 
               <div className="mt-10 flex sm:flex-col1">
                 <button
-                  type="submit"
+                  type="button"
                   className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"
                   onClick={() => {
-                    addToCart({ id: item_code, quantity: 1 });
+                    addItem({
+                      id: option,
+                      quantity: 1,
+                      price: price,
+                      slug: product.slug,
+                      option: optionName,
+                      name: product.name,
+                      image: product.image_url,
+                    });
                   }}
                 >
                   Add to Cart
@@ -196,7 +244,7 @@ export default function Product({ product }) {
               id="related-heading"
               className="text-xl font-bold text-gray-900"
             >
-              Customers also bought
+              We recommend you purchase these products also:
             </h2>
 
             <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
@@ -205,11 +253,73 @@ export default function Product({ product }) {
                   <div key={product.id}>
                     <div className="relative">
                       <div className="relative w-full h-72 rounded-lg overflow-hidden">
-                        <Image
-                          src={product.image_url}
-                          alt={`Related Product`}
-                          className="w-full h-full object-center object-cover"
+                        {product.image_url && (
+                          <Image
+                            src={product.image_url}
+                            alt={`Related Product`}
+                            className="w-full h-full object-center object-cover"
+                            layout="fill"
+                          />
+                        )}
+                      </div>
+                      <div className="relative mt-4">
+                        <h3 className="text-sm font-medium text-gray-900">
+                          {product.name}
+                        </h3>
+                        <p className="mt-1 text-sm text-gray-500">
+                          {product.color}
+                        </p>
+                      </div>
+                      <div className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
+                        <div
+                          aria-hidden="true"
+                          className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
                         />
+                        <p className="relative text-lg font-semibold text-white">
+                          {product.price}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-6">
+                      <a
+                        href={product.href}
+                        className="relative flex bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
+                      >
+                        Add to bag
+                        <span className="sr-only">, {product.name}</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </section>
+        )}
+        {product.related && (
+          <section
+            aria-labelledby="related-heading"
+            className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
+          >
+            <h2
+              id="related-heading"
+              className="text-xl font-bold text-gray-900"
+            >
+              Similar Products
+            </h2>
+
+            <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+              {product.related &&
+                product.related.map((product) => (
+                  <div key={product.id}>
+                    <div className="relative">
+                      <div className="relative w-full h-72 rounded-lg overflow-hidden">
+                        {product.image_url && (
+                          <Image
+                            src={product.image_url}
+                            alt={`Related Product`}
+                            className="w-full h-full object-center object-cover"
+                            layout="fill"
+                          />
+                        )}
                       </div>
                       <div className="relative mt-4">
                         <h3 className="text-sm font-medium text-gray-900">

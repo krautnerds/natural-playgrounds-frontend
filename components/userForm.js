@@ -4,11 +4,23 @@ const Form = ({ errorMessage, onSubmit }) => (
   <form onSubmit={onSubmit} className="flex flex-col space-y-6">
     <label>
       <span>Email Address</span>
-      <input type="email" name="email" required className="input" />
+      <input
+        type="email"
+        name="email"
+        required
+        className="input"
+        autoComplete="email"
+      />
     </label>
     <label>
       <span>Password</span>
-      <input type="password" name="password" required className="input" />
+      <input
+        type="password"
+        name="password"
+        required
+        className="input"
+        autoComplete="current-password"
+      />
     </label>
     <div className="flex flex-row justify-between w-full items-center">
       <>
