@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "natural-playgrounds-production.s3.amazonaws.com"],
   },
 };
