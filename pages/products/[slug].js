@@ -4,6 +4,7 @@ import { Disclosure, Tab } from "@headlessui/react";
 import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { useCartSlide } from "../../hooks/use-cart-slide.js";
 
 import { CartProvider, useCart } from "react-use-cart";
 
@@ -15,6 +16,7 @@ export default function Product({ product }) {
   const [option, setOption] = useState("");
   const [optionName, setOptionName] = useState("");
   const [price, setPrice] = useState(0);
+  const { cartSlide, updateCartSlide } = useCartSlide();
 
   useEffect(() => {
     for (var i in product.options) {
@@ -147,6 +149,7 @@ export default function Product({ product }) {
                         name: product.name,
                         image: product.image_url,
                       });
+                      updateCartSlide(true);
                     }}
                   >
                     Add to Cart

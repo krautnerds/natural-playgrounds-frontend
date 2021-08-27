@@ -52,11 +52,14 @@ const Purchase = (props) => {
                 key={product.id}
                 className="py-10 border-b border-gray-200 flex space-x-6"
               >
-                <Image
-                  src={product.image}
-                  alt={`Product image for ${product.name}`}
-                  className="flex-none w-20 h-20 object-center object-cover bg-gray-100 rounded-lg sm:w-40 sm:h-40"
-                />
+                <div className="h-20 w-20 rounded-lg sm:w-40 sm:h-40 bg-gray-100 relative">
+                  <Image
+                    src={product.image}
+                    alt={`Product image for ${product.name}`}
+                    className="object-center object-cover"
+                    layout="fill"
+                  />
+                </div>
                 <div className="flex-auto flex flex-col">
                   <div>
                     <h4 className="font-medium text-gray-900">

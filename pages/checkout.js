@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { RadioGroup } from "@headlessui/react";
-import { CheckCircleIcon, TrashIcon } from "@heroicons/react/solid";
+import { TrashIcon } from "@heroicons/react/solid";
 import { useCart } from "react-use-cart";
+import { Switch } from "@headlessui/react";
 import axios from "axios";
 import nextCookie from "next-cookies";
 import { withAuthSync } from "../lib/auth";
@@ -10,6 +10,11 @@ import Loader from "react-loader-spinner";
 import Router from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import Autocomplete from "react-google-autocomplete";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 const Checkout = (props) => {
   const { cartTotal, items, removeItem, updateItemQuantity, emptyCart } =
     useCart();
@@ -41,8 +46,8 @@ const Checkout = (props) => {
         firstName: firstName,
         lastName: lastName,
         email: userEmail,
-        billing: billing,
-        shipping: shipping,
+        billing: billing.formatted_address,
+        shipping: shipping.formatted_address,
         customer_shipping: shippingAmount,
         same_as: billingShippingSame,
         company: company,
@@ -191,6 +196,104 @@ const Checkout = (props) => {
 
               {/* Payment */}
               <div className="mt-10 border-t border-gray-200 pt-10">
+                <h2 className="text-lg font-medium text-gray-900">
+                  Shipping/Billing Information
+                </h2>
+                <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="street-address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Shipping address
+                    </label>
+                    <div className="mt-1">
+                      <Autocomplete
+                        className="shadow-sm focus:ring-i-500 focus:border-i-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
+                        apiKey={`AIzaSyApuPpbYSAqBTHTnfB_n7SECRD9V9UYpJA`}
+                        defaultValue={shipping}
+                        options={{
+                          types: ["address"],
+                          componentRestrictions: { country: ["us", "ca"] },
+                        }}
+                        onPlaceSelected={(place) => {
+                          setShipping(place);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="sm:col-span-6">
+                    <div className="w-full">
+                      <Switch.Group
+                        as="div"
+                        className="flex items-center justify-between"
+                      >
+                        <span className="flex-grow flex flex-col">
+                          <Switch.Label
+                            as="span"
+                            className="text-sm font-medium text-gray-900"
+                            passive
+                          >
+                            Billing address same as shipping?
+                          </Switch.Label>
+                          <Switch.Description
+                            as="span"
+                            className="text-sm text-gray-500"
+                          >
+                            If your Billing and Shipping address is the same,
+                            please select.
+                          </Switch.Description>
+                        </span>
+                        <Switch
+                          checked={billingShippingSame}
+                          onChange={setBillingShippingSame}
+                          className={classNames(
+                            billingShippingSame
+                              ? "bg-green-600"
+                              : "bg-gray-200",
+                            "relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                          )}
+                        >
+                          <span
+                            aria-hidden="true"
+                            className={classNames(
+                              billingShippingSame
+                                ? "translate-x-5"
+                                : "translate-x-0",
+                              "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
+                            )}
+                          />
+                        </Switch>
+                      </Switch.Group>
+                    </div>
+                  </div>
+                  {!billingShippingSame && (
+                    <div className="sm:col-span-6">
+                      <label
+                        htmlFor="street-address"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Billing address
+                      </label>
+                      <div className="mt-1">
+                        <Autocomplete
+                          className="shadow-sm focus:ring-i-500 focus:border-i-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
+                          apiKey={`AIzaSyApuPpbYSAqBTHTnfB_n7SECRD9V9UYpJA`}
+                          defaultValue={billing}
+                          options={{
+                            types: ["address"],
+                            componentRestrictions: { country: ["us", "ca"] },
+                          }}
+                          onPlaceSelected={(place) => {
+                            setBilling(place);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="mt-10 border-t border-gray-200 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">Payment</h2>
 
                 <div className="mt-6 grid grid-cols-3 gap-y-6 gap-x-4">
@@ -308,12 +411,12 @@ const Checkout = (props) => {
                 <ul role="list" className="divide-y divide-gray-200">
                   {items.map((item) => (
                     <li key={item.id} className="flex py-6 px-4 sm:px-6">
-                      <div className="flex-shrink-0">
+                      <div className="flex-shrink-0 h-32 w-32 relative">
                         {item.image && (
                           <Image
                             src={item.image}
                             alt={`Product Image of ${item.name}`}
-                            className="w-32 h-32 object-center object-cover"
+                            className="object-center object-cover"
                             layout="fill"
                           />
                         )}
@@ -331,7 +434,7 @@ const Checkout = (props) => {
                               </Link>
                             </h4>
                             <p className="mt-1 text-sm text-gray-500">
-                              {items.option}
+                              {item.option}
                             </p>
                           </div>
 
