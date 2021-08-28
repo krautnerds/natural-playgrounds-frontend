@@ -369,7 +369,7 @@ const Profile = (props) => {
 
 Profile.getInitialProps = async (ctx) => {
   const { token } = nextCookie(ctx);
-  var environment = process.env.API_URL || "http://localhost:8000";
+  var environment = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
   const apiUrl = `${environment}/api/account/`;
 
   const redirectOnError = () =>

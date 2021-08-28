@@ -18,7 +18,7 @@ export default function Page({ page }) {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `${process.env.API_URL}/api/pages/homepage/?format=json`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/pages/homepage/?format=json`
   );
 
   return {

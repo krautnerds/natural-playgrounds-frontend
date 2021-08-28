@@ -117,7 +117,7 @@ Purchase.getInitialProps = async (ctx) => {
     typeof window !== "undefined"
       ? Router.push("/login")
       : ctx.res.writeHead(302, { Location: "/login" }).end();
-  var environment = process.env.API_URL || "http://localhost:8000";
+  var environment = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
   const apiUrl = `${environment}/api/purchase/${ctx.query.id}/`;
 
   try {

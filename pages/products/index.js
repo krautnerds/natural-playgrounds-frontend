@@ -7,9 +7,11 @@ export default function ProductIndex({ results, category }) {
 }
 
 export async function getStaticProps({ params }) {
-  const results = await fetch(`${process.env.API_URL}/api/search/?format=json`);
+  const results = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/search/?format=json`
+  );
   const category = await fetch(
-    `${process.env.API_URL}/api/search/category/?format=json`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/search/category/?format=json`
   );
 
   return {

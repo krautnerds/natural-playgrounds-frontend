@@ -18,7 +18,7 @@ export default function Page({ page }) {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `${process.env.API_URL}/api/pages/${params.slug}/?format=json`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/pages/${params.slug}/?format=json`
   );
 
   return {
@@ -28,7 +28,9 @@ export async function getStaticProps({ params }) {
   };
 }
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.API_URL}/api/pages/?format=json`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/pages/?format=json`
+  );
   const pages = await res.json();
   const paths = pages.map((page) => {
     return {
