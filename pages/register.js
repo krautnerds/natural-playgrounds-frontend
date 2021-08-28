@@ -25,6 +25,7 @@ const Login = () => {
       if (res.status === 201) {
         const { token } = await res.data;
         await login({ token });
+        console.log("token", token);
         Router.push("/account");
       } else {
         throw new Error(await res.data);

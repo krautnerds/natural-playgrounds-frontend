@@ -11,11 +11,13 @@ import Router from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import Autocomplete from "react-google-autocomplete";
+import { useToasts } from "react-toast-notifications";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const Checkout = (props) => {
+  const { addToast } = useToasts();
   const { cartTotal, items, removeItem, updateItemQuantity, emptyCart } =
     useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,19 +67,13 @@ const Checkout = (props) => {
         const data = await res.data;
         emptyCart();
         Router.push(`/purchase/${data.saleId}`);
-      } else {
-        throw new Error(await res.data);
-        setIsSubmitting(false);
       }
     } catch (error) {
-      console.error("An unexpected error happened occurred:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.non_field_errors
-      ) {
-        setErrorMsg(error.response.data.non_field_errors[0]);
-      }
+      setIsSubmitting(false);
+      addToast(
+        "Issue processing your credit card. Please check the numbers or contact us at info@naturalplaygrounds.com",
+        { appearance: "error" }
+      );
     }
   }
   return (
@@ -389,7 +385,7 @@ const Checkout = (props) => {
                         type="text"
                         name="cvc"
                         id="cvc"
-                        autoComplete="csc"
+                        autoComplete="cc-csc"
                         defaultValue={cvc}
                         maxLength="4"
                         onChange={(e) => setCVC(e.target.value)}
@@ -499,7 +495,7 @@ const Checkout = (props) => {
                       Shipping
                       <br />
                       <div className="w-3/4 text-xs italic">
-                        This is our best guest. Due to the nature of our
+                        This is our best guess. Due to the nature of our
                         products we put an estimate together. Once the product
                         is ready to ship, we&lsquo;ll reach back out with actual
                         shipping amounts. Your card will be charge then.

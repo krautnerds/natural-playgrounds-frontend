@@ -6,6 +6,7 @@ import { withAuthSync } from "../lib/auth";
 import axios from "axios";
 import Image from "next/image";
 import Autocomplete from "react-google-autocomplete";
+import { useToasts } from "react-toast-notifications";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -18,6 +19,7 @@ const Profile = (props) => {
   const [firstName, setFirstName] = useState(props.first_name);
   const [lastName, setLastName] = useState(props.last_name);
   const [errorMsg, setErrorMsg] = useState("");
+  const { addToast } = useToasts();
   async function handleSubmit(e) {
     try {
       e.preventDefault();
@@ -35,6 +37,11 @@ const Profile = (props) => {
       });
 
       if (res.status === 201) {
+        addToast("Account Updated", {
+          appearance: "success",
+          autoDismiss: true,
+          autoDismissTimeout: 3000,
+        });
       } else {
         throw new Error(await res.data);
       }
@@ -256,8 +263,8 @@ const Profile = (props) => {
 
               <div className="space-y-16 sm:space-y-24">
                 {props.orders &&
-                  props.orders.map((order) => (
-                    <div key={order.number}>
+                  props.orders.map((order, orderIdx) => (
+                    <div key={orderIdx}>
                       <h3 className="sr-only">
                         Order placed on{" "}
                         <time dateTime={order.datetime}>{order.date}</time>
@@ -287,7 +294,7 @@ const Profile = (props) => {
                           </div>
                           <div className="flex justify-between pt-4 font-medium text-gray-900 md:block md:pt-0">
                             <dt>Order Status</dt>
-                            <dd className="md:mt-1">${order.total}</dd>
+                            <dd className="md:mt-1">{order.customer_status}</dd>
                           </div>
                           <div className="flex justify-between pt-4 font-medium text-gray-900 md:block md:pt-0">
                             <dt>Tracking Number</dt>
@@ -345,11 +352,12 @@ const Profile = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="ml-4 flex-shrink-0 sm:m-0 sm:mr-6 sm:order-first">
+                              <div className="ml-4 flex-shrink-0 sm:m-0 sm:mr-6 sm:order-first relative  w-20 h-20  sm:w-40 sm:h-40 lg:w-52 lg:h-52">
                                 <Image
                                   src={product.image}
                                   alt={`Product image for ${product.name}`}
-                                  className="col-start-2 col-end-3 sm:col-start-1 sm:row-start-1 sm:row-span-2 w-20 h-20 rounded-lg object-center object-cover sm:w-40 sm:h-40 lg:w-52 lg:h-52"
+                                  className="col-start-2 col-end-3 sm:col-start-1 sm:row-start-1 sm:row-span-2rounded-lg object-center object-cover "
+                                  layout="fill"
                                 />
                               </div>
                             </div>
