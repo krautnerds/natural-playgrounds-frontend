@@ -21,8 +21,7 @@ const Login = () => {
     };
 
     try {
-      var environment = process.env.API_URL || "http://localhost:8000";
-      const res = await axios.post(`${environment}/api/auth-token/`, {
+      const res = await axios.post(`${process.env.API_URL}/api/auth-token/`, {
         username: e.currentTarget.email.value,
         password: e.currentTarget.password.value,
       });
