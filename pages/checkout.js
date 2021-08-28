@@ -40,7 +40,8 @@ const Checkout = (props) => {
     try {
       e.preventDefault();
       setIsSubmitting(true);
-      const environment = process.env.API_URL || "http://localhost:8000";
+      const environment =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       const res = await axios.post(`${environment}/api/checkout/`, {
         token: props.token,
         firstName: firstName,

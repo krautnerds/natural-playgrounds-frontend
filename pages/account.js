@@ -21,7 +21,8 @@ const Profile = (props) => {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      const environment = process.env.API_URL || "http://localhost:8000";
+      const environment =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       const res = await axios.post(`${environment}/api/account/`, {
         token: props.token,
         first_name: firstName,

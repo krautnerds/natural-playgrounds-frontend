@@ -13,8 +13,9 @@ const Login = () => {
     if (errorMsg) setErrorMsg("");
 
     try {
-      var environment = process.env.API_URL || "http://localhost:8000";
-      const res = await axios.post(`http://localhost:8000/api/register/`, {
+      var environment =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const res = await axios.post(`${environment}/api/register/`, {
         email: e.currentTarget.email.value,
         first_name: e.currentTarget.first_name.value,
         last_name: e.currentTarget.last_name.value,
