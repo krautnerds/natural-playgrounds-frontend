@@ -2,6 +2,7 @@ import Text from "./widget/text";
 import NaturalImage from "./widget/images";
 import Link from "next/link";
 import Image from "next/image";
+import SectionGrid from "./widget/section_grid";
 import Title from "./widget/title";
 import Leaf from "../images/leaf.jpg";
 import Bark from "../images/bark.jpg";
@@ -12,7 +13,7 @@ export default function WidgetChooser({ obj }) {
     <>
       {obj.widget_type === "Image/Text" && (
         <div className="relative">
-          <div className="wide-load flex flex-col md:flex-row space-x-12">
+          <div className="wide-load flex flex-col md:flex-row md:space-x-12">
             <div className="w-full md:w-1/2 h-full items-center align-center justify-center flex flex-col space-y-8">
               {obj.image_one_url && (
                 <div className="w-full flex justify-start">
@@ -41,12 +42,12 @@ export default function WidgetChooser({ obj }) {
       )}
       {obj.widget_type === "Text/CTA" && (
         <div className="relative">
-          <div className="wide-load flex flex-col md:flex-row space-x-12">
+          <div className="wide-load flex flex-col md:flex-row md:space-x-12">
             <div className="w-full md:w-1/2 h-full">
               <Text title={obj.title} content={obj.content} />
             </div>
             <div className="w-full md:w-1/2 flex flex-col justify-center items-center py-8">
-              <Title title={obj.cta_title} />
+              <Title title={obj.cta_title} added_class="text-center" />
               <div className="py-4 flex">
                 <Link href={obj.cta_link}>
                   <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
@@ -63,6 +64,28 @@ export default function WidgetChooser({ obj }) {
                   </a>
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {obj.widget_type === "Services Grid" && (
+        <div className="relative">
+          <div className="wide-load flex flex-col md:flex-row md:space-x-12">
+            <div className="w-full md:w-1/2 flex flex-col">
+              <SectionGrid
+                title={obj.service_one_title}
+                logo={obj.service_one_logo_url}
+                image={obj.service_one_image_url}
+                content={obj.service_one_content}
+              />
+            </div>
+            <div className="w-full md:w-1/2 flex flex-col">
+              <SectionGrid
+                title={obj.service_two_title}
+                logo={obj.service_two_logo_url}
+                image={obj.service_two_image_url}
+                content={obj.service_two_content}
+              />
             </div>
           </div>
         </div>
@@ -162,6 +185,18 @@ export default function WidgetChooser({ obj }) {
           </div>
         </div>
       )}
+      {obj.widget_type === "Grey Box" && (
+        <div className="relative grey-box max-w-5xl mx-auto">
+          <div className="wide-load flex flex-col space-y-6 my-16 mx-8">
+            <div className="w-full justify-center flex flex-col items-center">
+              <Title title={obj.title} added_class="full-text" />
+            </div>
+            <div className="w-full flex">
+              <Text content={obj.content} added_class="full-text" />
+            </div>
+          </div>
+        </div>
+      )}
       {obj.widget_type === "Leafs" && (
         <div className="relative">
           <div className="wide-load flex flex-col space-y-6">
@@ -226,8 +261,6 @@ export default function WidgetChooser({ obj }) {
               )}
               <div className="absolute inset-0"></div>
             </div>
-            <div className="absolute top-[-16px] h-16 bg-tan w-[85%] mx-auto flex justify-center left-[10%]"></div>
-            <div className="absolute bottom-[-16px] h-16 bg-tan w-[85%] mx-auto flex justify-center left-[10%]"></div>
           </div>
         </div>
       )}

@@ -6,7 +6,10 @@ export default function Page({ page }) {
   return (
     <main>
       <Hero title={page.title} sub_title={page.sub_title} />
-      <div className="flex flex-col space-y-16 relative">
+      <div
+        className="flex flex-col space-y-16 relative"
+        style={{ minHeight: "600px" }}
+      >
         {page.widgets &&
           page.widgets.map((object, i) => (
             <WidgetChooser obj={object} key={i} />

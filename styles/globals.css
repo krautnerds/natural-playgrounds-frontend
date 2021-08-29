@@ -173,3 +173,13 @@ blockquote::after {
   height: unset !important;
   position: relative !important;
 }
+
+.grey-box {
+  @apply bg-light-gray;
+
+  margin-top: 0 !important;
+}
+
+.section-grid h3 {
+  @apply text-blue-green;
+}
