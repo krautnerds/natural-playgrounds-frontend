@@ -135,3 +135,35 @@ h3.sub-title {
 .cc div {
   width: 100% !important;
 }
+
+blockquote {
+  font-family: Times New Roman, Times, serif;
+  font-size: 30px;
+  margin: 0 auto;
+  quotes: "\201C""\201D""\2018""\2019";
+  padding: 10px 20px;
+  line-height: 1.4;
+}
+
+blockquote:before {
+  content: open-quote;
+  display: inline;
+  height: 0;
+  line-height: 0;
+  left: -40px;
+  position: relative;
+  top: 45px;
+  color: #ccc;
+  font-size: 6em;
+}
+blockquote::after {
+  content: close-quote;
+  display: inline;
+  height: 0;
+  line-height: 0;
+  left: 50%;
+  position: relative;
+  top: 35px;
+  color: #ccc;
+  font-size: 6em;
+}

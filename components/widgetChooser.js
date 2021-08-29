@@ -63,7 +63,10 @@ export default function WidgetChooser({ obj }) {
               )}
             </div>
             <div className="w-full md:w-1/2 h-full">
-              <Text title={obj.title} content={obj.content} />
+              <blockquote
+                className="prose"
+                dangerouslySetInnerHTML={{ __html: obj.content }}
+              />
             </div>
           </div>
         </div>
