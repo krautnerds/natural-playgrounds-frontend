@@ -167,3 +167,9 @@ blockquote::after {
   color: #ccc;
   font-size: 6em;
 }
+
+.image img,
+.image div {
+  height: unset !important;
+  position: relative !important;
+}

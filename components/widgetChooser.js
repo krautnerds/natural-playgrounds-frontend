@@ -47,7 +47,7 @@ export default function WidgetChooser({ obj }) {
             </div>
             <div className="w-full md:w-1/2 flex flex-col justify-center items-center py-8">
               <Title title={obj.cta_title} />
-              <div className="py-4">
+              <div className="py-4 flex">
                 <Link href={obj.cta_link}>
                   <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
                     <div className="absolute inset-0">
