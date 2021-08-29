@@ -4,18 +4,18 @@ import Social from "./social";
 const navigation = {
   learn_more: [
     { name: "Success Stories", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Testimonials", href: "#" },
+    { name: "FAQ", href: "/faq" },
+    { name: "Testimonials", href: "/testimonials" },
     { name: "News & Articles", href: "#" },
   ],
   resources: [
-    { name: "For Homeowners", href: "#" },
-    { name: "For Constructors", href: "#" },
-    { name: "Employment", href: "#" },
+    { name: "For Homeowners", href: "/homeowners" },
+    { name: "For Constructors", href: "/construction" },
+    { name: "Employment", href: "/employment" },
   ],
   policies: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms & Conditions", href: "#" },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms & Conditions", href: "/toc" },
   ],
 };
 
