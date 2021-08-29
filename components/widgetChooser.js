@@ -15,8 +15,8 @@ export default function WidgetChooser({ obj }) {
           <div className="wide-load flex flex-col md:flex-row space-x-12">
             <div className="w-full md:w-1/2 h-full items-center align-center justify-center flex flex-col space-y-8">
               {obj.image_one_url && (
-                <div className="w-full  flex justify-start">
-                  <div className="relative w-3/4 h-96">
+                <div className="w-full flex justify-start">
+                  <div className="relative w-full h-96">
                     {obj.image_one_url && (
                       <NaturalImage obj={obj} image={obj.image_one_url} />
                     )}
@@ -25,7 +25,7 @@ export default function WidgetChooser({ obj }) {
               )}
               {obj.image_two_url && (
                 <div className="w-full  flex justify-start">
-                  <div className="relative w-3/4 h-96">
+                  <div className="relative w-full h-96">
                     {obj.image_two_url && (
                       <NaturalImage obj={obj} image={obj.image_two_url} />
                     )}
@@ -39,16 +39,29 @@ export default function WidgetChooser({ obj }) {
           </div>
         </div>
       )}
-      {obj.widget_type === "Text Left/CTA Right" && (
+      {obj.widget_type === "Text/CTA" && (
         <div className="relative">
           <div className="wide-load flex flex-col md:flex-row space-x-12">
             <div className="w-full md:w-1/2 h-full">
               <Text title={obj.title} content={obj.content} />
             </div>
             <div className="w-full md:w-1/2 flex flex-col justify-center items-center py-8">
-              <h2>{obj.cta_title}</h2>
+              <Title title={obj.cta_title} />
               <div className="py-4">
-                <button>{obj.cta_text}</button>
+                <Link href={obj.cta_link}>
+                  <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
+                    <div className="absolute inset-0">
+                      <Image
+                        className="w-full h-full object-cover"
+                        src={Bark}
+                        alt="CTA Bark"
+                      />
+                    </div>
+                    <p className="relative font-bold text-lg uppercase">
+                      {obj.cta_text}
+                    </p>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

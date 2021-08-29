@@ -92,7 +92,7 @@ h3.sub-title {
   @apply text-2xl;
 }
 .widget-title {
-  @apply text-4xl uppercase font-bold pb-8 text-brown;
+  @apply text-4xl uppercase  pb-8 text-blue-green font-light;
 }
 .wood.widget-title {
   @apply text-4xl uppercase font-semibold text-blue-green text-center;
