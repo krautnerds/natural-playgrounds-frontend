@@ -7,6 +7,8 @@ export default function NaturalImage({ obj, image, alt_text }) {
           className="object-cover shadow-lg"
           src={image}
           alt={alt_text}
+          placeholder="blur"
+          blurDataURL="LWGuj#%LNuax9ZRjjrah~pWXs:j]"
           layout="fill"
         />
       )}

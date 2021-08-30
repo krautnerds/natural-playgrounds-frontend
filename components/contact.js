@@ -3,7 +3,7 @@ import Social from "./social";
 export default function Contact() {
   return (
     <div className="bg-light-gray border-b-2 border-gray-400 py-4">
-      <div className="wide-load flex flex-row">
+      <div className="wide-load flex md:flex-row">
         <div className="w-full md:w-1/2 flex flex-row items-center space-x-6">
           <p>Follow Us</p>
           <div className="flex flex-row space-x-6">

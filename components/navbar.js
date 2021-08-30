@@ -16,7 +16,7 @@ import { useState } from "react";
 
 const navigation = [
   { name: "About", href: "/about/", current: true },
-  { name: "Products", href: "/products/", current: false },
+  { name: "Store Products", href: "/products/", current: false },
   { name: "Services", href: "/services/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
   { name: "Learn", href: "/learn/", current: false },
@@ -24,7 +24,7 @@ const navigation = [
 
 const mobileNavigation = [
   { name: "About", href: "/about/", current: true },
-  { name: "Products", href: "/products/", current: false },
+  { name: "Store Products", href: "/products/", current: false },
   { name: "Services", href: "/services/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
   { name: "Learn", href: "/learn/", current: false },
@@ -144,9 +144,9 @@ export default function Example() {
                 </div>
               </div>
             </div>
-            <div className="bg-yellow-gray flex flex-row">
+            <div className="bg-dark-green flex flex-row">
               <div className="w-1/4"></div>
-              <div className="bg-dark-green flex-1">
+              <div className=" flex-1">
                 <div className="wide-load">
                   <nav
                     className="hidden lg:py-2 lg:flex lg:space-x-8"
@@ -175,7 +175,7 @@ export default function Example() {
               {mobileNavigation.map((item) => (
                 <Link href={item.href} key={item.name} passHref>
                   <a
-                    className="block rounded-md py-2 px-3 text-base font-medium"
+                    className="block rounded-md py-2 px-3 text-base font-medium no-underline"
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}

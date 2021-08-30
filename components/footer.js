@@ -3,10 +3,10 @@ import Logo from "../images/logo.png";
 import Social from "./social";
 const navigation = {
   learn_more: [
-    { name: "Success Stories", href: "#" },
+    { name: "Success Stories", href: "/stories" },
     { name: "FAQ", href: "/faq" },
     { name: "Testimonials", href: "/testimonials" },
-    { name: "News & Articles", href: "#" },
+    { name: "News & Articles", href: "/news" },
   ],
   resources: [
     { name: "For Homeowners", href: "/homeowners" },
