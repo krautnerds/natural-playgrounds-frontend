@@ -20,8 +20,8 @@ export default function SectionGrid({ title, logo, content, image }) {
         <div className="aspect-w-3 aspect-h-2 h-32 relative">
           <Image
             className="object-cover"
-            src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
-            alt=""
+            src={image}
+            alt="Image related to the corresponding service"
             layout="fill"
           />
         </div>
