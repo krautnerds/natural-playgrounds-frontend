@@ -156,6 +156,14 @@ blockquote:before {
   color: #ccc;
   font-size: 6em;
 }
+blockquote.testimonial {
+  padding: 0px;
+}
+blockquote.testimonial:before {
+  position: absolute;
+  top: 35px;
+  left: -55px;
+}
 blockquote::after {
   content: close-quote;
   display: inline;
@@ -167,7 +175,12 @@ blockquote::after {
   color: #ccc;
   font-size: 6em;
 }
-
+blockquote.testimonial:after {
+  left: 75%;
+  position: absolute;
+  top: -8px;
+  line-height: unset !important;
+}
 .image img,
 .image div {
   height: unset !important;

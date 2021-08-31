@@ -13,7 +13,13 @@ export default function WidgetChooser({ obj }) {
     <>
       {obj.widget_type === "Image/Text" && (
         <div className="relative">
-          <div className="wide-load flex flex-col md:flex-row md:space-x-12">
+          <div
+            className={`wide-load flex flex-col ${
+              obj.structure === "Text Right"
+                ? "md:flex-row"
+                : "md:flex-row-reverse"
+            } md:space-x-12`}
+          >
             <div className="w-full md:w-1/2 h-full items-center align-center justify-center flex flex-col space-y-8">
               {obj.image_one_url && (
                 <div className="w-full flex justify-start">
@@ -42,7 +48,13 @@ export default function WidgetChooser({ obj }) {
       )}
       {obj.widget_type === "Text/CTA" && (
         <div className="relative">
-          <div className="wide-load flex flex-col md:flex-row md:space-x-12">
+          <div
+            className={`wide-load flex flex-col ${
+              obj.structure === "Text Right"
+                ? "md:flex-row"
+                : "md:flex-row-reverse"
+            } md:space-x-12`}
+          >
             <div className="w-full md:w-1/2 h-full">
               <Text title={obj.title} content={obj.content} />
             </div>

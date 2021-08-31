@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Hero from "../components/hero";
 import WidgetChooser from "../components/widgetChooser";
-
+import { useCartSlide } from "../hooks/use-cart-slide.js";
 export default function Page({ page }) {
+  const { updateTestimonial } = useCartSlide();
+  updateTestimonial(page.testimonial);
   return (
     <main>
       <Hero title={page.title} sub_title={page.sub_title} />

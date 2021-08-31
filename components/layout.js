@@ -5,6 +5,7 @@ import Footer from "./footer";
 import Connected from "./connected";
 import Cart from "./cart";
 import Contact from "./contact";
+import Testimonial from "./testimonial";
 
 export default function Layout({ children }) {
   return (
@@ -14,6 +15,7 @@ export default function Layout({ children }) {
       <main>{children}</main>
       <Cart />
       <Connected />
+      <Testimonial />
       <Footer />
     </>
   );
