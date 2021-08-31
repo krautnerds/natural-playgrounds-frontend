@@ -3,8 +3,8 @@ export default function Testimonial() {
   const { testimonial, updateTestimonial } = useCartSlide();
   return (
     <>
-      {testimonial && (
-        <div className="relative bg-tan">
+      <div className="relative bg-tan min-h-[128px]">
+        {testimonial && (
           <div className="wide-load flex flex-col md:flex-row py-2">
             <div className="w-1/4 hidden md:block"></div>
             <div className="w-full md:w:3/4 h-full">
@@ -21,8 +21,8 @@ export default function Testimonial() {
               </blockquote>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
