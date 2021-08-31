@@ -8,6 +8,7 @@ import Leaf from "../images/leaf.jpg";
 import Bark from "../images/bark.jpg";
 import Manufacturing from "../images/manufacturing.png";
 import Design from "../images/design.png";
+import YoutubeEmbed from "./widget/youtube";
 export default function WidgetChooser({ obj }) {
   return (
     <>
@@ -212,7 +213,7 @@ export default function WidgetChooser({ obj }) {
               </div>
             </div>
             <div className="wide-load w-full">
-              <div className="w-full flex flex-col md:flex-row">
+              <div className="w-full flex flex-col md:flex-row space-y-6">
                 <div className="w-full md:w-1/3 flex justify-center">
                   <div className="relative w-3/4 h-64">
                     <Image
@@ -342,7 +343,7 @@ export default function WidgetChooser({ obj }) {
       {obj.widget_type === "Wood Section" && (
         <div className="mt-0 pt-12">
           <div className="relative sm:overflow-hidden">
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 top-[-64px]">
               <Image
                 className="h-full w-full object-cover"
                 src={Bark}
@@ -406,25 +407,33 @@ export default function WidgetChooser({ obj }) {
             <div className="w-full justify-center flex flex-col items-center">
               <Title title="Videos" />
             </div>
-            <div className="w-full flex flex-wrap md:space-x-12">
+            <div className="w-full flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
               {obj.video_link_one && (
-                <div className="w-full md:w-1/2 lg:w-1/4">
-                  <div className="relative w-full h-64"></div>
+                <div className="mx-auto w-2/3 md:w-1/2 lg:w-1/4">
+                  <div className="relative w-full overflow-hidden">
+                    <YoutubeEmbed embedId={obj.video_link_one} />
+                  </div>
                 </div>
               )}
               {obj.video_link_two && (
-                <div className="w-full md:w-1/2 lg:w-1/4">
-                  <div className="relative w-full h-64"></div>
+                <div className="mx-auto w-2/3 md:w-1/2 lg:w-1/4">
+                  <div className="relative w-full overflow-hidden">
+                    <YoutubeEmbed embedId={obj.video_link_two} />
+                  </div>
                 </div>
               )}
               {obj.video_link_three && (
-                <div className="w-full md:w-1/2 lg:w-1/4">
-                  <div className="relative w-full h-64"></div>
+                <div className="mx-auto w-2/3 md:w-1/2 lg:w-1/4">
+                  <div className="relative w-full overflow-hidden">
+                    <YoutubeEmbed embedId={obj.video_link_three} />
+                  </div>
                 </div>
               )}
               {obj.video_link_four && (
-                <div className="w-full md:w-1/2 lg:w-1/4">
-                  <div className="relative w-full h-64"></div>
+                <div className="mx-auto w-2/3 md:w-1/2 lg:w-1/4">
+                  <div className="relative w-full overflow-hidden">
+                    <YoutubeEmbed embedId={obj.video_link_four} />
+                  </div>
                 </div>
               )}
             </div>
