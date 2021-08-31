@@ -99,7 +99,7 @@ export default function WidgetChooser({ obj }) {
                   className="col-span-2 sm:col-span-1 flex flex-col"
                   key={idx}
                 >
-                  <div className="relative image shadow-lg">
+                  <div className="relative image shadow-lg h-full">
                     {gallery.image_url && (
                       <Image
                         className="object-cover shadow-lg"
@@ -118,6 +118,38 @@ export default function WidgetChooser({ obj }) {
                   </div>
                 </div>
               ))}
+          </div>
+        </div>
+      )}
+      {obj.widget_type === "News Release" && (
+        <div className="relative">
+          <div className="wide-load">
+            <div class="max-w-2xl  space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
+              {obj.news_releases &&
+                obj.news_releases.map((news, idx) => (
+                  <div
+                    className="col-span-2 sm:col-span-1 flex flex-col"
+                    key={idx}
+                  >
+                    <div className="relative image h-full">
+                      <Link href={news.url} passHref>
+                        <a className="cursor-pointer">
+                          {news.image_url && (
+                            <Image
+                              className="object-cover"
+                              src={news.image_url}
+                              alt=""
+                              placeholder="blur"
+                              blurDataURL="LWGuj#%LNuax9ZRjjrah~pWXs:j]"
+                              layout="fill"
+                            />
+                          )}
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       )}
