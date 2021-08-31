@@ -262,8 +262,8 @@ export default function WidgetChooser({ obj }) {
         </div>
       )}
       {obj.widget_type === "Grey Box" && (
-        <div className="relative grey-box max-w-5xl mx-auto">
-          <div className="wide-load flex flex-col space-y-6 my-16 mx-8">
+        <div className="container mx-auto items-center  max-w-[70rem]">
+          <div className="flex flex-col space-y-6 p-16 grey-box">
             <div className="w-full justify-center flex flex-col items-center">
               <Title title={obj.title} added_class="full-text" />
             </div>
@@ -295,6 +295,28 @@ export default function WidgetChooser({ obj }) {
                       {obj.leafs[key].content}
                     </p>
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+      {obj.widget_type === "Tips" && (
+        <div className="relative bg-concrete">
+          <div className="wide-load flex flex-col space-y-6 py-12">
+            <div className="w-full justify-center flex flex-col items-center">
+              <Title title={obj.title} added_class="full-text" />
+            </div>
+            <div className="space-y-12 sm:grid grid-cols-1 sm:grid-cols-2 grid-rows-5 sm:gap-12 sm:space-y-0 lg:gap-x-8">
+              {Object.keys(obj.tips).map((key) => (
+                <div className="relative flex flex-col items-start" key={key}>
+                  <h3 className="w-full text-dark-green font-semibold mb-2">
+                    {obj.tips[key].title}
+                  </h3>
+                  <div
+                    className="ml-12 text-md text-blue-green font-light w-full"
+                    dangerouslySetInnerHTML={{ __html: obj.tips[key].content }}
+                  />
                 </div>
               ))}
             </div>
@@ -440,6 +462,7 @@ export default function WidgetChooser({ obj }) {
           </div>
         </div>
       )}
+      <div className={`${obj.green_bottom ? "green-bottom-border" : ""}`}></div>
     </>
   );
 }

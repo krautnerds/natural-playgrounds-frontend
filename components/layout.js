@@ -12,7 +12,7 @@ export default function Layout({ children }) {
     <>
       <Contact />
       <Navbar />
-      <main>{children}</main>
+      <>{children}</>
       <Cart />
       <Connected />
       <Testimonial />

@@ -25,8 +25,7 @@ h5 {
 }
 
 .connected {
-  @apply border-b-8 border-dark-green py-4;
-  background-color: #efefef;
+  @apply border-b-8 border-dark-green py-4 bg-concrete;
 }
 
 .connected h3 {
@@ -176,9 +175,10 @@ blockquote::after {
   font-size: 6em;
 }
 blockquote.testimonial:after {
-  left: 75%;
   position: absolute;
-  top: -8px;
+  top: 50%;
+  left: 100%;
+  right: 0;
   line-height: unset !important;
 }
 .image img,
@@ -211,4 +211,8 @@ blockquote.testimonial:after {
   height: 100%;
   width: 100%;
   position: absolute;
+}
+
+.green-bottom-border {
+  @apply border-b-2 border-dark-green mx-auto max-w-6xl w-full;
 }

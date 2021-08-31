@@ -7,6 +7,12 @@ export default function Page({ page }) {
   updateTestimonial(page.testimonial);
   return (
     <main>
+      <Head>
+        <title>{page.title}</title>
+        <meta name="description" content={page.seo_description} />
+        <meta name="keywords" content={page.seo_keywords} />
+        <meta property="og:type" content="article" />
+      </Head>
       <Hero title={page.title} sub_title={page.sub_title} />
       <div
         className="flex flex-col space-y-16 relative"
