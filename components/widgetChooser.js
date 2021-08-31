@@ -213,7 +213,7 @@ export default function WidgetChooser({ obj }) {
               </div>
             </div>
             <div className="wide-load w-full">
-              <div className="w-full flex flex-col md:flex-row space-y-6">
+              <div className="w-full flex flex-col md:flex-row space-y-6 md:space-y-0">
                 <div className="w-full md:w-1/3 flex justify-center">
                   <div className="relative w-3/4 h-64">
                     <Image
