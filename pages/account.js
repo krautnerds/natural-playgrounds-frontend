@@ -12,14 +12,15 @@ function classNames(...classes) {
 }
 
 const Profile = (props) => {
-  const [billing, setBilling] = useState(props.billing_address);
-  const [shipping, setShipping] = useState(props.shipping_address);
+  const [billing, setBilling] = useState();
+  const [shipping, setShipping] = useState();
   const [billingShippingSame, setBillingShippingSame] = useState(false);
   const [userEmail, setUserEmail] = useState(props.email);
   const [firstName, setFirstName] = useState(props.first_name);
   const [lastName, setLastName] = useState(props.last_name);
   const [errorMsg, setErrorMsg] = useState("");
   const { addToast } = useToasts();
+
   async function handleSubmit(e) {
     try {
       e.preventDefault();
@@ -31,8 +32,8 @@ const Profile = (props) => {
         last_name: lastName,
         email: userEmail,
         same_as: billingShippingSame,
-        shipping_address: shipping.formatted_address,
-        billing_address: billing.formatted_address,
+        shipping_address: shipping,
+        billing_address: billing,
         status: true,
       });
 
@@ -69,15 +70,7 @@ const Profile = (props) => {
               Update your contact information.
             </p>
           </div>
-          <div className="pt-8">
-            <div>
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Personal Information
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Use a permanent address where you can receive mail.
-              </p>
-            </div>
+          <div className="pt-4">
             <form
               className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
               onSubmit={handleSubmit}
@@ -96,6 +89,7 @@ const Profile = (props) => {
                     id="first-name"
                     autoComplete="given-name"
                     defaultValue={firstName}
+                    required={true}
                     onChange={(e) => setFirstName(e.target.value)}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
                   />
@@ -116,27 +110,8 @@ const Profile = (props) => {
                     id="last-name"
                     autoComplete="family-name"
                     defaultValue={lastName}
+                    required={true}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-6">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email address
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    defaultValue={userEmail}
-                    onChange={(e) => setUserEmail(e.target.value)}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
                   />
                 </div>
@@ -153,11 +128,12 @@ const Profile = (props) => {
                   <Autocomplete
                     className="shadow-sm focus:ring-i-500 focus:border-i-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
                     apiKey={`AIzaSyApuPpbYSAqBTHTnfB_n7SECRD9V9UYpJA`}
-                    defaultValue={shipping}
+                    defaultValue={props.raw_shipping}
                     options={{
                       types: ["address"],
                       componentRestrictions: { country: ["us", "ca"] },
                     }}
+                    required={true}
                     onPlaceSelected={(place) => {
                       setShipping(place);
                     }}
@@ -219,7 +195,7 @@ const Profile = (props) => {
                     <Autocomplete
                       className="shadow-sm focus:ring-i-500 focus:border-i-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
                       apiKey={`AIzaSyApuPpbYSAqBTHTnfB_n7SECRD9V9UYpJA`}
-                      defaultValue={billing}
+                      defaultValue={props.raw_billing}
                       options={{
                         types: ["address"],
                         componentRestrictions: { country: ["us", "ca"] },
