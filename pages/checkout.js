@@ -38,6 +38,9 @@ const Checkout = (props) => {
   const [cvc, setCVC] = useState("");
   const [expiry_month, setExpiryMonth] = useState("");
   const [expiry_year, setExpiryYear] = useState("");
+  useEffect(() => {
+    setBilling("");
+  }, [billingShippingSame]);
   async function handleSubmit(e) {
     try {
       e.preventDefault();
@@ -49,8 +52,8 @@ const Checkout = (props) => {
         firstName: firstName,
         lastName: lastName,
         email: userEmail,
-        billing: billing.formatted_address,
-        shipping: shipping.formatted_address,
+        billing: billing,
+        shipping: shipping,
         customer_shipping: shippingAmount,
         same_as: billingShippingSame,
         company: company,
@@ -104,6 +107,7 @@ const Checkout = (props) => {
                         id="first-name"
                         name="first-name"
                         autoComplete="given-name"
+                        required={true}
                         defaultValue={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
@@ -123,6 +127,7 @@ const Checkout = (props) => {
                         type="text"
                         id="last-name"
                         name="last-name"
+                        required={true}
                         autoComplete="family-name"
                         defaultValue={lastName}
                         onChange={(e) => setLasstName(e.target.value)}
@@ -143,6 +148,7 @@ const Checkout = (props) => {
                         type="text"
                         name="company"
                         id="company"
+                        required={true}
                         defaultValue={company}
                         onChange={(e) => setCompany(e.target.value)}
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
@@ -181,6 +187,7 @@ const Checkout = (props) => {
                         type="text"
                         name="phone"
                         id="phone"
+                        required={true}
                         defaultValue={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         autoComplete="tel"
@@ -213,6 +220,7 @@ const Checkout = (props) => {
                           types: ["address"],
                           componentRestrictions: { country: ["us", "ca"] },
                         }}
+                        required={true}
                         onPlaceSelected={(place) => {
                           setShipping(place);
                         }}
@@ -277,6 +285,7 @@ const Checkout = (props) => {
                           className="shadow-sm focus:ring-i-500 focus:border-i-500 block w-full sm:text-sm border-gray-300 rounded-md border-2 py-2 px-4"
                           apiKey={`AIzaSyApuPpbYSAqBTHTnfB_n7SECRD9V9UYpJA`}
                           defaultValue={billing}
+                          required={!billingShippingSame}
                           options={{
                             types: ["address"],
                             componentRestrictions: { country: ["us", "ca"] },
@@ -307,6 +316,7 @@ const Checkout = (props) => {
                         name="card-number"
                         autoComplete="cc-number"
                         defaultValue={cc}
+                        required={true}
                         maxLength="16"
                         onChange={(e) => setCC(e.target.value)}
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
@@ -326,6 +336,7 @@ const Checkout = (props) => {
                         type="text"
                         id="name-on-card"
                         name="name-on-card"
+                        required={true}
                         autoComplete="cc-name"
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
                       />
@@ -346,6 +357,7 @@ const Checkout = (props) => {
                         id="expiration-date"
                         autoComplete="cc-exp"
                         defaultValue={expiry_month}
+                        required={true}
                         maxLength="2"
                         onChange={(e) => setExpiryMonth(e.target.value)}
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
@@ -365,6 +377,7 @@ const Checkout = (props) => {
                         name="expiration-date"
                         id="expiration-date"
                         autoComplete="cc-exp"
+                        required={true}
                         maxLength="2"
                         defaultValue={expiry_year}
                         onChange={(e) => setExpiryYear(e.target.value)}
@@ -387,6 +400,7 @@ const Checkout = (props) => {
                         id="cvc"
                         autoComplete="cc-csc"
                         defaultValue={cvc}
+                        required={true}
                         maxLength="4"
                         onChange={(e) => setCVC(e.target.value)}
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
