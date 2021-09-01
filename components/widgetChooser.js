@@ -137,7 +137,7 @@ export default function WidgetChooser({ obj }) {
       {obj.widget_type === "News Release" && (
         <div className="relative">
           <div className="wide-load">
-            <div class="max-w-2xl  space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
+            <div className="max-w-2xl  space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
               {obj.news_releases &&
                 obj.news_releases.map((news, idx) => (
                   <div
