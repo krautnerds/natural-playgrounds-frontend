@@ -404,8 +404,12 @@ export default function WidgetChooser({ obj }) {
                 </div>
                 <div className="w-full md:w-1/3 flex flex-col space-y-4 items-center">
                   <Title title={obj.title} added_class="learn-more" />
-                  <p>Our Company</p>
-                  <p>Everything else about Natural Playgrounds</p>
+                  <Link href="/about">
+                    <p>Our Company</p>
+                  </Link>
+                  <Link href="/faq">
+                    <p>Everything else about Natural Playgrounds</p>
+                  </Link>
                 </div>
                 <div className="w-full md:w-1/3 flex justify-center">
                   <div className="relative w-3/4 h-64">
