@@ -112,7 +112,7 @@ export default function WidgetChooser({ obj }) {
                   className="col-span-2 sm:col-span-1 flex flex-col"
                   key={idx}
                 >
-                  <div className="relative image shadow-lg h-full">
+                  <div className="relative image h-full">
                     {gallery.image_url && (
                       <Image
                         className="object-cover shadow-lg"
