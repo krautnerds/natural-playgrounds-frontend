@@ -9,6 +9,7 @@ import Bark from "../images/bark.jpg";
 import Manufacturing from "../images/manufacturing.png";
 import Design from "../images/design.png";
 import YoutubeEmbed from "./widget/youtube";
+import ContactUs from "./widget/contact_us";
 export default function WidgetChooser({ obj }) {
   return (
     <>
@@ -427,6 +428,7 @@ export default function WidgetChooser({ obj }) {
           </div>
         </div>
       )}
+      {obj.widget_type === "Contact Us" && <ContactUs />}
       {obj.widget_type === "Videos" && (
         <div className="relative">
           <div className="wide-load flex flex-col">
