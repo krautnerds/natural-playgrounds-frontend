@@ -1,4 +1,4 @@
-import Tree from "../images/tree.jpeg";
+import Tree from "../images/tree.png";
 import Image from "next/image";
 export default function Hero({ title, sub_title }) {
   return (
