@@ -91,6 +91,7 @@ export default function WidgetChooser({ obj }) {
                 logo={obj.service_one_logo_url}
                 image={obj.service_one_image_url}
                 content={obj.service_one_content}
+                link={obj.service_one_link}
               />
             </div>
             <div className="w-full md:w-1/2 flex flex-col">
@@ -99,6 +100,7 @@ export default function WidgetChooser({ obj }) {
                 logo={obj.service_two_logo_url}
                 image={obj.service_two_image_url}
                 content={obj.service_two_content}
+                link={obj.service_two_link}
               />
             </div>
           </div>
@@ -226,13 +228,21 @@ export default function WidgetChooser({ obj }) {
                   </div>
                 </div>
                 <div className="w-full md:w-1/3 flex flex-col space-y-12 items-center">
-                  <div className="flex flex-col items-center">
-                    <Image src={Manufacturing} width={50} height={50} />
-                    <h3 className="mt-4">Manufacturing</h3>
+                  <div>
+                    <Link href="/manufacturing" passHref>
+                      <a className="flex flex-col items-center no-underline">
+                        <Image src={Manufacturing} width={50} height={50} />
+                        <h3 className="mt-4">Manufacturing</h3>
+                      </a>
+                    </Link>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <Image src={Design} width={50} height={50} />
-                    <h3 className="mt-4">Design</h3>
+                  <div>
+                    <Link href="/design" passHref>
+                      <a className="flex flex-col items-center no-underline">
+                        <Image src={Design} width={50} height={50} />
+                        <h3 className="mt-4">Design</h3>
+                      </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="w-full md:w-1/3 flex justify-center">
@@ -253,7 +263,7 @@ export default function WidgetChooser({ obj }) {
       {obj.widget_type === "Full Width Text" && (
         <div className="relative">
           <div className="wide-load flex flex-col space-y-6">
-            <div className="w-full justify-center flex flex-col items-center">
+            <div className="w-full justify-start flex flex-col items-start">
               <Title title={obj.title} added_class="full-text" />
             </div>
             <div className="w-full flex">
@@ -283,12 +293,8 @@ export default function WidgetChooser({ obj }) {
             <div className="space-y-12 sm:grid grid-cols-1 sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
               {Object.keys(obj.leafs).map((key) => (
                 <div className="relative flex items-start space-x-3" key={key}>
-                  <div className="flex-shrink-0">
-                    <Image
-                      className="h-10 w-10 rounded-full"
-                      src={Leaf}
-                      alt=""
-                    />
+                  <div className="flex-shrink-0 w-12">
+                    <Image className="h-6 w-6 rounded-full" src={Leaf} alt="" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="absolute inset-0" aria-hidden="true" />
@@ -348,7 +354,7 @@ export default function WidgetChooser({ obj }) {
       )}
       {obj.widget_type === "Full Width Image" && (
         <div>
-          <div className="relative h-[500px]">
+          <div className="relative h-[400px]">
             <div className="absolute inset-0">
               {obj.image_one_url && (
                 <Image
@@ -364,8 +370,8 @@ export default function WidgetChooser({ obj }) {
         </div>
       )}
       {obj.widget_type === "Wood Section" && (
-        <div className="mt-0 pt-12">
-          <div className="relative sm:overflow-hidden">
+        <div className="mt-0">
+          <div className="relative">
             <div className="absolute inset-0 top-[-64px]">
               <Image
                 className="h-full w-full object-cover"
@@ -403,13 +409,15 @@ export default function WidgetChooser({ obj }) {
                     )}
                   </div>
                 </div>
-                <div className="w-full md:w-1/3 flex flex-col space-y-4 items-center">
+                <div className="w-full md:w-1/3 flex flex-col space-y-8 items-center justify-end">
                   <Title title={obj.title} added_class="learn-more" />
                   <Link href="/about">
-                    <p>Our Company</p>
+                    <p className="cursor-pointer">Our Company</p>
                   </Link>
                   <Link href="/faq">
-                    <p>Everything else about Natural Playgrounds</p>
+                    <p className="cursor-pointer">
+                      Everything else about Natural Playgrounds
+                    </p>
                   </Link>
                 </div>
                 <div className="w-full md:w-1/3 flex justify-center">
@@ -468,7 +476,11 @@ export default function WidgetChooser({ obj }) {
           </div>
         </div>
       )}
-      <div className={`${obj.green_bottom ? "green-bottom-border" : ""}`}></div>
+      {obj.green_bottom && (
+        <div
+          className={`${obj.green_bottom ? "green-bottom-border" : ""}`}
+        ></div>
+      )}
     </>
   );
 }

@@ -18,7 +18,7 @@ export default function Connected() {
           ></input>
           <div>
             <button type="submit" className="button">
-              Save
+              Subscribe
             </button>
           </div>
         </div>

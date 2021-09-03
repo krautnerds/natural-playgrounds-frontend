@@ -15,13 +15,16 @@
 
 body,
 p,
-a,
+a {
+  @apply font-body font-light;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5 {
-  @apply font-body;
+  @apply font-body font-normal;
 }
 
 .connected {
@@ -29,7 +32,7 @@ h5 {
 }
 
 .connected h3 {
-  @apply tracking-widest font-thin font-rounded uppercase text-4xl leading-loose;
+  @apply tracking-widest font-normal font-rounded uppercase text-4xl leading-loose;
   color: #877759;
 }
 
@@ -47,11 +50,13 @@ h5 {
 .hero {
   position: relative;
   right: 0;
+  height: 600px;
 }
 
 .hero > div {
   position: unset !important;
   overflow: visible !important;
+  display: unset !important;
 }
 
 a:not(.no-underline) {
@@ -59,42 +64,52 @@ a:not(.no-underline) {
 }
 
 h1 {
-  @apply text-4xl font-medium  md:text-5xl uppercase;
+  @apply text-4xl font-normal  md:text-5xl uppercase;
 
   line-height: 1.25;
 }
 
+h3 {
+  @apply text-xl pt-4;
+}
 h3.sub-title {
-  @apply text-base font-semibold text-black sm:mt-5 sm:max-w-xl lg:mx-auto md:mt-5 sm:text-lg md:text-2xl lg:mx-0 uppercase;
+  @apply text-base font-normal text-black sm:mt-5 sm:max-w-xl lg:mx-0 md:mt-5 sm:text-lg md:text-2xl  uppercase;
 }
 
-.prose ul {
+ul {
   @apply list-disc list-inside;
 }
 
-.prose ul li:before {
+.no-dots {
+  @apply list-none !important;
+}
+
+ul li:before {
   display: none;
 }
 
-.wood.prose {
-  @apply text-2xl;
+.wood {
+  @apply flex flex-col space-y-8;
+}
+.wood p {
+  @apply text-xl block;
 }
 .widget-title {
-  @apply text-4xl uppercase  pb-8 text-blue-green font-light;
+  @apply text-2xl uppercase text-blue-green font-normal;
 }
 .wood.widget-title {
-  @apply text-4xl uppercase font-semibold text-blue-green text-center;
+  @apply text-4xl uppercase font-normal text-blue-green text-center;
   line-height: 1.25;
 }
 
 .wood.prose {
   @apply max-w-6xl !important;
 }
-.full-text.prose {
-  @apply max-w-6xl !important;
+.full-text {
+  @apply max-w-6xl flex flex-col space-y-6 !important;
 }
 
-.full-text.prose h3 {
+.full-text h3 {
   @apply text-2xl mt-0;
 }
 
@@ -103,16 +118,16 @@ h3.sub-title {
 }
 
 .services h3 {
-  @apply uppercase font-semibold text-xl text-brown;
+  @apply uppercase font-normal text-xl text-brown;
 }
 
 .full-text.widget-title {
-  @apply text-3xl uppercase font-semibold text-black pb-4;
+  @apply text-3xl uppercase font-normal text-black pb-4;
   line-height: 1.25;
 }
 
 .learn-more.widget-title {
-  @apply text-3xl uppercase font-semibold text-brown text-center pb-4;
+  @apply text-3xl uppercase font-normal text-brown text-center pb-4;
   line-height: 1.25;
 }
 
@@ -157,9 +172,9 @@ blockquote::after {
   display: inline;
   height: 0;
   line-height: 0;
-  left: 50%;
+  left: 75%;
   position: relative;
-  top: 35px;
+  top: 0;
   color: #ccc;
   font-size: 6em;
 }

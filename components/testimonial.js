@@ -10,7 +10,7 @@ export default function Testimonial() {
             <div className="w-full md:w:3/4 h-full">
               <blockquote className="testimonial relative">
                 <div className="ml-12 my-8 relative">
-                  <p className="text-2xl font-semibold mb-6">
+                  <p className="text-2xl font-light mb-6">
                     What our customers are saying
                   </p>
                   <div

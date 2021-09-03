@@ -19,7 +19,6 @@ const navigation = [
   { name: "Store Products", href: "/products/", current: false },
   { name: "Services", href: "/services/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
-  { name: "Learn", href: "/learn/", current: false },
 ];
 
 const mobileNavigation = [
@@ -27,7 +26,6 @@ const mobileNavigation = [
   { name: "Store Products", href: "/products/", current: false },
   { name: "Services", href: "/services/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
-  { name: "Learn", href: "/learn/", current: false },
   { name: "Shopping Cart", href: "/cart/", current: false },
   { name: "My Account", href: "/account/", current: false },
 ];

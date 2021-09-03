@@ -1,19 +1,27 @@
 import Image from "next/image";
-export default function SectionGrid({ title, logo, content, image }) {
+import Link from "next/link";
+export default function SectionGrid({ title, logo, content, image, url }) {
   return (
     <div className="h-full bg-sand flex flex-col pt-6 section-grid">
       {image && (
         <div className="p-8 flex justify-center mx-auto">
           <div className="relative h-16 w-16 ">
-            <Image className="object-cover " src={logo} alt="" layout="fill" />
+            <Link href={url}>
+              <Image
+                className="object-cover "
+                src={logo}
+                alt=""
+                layout="fill"
+              />
+            </Link>
           </div>
         </div>
       )}
       <div className="px-8 flex justify-center text-center">
-        <h2 className="font-bold text-2xl text-gray-900">{title}</h2>
+        <h2 className="text-2xl uppercase">{title}</h2>
       </div>
       <div
-        className={`prose p-8 flex flex-col justify-center flex-1`}
+        className={`prose p-8 flex flex-col justify-start flex-1 text-lg`}
         dangerouslySetInnerHTML={{ __html: content }}
       ></div>
       <div>

@@ -7,6 +7,7 @@ const navigation = {
     { name: "FAQ", href: "/faq" },
     { name: "Testimonials", href: "/testimonials" },
     { name: "News & Articles", href: "/news" },
+    { name: "More", href: "/more" },
   ],
   resources: [
     { name: "For Homeowners", href: "/homeowners" },
@@ -26,8 +27,8 @@ export default function Footer() {
         Footer
       </h2>
       <div className="wide-load py-12 lg:py-16">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8 xl:col-span-1">
+        <div className="xl:grid xl:grid-cols-4 xl:gap-8">
+          <div className="space-y-8 xl:col-span-2">
             <div>
               <h3 className="uppercase text-3xl">Contact Us</h3>
               <p className="text-gray-500 text-base">
@@ -42,13 +43,13 @@ export default function Footer() {
               <Social classProps="h-6 w-6 text-gray-500 hover:text-gray-800 cursor-pointer" />
             </div>
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
+          <div className="mt-12 grid grid-cols-3 gap-8 xl:mt-0 xl:col-span-2">
+            <div className="md:grid md:grid-cols-1 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold tracking-wider uppercase text-dark-green">
+                <h3 className="text-sm font-normal tracking-wider uppercase text-dark-green">
                   Learn More
                 </h3>
-                <ul className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4 no-dots">
                   {navigation.learn_more.map((item) => (
                     <li key={item.name}>
                       <a
@@ -61,11 +62,13 @@ export default function Footer() {
                   ))}
                 </ul>
               </div>
+            </div>
+            <div className="md:grid md:grid-cols-1 md:gap-8">
               <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold tracking-wider uppercase text-dark-green">
+                <h3 className="text-sm font-normal tracking-wider uppercase text-dark-green">
                   Resources
                 </h3>
-                <ul className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4 no-dots">
                   {navigation.resources.map((item) => (
                     <li key={item.name}>
                       <a
@@ -79,12 +82,12 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
+            <div className="md:grid md:grid-cols-1 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold tracking-wider uppercase text-dark-green">
+                <h3 className="text-sm font-normal tracking-wider uppercase text-dark-green">
                   Policies
                 </h3>
-                <ul className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4 no-dots">
                   {navigation.policies.map((item) => (
                     <li key={item.name}>
                       <a
