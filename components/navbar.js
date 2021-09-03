@@ -17,14 +17,14 @@ import { useState } from "react";
 const navigation = [
   { name: "About", href: "/about/", current: true },
   { name: "Store Products", href: "/products/", current: false },
-  { name: "Services", href: "/services/", current: false },
+  { name: "Services", href: "/design/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
 ];
 
 const mobileNavigation = [
   { name: "About", href: "/about/", current: true },
   { name: "Store Products", href: "/products/", current: false },
-  { name: "Services", href: "/services/", current: false },
+  { name: "Services", href: "/design/", current: false },
   { name: "Gallery", href: "/gallery/", current: false },
   { name: "Shopping Cart", href: "/cart/", current: false },
   { name: "My Account", href: "/account/", current: false },
