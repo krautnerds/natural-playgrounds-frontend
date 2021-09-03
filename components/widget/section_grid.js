@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SectionGrid({ title, logo, content, image, url }) {
   return (
     <div className="h-full bg-sand flex flex-col pt-6 section-grid">
-      {image && (
+      {image && url && (
         <div className="p-8 flex justify-center mx-auto">
           <div className="relative h-16 w-16 ">
             <Link href={url}>
