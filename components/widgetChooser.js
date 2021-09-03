@@ -209,13 +209,13 @@ export default function WidgetChooser({ obj }) {
       )}
       {obj.widget_type === "Services" && (
         <div className="relative">
-          <div className="flex flex-col md:space-x-12 services py-8 items-center">
-            <div className="container max-w-6xl mx-auto">
+          <div className="flex flex-col services py-8 items-center">
+            <div className="wide-load">
               <div className="w-full justify-center flex flex-col items-center">
                 <Title title={obj.title} />
               </div>
             </div>
-            <div className="wide-load w-full">
+            <div className="wide-load w-full pt-8">
               <div className="w-full flex flex-col md:flex-row space-y-6 md:space-y-0">
                 <div className="w-full md:w-1/3 flex justify-center">
                   <div className="relative w-3/4 h-64">
@@ -410,7 +410,11 @@ export default function WidgetChooser({ obj }) {
                   </div>
                 </div>
                 <div className="w-full md:w-1/3 flex flex-col space-y-8 items-center justify-end">
-                  <Title title={obj.title} added_class="learn-more" />
+                  <Link href="/about" passHref>
+                    <a className="cursor-pointer no-underline">
+                      <Title title={obj.title} added_class="learn-more " />
+                    </a>
+                  </Link>
                   <Link href="/about">
                     <p className="cursor-pointer">Our Company</p>
                   </Link>
