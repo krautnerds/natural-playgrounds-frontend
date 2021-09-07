@@ -8,9 +8,10 @@ import Leaf from "../images/leaf.jpg";
 import Bark from "../images/bark.jpg";
 import Manufacturing from "../images/manufacturing.png";
 import Design from "../images/design.png";
+import Store from "./store";
 import YoutubeEmbed from "./widget/youtube";
 import ContactUs from "./widget/contact_us";
-export default function WidgetChooser({ obj }) {
+export default function WidgetChooser({ obj, results }) {
   return (
     <>
       {obj.widget_type === "Image/Text" && (
@@ -203,6 +204,9 @@ export default function WidgetChooser({ obj }) {
           <div className="wide-load">
             <div className="w-full justify-center flex flex-col items-center">
               <Title title="Shop our Store" />
+            </div>
+            <div>
+              <Store results={results} />
             </div>
           </div>
         </div>

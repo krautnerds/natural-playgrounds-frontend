@@ -2,7 +2,7 @@ import Head from "next/head";
 import Hero from "../components/hero";
 import WidgetChooser from "../components/widgetChooser";
 import { useCartSlide } from "../hooks/use-cart-slide.js";
-export default function Page({ page }) {
+export default function Page({ page, results, selected }) {
   const { updateTestimonial } = useCartSlide();
   updateTestimonial(page.testimonial);
   return (
@@ -20,7 +20,12 @@ export default function Page({ page }) {
       >
         {page.widgets &&
           page.widgets.map((object, i) => (
-            <WidgetChooser obj={object} key={i} />
+            <WidgetChooser
+              obj={object}
+              key={i}
+              results={results}
+              selected={selected}
+            />
           ))}
       </div>
     </main>
@@ -31,10 +36,18 @@ export async function getStaticProps({ params }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/pages/${params.slug}/?format=json`
   );
+  const results = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/search/home/?format=json`
+  );
+  const selected = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/search/selected/?format=json`
+  );
 
   return {
     props: {
       page: await res.json(),
+      results: await results.json(),
+      selected: await selected.json(),
     },
   };
 }

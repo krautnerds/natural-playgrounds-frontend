@@ -11,6 +11,10 @@ export default function Search({ results, category }) {
   const [filterable, setFilterable] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    console.log("test");
+  });
+
   const filterSelected = (value) => {
     // Save the filters
     var local_filters = [...filterable];
@@ -37,7 +41,6 @@ export default function Search({ results, category }) {
     } else {
       filteredResults = results;
     }
-    console.log(filteredResults);
     setTimeout(
       function () {
         //Start the timer
@@ -58,7 +61,7 @@ export default function Search({ results, category }) {
             <h3 className="text-2xl font-medium leading-6 text-gray-900 pb-4">
               Select a Category
             </h3>
-            <form className="space-y-6 max-h-96 overflow-scroll border-gray-200 border-2 p-2 rounded-lg drop-shadow-lg">
+            <form className="space-y-6 max-h-96 overflow-scroll">
               {category.map((option, optionIdx) => (
                 <div key={option.id} className="flex items-center">
                   <input
