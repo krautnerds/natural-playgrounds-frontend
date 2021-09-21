@@ -92,7 +92,7 @@ export default function WidgetChooser({ obj, results, category }) {
                 logo={obj.service_one_logo_url}
                 image={obj.service_one_image_url}
                 content={obj.service_one_content}
-                link={obj.service_one_link}
+                link={obj.service_one_url}
               />
             </div>
             <div className="w-full md:w-1/2 flex flex-col">
@@ -101,7 +101,7 @@ export default function WidgetChooser({ obj, results, category }) {
                 logo={obj.service_two_logo_url}
                 image={obj.service_two_image_url}
                 content={obj.service_two_content}
-                link={obj.service_two_link}
+                link={obj.service_two_url}
               />
             </div>
           </div>
