@@ -11,7 +11,7 @@ import Design from "../images/design.png";
 import Store from "./store";
 import YoutubeEmbed from "./widget/youtube";
 import ContactUs from "./widget/contact_us";
-export default function WidgetChooser({ obj, results }) {
+export default function WidgetChooser({ obj, results, category }) {
   return (
     <>
       {obj.widget_type === "Image/Text" && (
@@ -210,7 +210,7 @@ export default function WidgetChooser({ obj, results }) {
               <Title title="Shop our Store" />
             </div>
             <div>
-              <Store results={results} />
+              <Store results={results} category={category} />
             </div>
           </div>
         </div>

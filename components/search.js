@@ -14,7 +14,13 @@ export default function Search({ results, category }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    filterSearch(query.search);
+    console.log(query);
+    if (query.search) {
+      filterSearch(query.search);
+    }
+    if (query.category) {
+      filterSelected(query.category);
+    }
   }, []);
 
   const filterSearch = (value) => {
@@ -34,6 +40,7 @@ export default function Search({ results, category }) {
 
   const filterSelected = (value) => {
     // Save the filters
+    console.log(value);
     var local_filters = [...filterable];
     var index = local_filters.indexOf(value);
     if (index === 1) {
@@ -87,6 +94,7 @@ export default function Search({ results, category }) {
                     type="checkbox"
                     onChange={(event) => filterSelected(option.name)}
                     className="focus:ring-dark-green h-4 w-4 text-dark-green border-gray-300 rounded"
+                    checked={filterable.includes(option.name) && true}
                   />
                   <label
                     htmlFor={`${optionIdx}`}

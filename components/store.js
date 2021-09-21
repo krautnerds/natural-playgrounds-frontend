@@ -7,7 +7,7 @@ import Loader from "react-loader-spinner";
 import Drawer from "./widget/drawer";
 import Image from "next/image";
 import Link from "next/link";
-export default function Store({ results, selected }) {
+export default function Store({ results, selected, category }) {
   const [localResults, setLocalResults] = useState(
     selected ? selected : results
   );
@@ -49,23 +49,31 @@ export default function Store({ results, selected }) {
               Browse Categories
             </h3>
             <form className="space-y-6 max-h-96 overflow-scroll p-2">
-              {results &&
-                results.map((option, optionIdx) => (
-                  <div key={option.id} className="flex items-center">
-                    <label
-                      htmlFor={`${optionIdx}`}
-                      className="text-sm text-gray-600 flex flex-row w-full"
-                      onClick={(event) => filterSelected(option.name)}
-                    >
-                      <div className="flex-1">{option.name}</div>
-                      <div className="flex justify-end">
-                        <PlusSmIcon
-                          className="ml-1 mr-2 h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                      </div>
-                    </label>
-                  </div>
+              {category &&
+                category.map((option, optionIdx) => (
+                  <Link
+                    href={{
+                      pathname: "/products",
+                      query: { category: option.name },
+                    }}
+                    key={option.id}
+                    passHref
+                  >
+                    <a className="flex items-center cursor-pointer no-underline">
+                      <label
+                        htmlFor={`${optionIdx}`}
+                        className="text-sm text-gray-600 flex flex-row w-full"
+                      >
+                        <div className="flex-1">{option.name}</div>
+                        <div className="flex justify-end">
+                          <PlusSmIcon
+                            className="ml-1 mr-2 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </label>
+                    </a>
+                  </Link>
                 ))}
             </form>
           </div>
@@ -82,13 +90,13 @@ export default function Store({ results, selected }) {
               {localResults.map((result, idx) => (
                 <Fragment key={idx}>
                   {result.products.map((product, idx) => (
-                    <Drawer product={product} key={idx} three={(idx + 1) % 3} />
+                    <Drawer
+                      product={product}
+                      category={result}
+                      key={idx}
+                      three={(idx + 1) % 3}
+                    />
                   ))}
-                  <Link href={`/products?products=${result.name}`}>
-                    <a className="uppercase text-blue-green font-normal text-lg no-underline button-empty md:col-span-2">
-                      See {result.in_category} Items in {result.name}
-                    </a>
-                  </Link>
                 </Fragment>
               ))}
             </div>
