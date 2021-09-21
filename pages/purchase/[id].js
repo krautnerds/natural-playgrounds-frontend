@@ -1,4 +1,5 @@
 import nextCookie from "next-cookies";
+import Head from "next/head";
 import { withAuthSync } from "../../lib/auth";
 import Router from "next/router";
 import Image from "next/image";
@@ -6,6 +7,9 @@ import axios from "axios";
 const Purchase = (props) => {
   return (
     <div className="bg-white">
+      <Head>
+        <title>Checkout</title>
+      </Head>
       <div className="wide-load py-16 sm:py-24">
         <div className="max-w-xl">
           <h1 className="text-sm font-semibold uppercase tracking-wide text-green-600">
@@ -15,7 +19,7 @@ const Purchase = (props) => {
             It&lsquo;s on the way!
           </p>
           <p className="mt-2 text-base text-gray-500">
-            Your order #{props.sale_number} has shipped and will be with you
+            Your order #{props.sale_number} has been placed and will be with you
             soon.
           </p>
         </div>

@@ -1,9 +1,17 @@
 /* eslint-disable */
 import React from "react";
 import Search from "../../components/search";
+import Head from "next/head";
 
 export default function ProductIndex({ results, category }) {
-  return <Search results={results} category={category} />;
+  return (
+    <>
+      <Head>
+        <title>Products</title>
+      </Head>
+      <Search results={results} category={category} />
+    </>
+  );
 }
 
 export async function getStaticProps({ params }) {

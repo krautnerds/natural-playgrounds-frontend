@@ -6,6 +6,9 @@ export default function Page({ page, results, selected, category }) {
   return (
     <main>
       <Hero title={page.title} sub_title={page.sub_title} />
+      <Head>
+        <title>Natural Playgrounds</title>
+      </Head>
       <div className="flex flex-col space-y-16 relative">
         {page.widgets &&
           page.widgets.map((object, i) => (

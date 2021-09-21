@@ -28,6 +28,9 @@ export default function Product({ product }) {
   }, [option]);
   return (
     <main className="max-w-6xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
+      <Head>
+        <title>{product.name}</title>
+      </Head>
       <div className="max-w-2xl mx-auto lg:max-w-none">
         {/* Product */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
