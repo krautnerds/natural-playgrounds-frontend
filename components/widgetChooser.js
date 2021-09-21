@@ -118,14 +118,12 @@ export default function WidgetChooser({ obj, results, category }) {
                 >
                   <Link href={`/gallery/${gallery.slug}`} passHref>
                     <a>
-                      <div className="relative image h-full">
+                      <div className="relative image">
                         {gallery.image_url && (
                           <Image
                             className="object-cover shadow-lg"
                             src={gallery.image_url}
                             alt=""
-                            placeholder="blur"
-                            blurDataURL="LWGuj#%LNuax9ZRjjrah~pWXs:j]"
                             layout="fill"
                           />
                         )}
@@ -160,8 +158,6 @@ export default function WidgetChooser({ obj, results, category }) {
                               className="object-cover"
                               src={news.image_url}
                               alt=""
-                              placeholder="blur"
-                              blurDataURL="LWGuj#%LNuax9ZRjjrah~pWXs:j]"
                               layout="fill"
                             />
                           )}

@@ -19,8 +19,6 @@ export default function Gallery({ gallery }) {
                         className="object-cover shadow-lg"
                         src={image.image_url}
                         alt=""
-                        placeholder="blur"
-                        blurDataURL="LWGuj#%LNuax9ZRjjrah~pWXs:j]"
                         layout="fill"
                       />
                     )}
