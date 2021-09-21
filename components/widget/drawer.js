@@ -55,11 +55,7 @@ export default function Drawer({ product, three, category }) {
             )}
           </div>
           <div>
-            {isOpen ? (
-              <p className="font-light text-md pt-2">{product.name}</p>
-            ) : (
-              <p className="font-light text-md pt-2">{category.name}</p>
-            )}
+            <p className="font-light text-md pt-2">{category.name}</p>
           </div>
         </div>
         {isOpen && (
