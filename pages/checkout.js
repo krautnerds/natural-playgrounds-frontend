@@ -23,7 +23,9 @@ const Checkout = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [total, updateTotal] = useState(0);
-  const [shippingAmount, updateShippingAmount] = useState(232);
+  const [shippingAmount, updateShippingAmount] = useState(() =>
+    getShippingAmount()
+  );
   const [company, setCompany] = useState(props.company);
   const [billing, setBilling] = useState(props.billing_address);
   const [shipping, setShipping] = useState(props.shipping_address);
@@ -41,6 +43,27 @@ const Checkout = (props) => {
   useEffect(() => {
     setBilling("");
   }, [billingShippingSame]);
+  function getShippingAmount() {
+    var shipping_amount = 0;
+    items.map((item) => {
+      shipping_amount =
+        shipping_amount + parseFloat(item.quantity * item.weight);
+    });
+    if (shipping_amount >= 300 && cartTotal < 1500) {
+      return 600;
+    }
+    if (shipping_amount > 300) {
+      return cartTotal * 1.33;
+    }
+    if (shipping_amount >= 100) {
+      return cartTotal * 1.3;
+    }
+    if (shipping_amount >= 40) {
+      return cartTotal * 1.1;
+    }
+
+    return shipping_amount;
+  }
   async function handleSubmit(e) {
     try {
       e.preventDefault();

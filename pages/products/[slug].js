@@ -148,6 +148,7 @@ export default function Product({ product }) {
                         option: optionName,
                         name: product.name,
                         image: product.image_url,
+                        weight: product.weight,
                       });
                       updateCartSlide(true);
                     }}

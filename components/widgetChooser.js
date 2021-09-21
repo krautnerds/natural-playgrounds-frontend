@@ -116,23 +116,27 @@ export default function WidgetChooser({ obj, results }) {
                   className="col-span-2 sm:col-span-1 flex flex-col"
                   key={idx}
                 >
-                  <div className="relative image h-full">
-                    {gallery.image_url && (
-                      <Image
-                        className="object-cover shadow-lg"
-                        src={gallery.image_url}
-                        alt=""
-                        placeholder="blur"
-                        blurDataURL="LWGuj#%LNuax9ZRjjrah~pWXs:j]"
-                        layout="fill"
-                      />
-                    )}
-                  </div>
-                  <div className="relative p-8">
-                    <h3 className="text-xl font-semibold text-center uppercase">
-                      {gallery.title}
-                    </h3>
-                  </div>
+                  <Link href={`/gallery/${gallery.slug}`} passHref>
+                    <a>
+                      <div className="relative image h-full">
+                        {gallery.image_url && (
+                          <Image
+                            className="object-cover shadow-lg"
+                            src={gallery.image_url}
+                            alt=""
+                            placeholder="blur"
+                            blurDataURL="LWGuj#%LNuax9ZRjjrah~pWXs:j]"
+                            layout="fill"
+                          />
+                        )}
+                      </div>
+                      <div className="relative p-8">
+                        <h3 className="text-xl font-semibold text-center uppercase">
+                          {gallery.title}
+                        </h3>
+                      </div>
+                    </a>
+                  </Link>
                 </div>
               ))}
           </div>

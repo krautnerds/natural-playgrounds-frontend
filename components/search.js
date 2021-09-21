@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { PlusSmIcon } from "@heroicons/react/solid";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
@@ -6,14 +7,30 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Search({ results, category }) {
-  const [search, setSearch] = useState("");
+  const { query } = useRouter();
+  const [cnt, setCnt] = useState(1);
   const [localResults, setLocalResults] = useState(results);
   const [filterable, setFilterable] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("test");
-  });
+    filterSearch(query.search);
+  }, []);
+
+  const filterSearch = (value) => {
+    setLoading(true);
+    if (value) {
+      let filteredResults = [];
+      results.filter(function (_result) {
+        if (_result.description && _result.description.includes(value)) {
+          filteredResults.push(_result);
+        }
+      });
+      setLocalResults(filteredResults);
+    }
+
+    setLoading(false);
+  };
 
   const filterSelected = (value) => {
     // Save the filters
@@ -48,7 +65,7 @@ export default function Search({ results, category }) {
       }.bind(this),
       1500
     );
-    setLocalResults(filteredResults);
+    setLocalResults([...new Set(filteredResults)]);
   };
 
   return (
@@ -91,7 +108,7 @@ export default function Search({ results, category }) {
 
         <section
           aria-labelledby="product-heading"
-          className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3"
+          className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3 max-h-screen overflow-scroll"
         >
           <h2 id="product-heading" className="sr-only">
             Products
@@ -127,6 +144,7 @@ export default function Search({ results, category }) {
                   </a>
                 </Link>
               ))}
+              <button onClick={() => setCnt(cnt + 1)}>Load More</button>
             </div>
           ) : (
             <div className="h-screen flex justify-center align-center items-center">
