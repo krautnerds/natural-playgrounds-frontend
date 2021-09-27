@@ -573,7 +573,7 @@ const Checkout = (props) => {
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   {items.length <= 0 ? (
                     <p className="text-white bg-red-600 p-4 border-left-4 border-red-800">
-                      Cart can't be empty
+                      Cart can&apos;t be empty
                     </p>
                   ) : (
                     <>
