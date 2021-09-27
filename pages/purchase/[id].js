@@ -99,13 +99,13 @@ const Purchase = (props) => {
               <div className="flex">
                 <dt className="font-medium text-gray-900 w-32">Shipping</dt>
                 <dd className="text-gray-700 w-32">
-                  ${props.customer_shipping}
+                  ${props.customer_shipping.toFixed(2)}
                 </dd>
               </div>
               <div className="flex">
                 <dt className="font-medium text-gray-900 w-32">Total</dt>
                 <dd className="text-gray-900 w-32">
-                  ${props.order_total + props.customer_shipping}
+                  ${(props.order_total + props.customer_shipping).toFixed(2)}
                 </dd>
               </div>
             </dl>

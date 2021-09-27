@@ -27,14 +27,16 @@ const Checkout = (props) => {
     getShippingAmount()
   );
   const [company, setCompany] = useState(props.company);
-  const [billing, setBilling] = useState(props.billing_address);
-  const [shipping, setShipping] = useState(props.shipping_address);
-  const [billingShippingSame, setBillingShippingSame] = useState(false);
+  const [billing, setBilling] = useState(props.raw_billing);
+  const [shipping, setShipping] = useState(props.raw_shipping);
+  const [billingShippingSame, setBillingShippingSame] = useState(props.same_as);
   const [userEmail, setUserEmail] = useState(props.email);
   const [firstName, setFirstName] = useState(props.first_name);
-  const [fax, setFax] = useState(props.fax);
-  const [phone, setPhone] = useState(props.phone);
+  const [fax, setFax] = useState(props.fax_number);
+  const [phone, setPhone] = useState(props.phone_number);
   const [lastName, setLastName] = useState(props.last_name);
+  const [billingDirty, setBillingDirty] = useState(false);
+  const [shippingDirty, setShippingDirty] = useState(false);
 
   const [cc, setCC] = useState("");
   const [cvc, setCVC] = useState("");
@@ -222,7 +224,7 @@ const Checkout = (props) => {
               </div>
 
               {/* Payment */}
-              <div className="mt-10 border-t border-gray-200 pt-10">
+              <div className="mt-10 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">
                   Shipping/Billing Information
                 </h2>
@@ -244,10 +246,19 @@ const Checkout = (props) => {
                           componentRestrictions: { country: ["us", "ca"] },
                         }}
                         required={true}
+                        onChange={(e) => {
+                          setShippingDirty(true);
+                        }}
                         onPlaceSelected={(place) => {
                           setShipping(place);
+                          setShippingDirty(false);
                         }}
                       />
+                      {shippingDirty && (
+                        <p className="text-red-500 text-xs italic">
+                          Please select a valid address
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="sm:col-span-6">
@@ -313,16 +324,25 @@ const Checkout = (props) => {
                             types: ["address"],
                             componentRestrictions: { country: ["us", "ca"] },
                           }}
+                          onChange={(e) => {
+                            setBillingDirty(true);
+                          }}
                           onPlaceSelected={(place) => {
                             setBilling(place);
+                            setBillingDirty(false);
                           }}
                         />
+                        {billingDirty && (
+                          <p className="text-red-500 text-xs italic">
+                            Please select a valid address
+                          </p>
+                        )}
                       </div>
                     </div>
                   )}
                 </div>
               </div>
-              <div className="mt-10 border-t border-gray-200 pt-10">
+              <div className="mt-10 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">Payment</h2>
 
                 <div className="mt-6 grid grid-cols-3 gap-y-6 gap-x-4">
@@ -524,7 +544,7 @@ const Checkout = (props) => {
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Subtotal</dt>
                     <dd className="text-sm font-medium text-gray-900">
-                      ${cartTotal}
+                      ${cartTotal.toFixed(2)}
                     </dd>
                   </div>
                   <div className="flex items-center justify-between">
@@ -539,26 +559,37 @@ const Checkout = (props) => {
                       </div>
                     </dt>
                     <dd className="text-sm font-medium text-gray-900">
-                      ${shippingAmount}
+                      ${shippingAmount.toFixed(2)}
                     </dd>
                   </div>
                   <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>
                     <dd className="text-base font-medium text-gray-900">
-                      ${cartTotal + shippingAmount}
+                      ${(cartTotal + shippingAmount).toFixed(2)}
                     </dd>
                   </div>
                 </dl>
 
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                  {cc && items.length > 0 ? (
-                    <button type="submit" className="w-full button">
-                      Confirm order
-                    </button>
+                  {items.length <= 0 ? (
+                    <p className="text-white bg-red-600 p-4 border-left-4 border-red-800">
+                      Cart can't be empty
+                    </p>
                   ) : (
-                    <button type="button" className="w-full button-empty">
-                      Please check credit card and/or add items to cart
-                    </button>
+                    <>
+                      {cc &&
+                      items.length > 0 &&
+                      !shippingDirty &&
+                      !billingDirty ? (
+                        <button type="submit" className="w-full button">
+                          Confirm order
+                        </button>
+                      ) : (
+                        <button type="button" className="w-full button-empty">
+                          Please check credit card and/or add items to cart
+                        </button>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

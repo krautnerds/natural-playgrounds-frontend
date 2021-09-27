@@ -329,12 +329,14 @@ const Profile = (props) => {
                                 </div>
                               </div>
                               <div className="ml-4 flex-shrink-0 sm:m-0 sm:mr-6 sm:order-first relative  w-20 h-20  sm:w-40 sm:h-40 lg:w-52 lg:h-52">
-                                <Image
-                                  src={product.image}
-                                  alt={`Product image for ${product.name}`}
-                                  className="col-start-2 col-end-3 sm:col-start-1 sm:row-start-1 sm:row-span-2rounded-lg object-center object-cover "
-                                  layout="fill"
-                                />
+                                {product.image && (
+                                  <Image
+                                    src={product.image}
+                                    alt={`Product image for ${product.name}`}
+                                    className="col-start-2 col-end-3 sm:col-start-1 sm:row-start-1 sm:row-span-2rounded-lg object-center object-cover "
+                                    layout="fill"
+                                  />
+                                )}
                               </div>
                             </div>
                           ))}
