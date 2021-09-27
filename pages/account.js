@@ -19,6 +19,8 @@ const Profile = (props) => {
   const [firstName, setFirstName] = useState(props.first_name);
   const [lastName, setLastName] = useState(props.last_name);
   const [errorMsg, setErrorMsg] = useState("");
+  const [billingDirty, setBillingDirty] = useState(false);
+  const [shippingDirty, setShippingDirty] = useState(false);
   const { addToast } = useToasts();
 
   async function handleSubmit(e) {
@@ -133,11 +135,19 @@ const Profile = (props) => {
                       types: ["address"],
                       componentRestrictions: { country: ["us", "ca"] },
                     }}
-                    required={true}
+                    onChange={(e) => {
+                      setShippingDirty(true);
+                    }}
                     onPlaceSelected={(place) => {
                       setShipping(place);
+                      setShippingDirty(false);
                     }}
                   />
+                  {shippingDirty && (
+                    <p className="text-red-500 text-xs italic">
+                      Please select a valid address
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="sm:col-span-6">
@@ -200,17 +210,37 @@ const Profile = (props) => {
                         types: ["address"],
                         componentRestrictions: { country: ["us", "ca"] },
                       }}
+                      onChange={(e) => {
+                        setBillingDirty(true);
+                      }}
                       onPlaceSelected={(place) => {
                         setBilling(place);
+                        setBillingDirty(false);
                       }}
                     />
+                    {billingDirty && !billingShippingSame && (
+                      <p className="text-red-500 text-xs italic">
+                        Please select a valid address
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
               <div className="w-full sm:col-span-6">
-                <button type="submit" className="button w-32">
-                  Update
-                </button>
+                <div>
+                  {!billingDirty && !shippingDirty ? (
+                    <button type="submit" className="button w-32">
+                      Update
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      className="button-disabled w-auto cursor-not-allowed"
+                    >
+                      Update Addresses
+                    </button>
+                  )}
+                </div>
               </div>
             </form>
           </div>

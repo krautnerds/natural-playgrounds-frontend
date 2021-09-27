@@ -47,6 +47,10 @@ h5 {
   @apply bg-white border border-dark-green shadow-sm py-3 px-4 inline-flex justify-center text-sm font-medium text-dark-green  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500;
 }
 
+.button-disabled {
+  @apply bg-red-500 border border-red-800 shadow-sm py-3 px-4 inline-flex justify-center text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 cursor-not-allowed;
+}
+
 .hero {
   position: relative;
   right: 0;
