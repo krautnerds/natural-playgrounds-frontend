@@ -5,39 +5,13 @@ import { PlusSmIcon } from "@heroicons/react/solid";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import Drawer from "./widget/drawer";
-import Image from "next/image";
 import Link from "next/link";
 export default function Store({ results, selected, category }) {
   const [localResults, setLocalResults] = useState(
     selected ? selected : results
   );
-  const [filterable, setFilterable] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const filterSelected = (value) => {
-    // Save the filters
-    setFilterable(value);
-    // Now Filter the data
-    let filteredResults = [];
-    setLoading(true);
-    if (filterable) {
-      results.filter(function (_result) {
-        if (_result.name === value) {
-          filteredResults.push(_result);
-        }
-      });
-    } else {
-      filteredResults = results;
-    }
-    setTimeout(
-      function () {
-        //Start the timer
-        setLoading(false); //After 1.5 second, set loading to false
-      }.bind(this),
-      1500
-    );
-    setLocalResults(filteredResults);
-  };
   return (
     <main className="">
       <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
@@ -56,7 +30,7 @@ export default function Store({ results, selected, category }) {
                       pathname: "/products",
                       query: { category: option.name },
                     }}
-                    key={option.id}
+                    key={optionIdx}
                     passHref
                   >
                     <a className="flex items-center cursor-pointer no-underline">

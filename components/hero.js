@@ -24,7 +24,8 @@ export default function Hero({ title, sub_title }) {
           <Image
             className="h-56 w-full sm:h-72 md:h-96 lg:w-full lg:h-full relative"
             src={Tree}
-            alt=""
+            alt="Green Tree Decorative"
+            priority={true}
           />
         </div>
       </div>

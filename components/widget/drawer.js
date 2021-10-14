@@ -7,12 +7,12 @@ export default function Drawer({ product, three, category }) {
 
   const handleExit = () => {
     setTransitionExit(true);
+    setIsOpen(false);
     setTimeout(() => {
-      setIsOpen(false);
       setTransitionExit(false);
       // timeout should be less than animation time otherwise state might still be true
       // after animation ends and drawer appears for few milliseconds
-    }, 500);
+    }, 1500);
   };
   return (
     <div className="gray-outline">
@@ -34,6 +34,7 @@ export default function Drawer({ product, three, category }) {
                     alt={`Product Image for ${product.name}`}
                     className="w-full h-full object-center object-cover group-hover:opacity-75"
                     layout="fill"
+                    priority={true}
                   />
                 ) : (
                   <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
@@ -47,6 +48,7 @@ export default function Drawer({ product, three, category }) {
                     alt={`Category Image for ${category.name}`}
                     className="w-full h-full object-center object-cover group-hover:opacity-75"
                     layout="fill"
+                    priority={true}
                   />
                 ) : (
                   <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>

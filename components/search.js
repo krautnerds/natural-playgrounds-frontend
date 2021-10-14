@@ -40,13 +40,12 @@ export default function Search({ results, category }) {
 
   const filterSelected = (value) => {
     // Save the filters
-    console.log(value);
     var local_filters = [...filterable];
     var index = local_filters.indexOf(value);
-    if (index === 1) {
-      local_filters.splice(index, 1);
-    } else {
+    if (index === -1) {
       local_filters.push(value);
+    } else {
+      local_filters.splice(index, 1);
     }
     setFilterable(local_filters);
     // Now Filter the data
@@ -87,7 +86,7 @@ export default function Search({ results, category }) {
             </h3>
             <form className="space-y-6 max-h-96 overflow-scroll">
               {category.map((option, optionIdx) => (
-                <div key={option.id} className="flex items-center">
+                <div key={optionIdx} className="flex items-center">
                   <input
                     id={`${optionIdx}`}
                     name={`${option.name}`}
@@ -123,8 +122,8 @@ export default function Search({ results, category }) {
           </h2>
           {!loading ? (
             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-              {localResults.map((product) => (
-                <Link key={product.id} href={product.link} className="group">
+              {localResults.map((product, productIdx) => (
+                <Link key={productIdx} href={product.link} className="group">
                   <a>
                     <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                       {product.image_url ? (
@@ -152,7 +151,6 @@ export default function Search({ results, category }) {
                   </a>
                 </Link>
               ))}
-              <button onClick={() => setCnt(cnt + 1)}>Load More</button>
             </div>
           ) : (
             <div className="h-screen flex justify-center align-center items-center">
