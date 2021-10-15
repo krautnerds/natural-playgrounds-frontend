@@ -12,7 +12,6 @@ const navigation = {
   resources: [
     { name: "For Homeowners", href: "/homeowners" },
     { name: "For Constructors", href: "/construction" },
-    { name: "Employment", href: "/employment" },
   ],
   policies: [
     { name: "Privacy Policy", href: "/privacy" },
