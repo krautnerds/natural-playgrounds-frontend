@@ -28,7 +28,7 @@ export default function Store({ results, selected, category }) {
                   <Link
                     href={{
                       pathname: "/products",
-                      query: { category: option.name },
+                      query: { category_search: option.name },
                     }}
                     key={optionIdx}
                     passHref
@@ -63,7 +63,7 @@ export default function Store({ results, selected, category }) {
             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
               {localResults.map((result, idx) => (
                 <Fragment key={idx}>
-                  {result.products.map((product, idx) => (
+                  {result.products.map((product, pIdx) => (
                     <Drawer
                       product={product}
                       category={result}

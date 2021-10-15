@@ -7,21 +7,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Search({ results, category }) {
-  const { query } = useRouter();
-  const [cnt, setCnt] = useState(1);
   const [localResults, setLocalResults] = useState(results);
   const [filterable, setFilterable] = useState([]);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    console.log(query);
-    if (query.search) {
-      filterSearch(query.search);
+    if (router.query.search) {
+      filterSearch(router.query.search);
     }
-    if (query.category) {
-      filterSelected(query.category);
+    if (router.query.category_search) {
+      filterSelected(router.query.category_search);
     }
-  }, []);
+  }, [router.query]);
 
   const filterSearch = (value) => {
     setLoading(true);

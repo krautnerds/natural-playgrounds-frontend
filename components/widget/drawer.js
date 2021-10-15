@@ -4,7 +4,6 @@ import Image from "next/image";
 export default function Drawer({ product, three, category }) {
   const [isOpen, setIsOpen] = useState(false);
   const [transitionExit, setTransitionExit] = useState(false);
-
   const handleExit = () => {
     setTransitionExit(true);
     setIsOpen(false);
@@ -72,11 +71,21 @@ export default function Drawer({ product, three, category }) {
                 transitionExit ? "exit" : ""
               } flex flex-col justify-start space-y-4`}
             >
-              <h3 className="uppercase text-blue-green font-normal text-xl text-center">
-                {product.name}
-              </h3>
-              <Link href={product.link}>
-                <a className="button no-underline">View</a>
+              <Link href={product.link} passHref>
+                <h3 className="uppercase text-blue-green font-normal text-xl text-center cursor-pointer">
+                  {product.name}
+                </h3>
+              </Link>
+              <Link
+                href={{
+                  pathname: "/products",
+                  query: { category_search: category.name },
+                }}
+                passHref
+              >
+                <a className="button no-underline text-center">
+                  View {category.name}
+                </a>
               </Link>
             </div>
           </div>

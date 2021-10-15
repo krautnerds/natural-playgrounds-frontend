@@ -10,7 +10,6 @@ const Login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(router);
     try {
       var environment =
         process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";

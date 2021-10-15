@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/outline";
 import { CartProvider, useCart } from "react-use-cart";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navigation = [
   { name: "About", href: "/about/", current: true },
@@ -36,9 +36,17 @@ function classNames(...classes) {
 
 export default function Example() {
   const router = useRouter();
+  const { search } = router.query;
   const { updateCartSlide } = useCartSlide();
   const { totalUniqueItems } = useCart();
-  const [searchTerm, setSearchTerm] = useState(router.query["search"] || "");
+  const [searchTerm, setSearchTerm] = useState(search);
+
+  useEffect(() => {
+    if (router.query.search) {
+      setSearchTerm(router.query.search);
+    }
+  }, [router.query]);
+
   return (
     <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
@@ -82,7 +90,8 @@ export default function Example() {
                         className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm"
                         placeholder="Search"
                         type="search"
-                        defaultValue={searchTerm}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                       />
                     </div>
                   </form>
