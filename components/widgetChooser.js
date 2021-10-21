@@ -305,19 +305,27 @@ export default function WidgetChooser({ obj, results, category }) {
               <Title title={obj.title} added_class="full-text" />
             </div>
             <div className="space-y-12 sm:grid grid-cols-1 sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
-              {Object.keys(obj.leafs).map((key) => (
-                <div className="relative flex items-start space-x-3" key={key}>
-                  <div className="flex-shrink-0 w-12">
-                    <Image className="h-6 w-6 rounded-full" src={Leaf} alt="" />
+              {obj.leafs &&
+                Object.keys(obj.leafs).map((key) => (
+                  <div
+                    className="relative flex items-start space-x-3"
+                    key={key}
+                  >
+                    <div className="flex-shrink-0 w-12">
+                      <Image
+                        className="h-6 w-6 rounded-full"
+                        src={Leaf}
+                        alt=""
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="absolute inset-0" aria-hidden="true" />
+                      <p className="text-lg font-medium text-gray-900">
+                        {obj.leafs[key].content}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="absolute inset-0" aria-hidden="true" />
-                    <p className="text-lg font-medium text-gray-900">
-                      {obj.leafs[key].content}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
@@ -329,17 +337,20 @@ export default function WidgetChooser({ obj, results, category }) {
               <Title title={obj.title} added_class="full-text" />
             </div>
             <div className="space-y-12 sm:grid grid-cols-1 sm:grid-cols-2 grid-rows-5 sm:gap-12 sm:space-y-0 lg:gap-x-8">
-              {Object.keys(obj.tips).map((key) => (
-                <div className="relative flex flex-col items-start" key={key}>
-                  <h3 className="w-full text-dark-green font-semibold mb-2">
-                    {obj.tips[key].title}
-                  </h3>
-                  <div
-                    className="ml-12 text-md text-blue-green font-light w-full"
-                    dangerouslySetInnerHTML={{ __html: obj.tips[key].content }}
-                  />
-                </div>
-              ))}
+              {obj.tips &&
+                Object.keys(obj.tips).map((key) => (
+                  <div className="relative flex flex-col items-start" key={key}>
+                    <h3 className="w-full text-dark-green font-semibold mb-2">
+                      {obj.tips[key].title}
+                    </h3>
+                    <div
+                      className="ml-12 text-md text-blue-green font-light w-full"
+                      dangerouslySetInnerHTML={{
+                        __html: obj.tips[key].content,
+                      }}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
         </div>

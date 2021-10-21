@@ -21,11 +21,12 @@ export default function Store({ category }) {
           </h2>
           {!loading ? (
             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-4">
-              {category.map((result, idx) => (
-                <Fragment key={idx}>
-                  <Drawer category={result} key={idx} />
-                </Fragment>
-              ))}
+              {category &&
+                category.map((result, idx) => (
+                  <Fragment key={idx}>
+                    <Drawer category={result} key={idx} />
+                  </Fragment>
+                ))}
             </div>
           ) : (
             <div className="h-64 flex justify-center align-center items-center">
