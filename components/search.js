@@ -21,7 +21,13 @@ export default function Search({ results, category, topSeller }) {
       filterSelected(router.query.category_search);
       filterTop(router.query.category_search);
     }
-  }, [router.query.search, router.query.category_search]);
+  }, [
+    router.query.search,
+    router.query.category_search,
+    filterSearch,
+    filterSelected,
+    filterTop,
+  ]);
 
   const filterSearch = (value) => {
     setLoading(true);
@@ -148,7 +154,7 @@ export default function Search({ results, category, topSeller }) {
                   <h2 className="text-2xl">Top Selling Product</h2>
                   <div className="grid grid-cols-1 gap-7">
                     {selling.map((seller, sellerIdx) => (
-                      <div className="grid grid-cols-3 gap-7">
+                      <div className="grid grid-cols-3 gap-7" key={sellerIdx}>
                         <div className="col-span-1">
                           <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                             {seller.image_url ? (
@@ -183,7 +189,7 @@ export default function Search({ results, category, topSeller }) {
                               }}
                             />
                           )}
-                          <div class="flex-1 flex items-end">
+                          <div className="flex-1 flex items-end">
                             <button
                               type="button"
                               className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"

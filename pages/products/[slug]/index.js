@@ -26,7 +26,7 @@ export default function Product({ product }) {
         break; // If you want to break out of the loop once you've found a match
       }
     }
-  }, [option]);
+  }, [option, product.options]);
   return (
     <main className="max-w-6xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
       <Head>
@@ -91,7 +91,7 @@ export default function Product({ product }) {
             <div className="sticky top-4">
               <div className="flex flex-col space-y-4 pt-4">
                 <div>
-                  <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">
+                  <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
                     {product.name}
                   </h2>
                 </div>
@@ -166,7 +166,7 @@ export default function Product({ product }) {
                 <div className="flex flex-col space-y-8 border-t-2 border-gray-100">
                   {product.instructions_url || product.product_pdf_url ? (
                     <section aria-labelledby="details-heading" className="mt-4">
-                      <h2 class="text-xl font-bold text-gray-900">
+                      <h2 className="text-xl font-bold text-gray-900">
                         Additional details
                       </h2>
 
@@ -198,7 +198,9 @@ export default function Product({ product }) {
                     ""
                   )}
                   <div>
-                    <h2 class="text-xl font-bold text-gray-900">Dimensions</h2>
+                    <h2 className="text-xl font-bold text-gray-900">
+                      Dimensions
+                    </h2>
                     <div
                       className="text-base text-gray-700 space-y-6"
                       dangerouslySetInnerHTML={{ __html: product.dimensions }}

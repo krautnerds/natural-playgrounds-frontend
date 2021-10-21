@@ -6,7 +6,7 @@ export default function SectionGrid({ title, logo, content, image, url }) {
       {image && url && (
         <div className="p-8 flex justify-center mx-auto">
           <div className="relative h-16 w-16 ">
-            <Link href={url}>
+            <Link href={url} passHref>
               <Image
                 className="object-cover "
                 src={logo}

@@ -64,7 +64,7 @@ export default function WidgetChooser({ obj, results, category }) {
             <div className="w-full md:w-1/2 flex flex-col justify-center items-center py-8">
               <Title title={obj.cta_title} added_class="text-center" />
               <div className="py-4 flex">
-                <Link href={obj.cta_link}>
+                <Link href={obj.cta_link} passHref>
                   <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
                     <div className="absolute inset-0">
                       <Image
@@ -235,7 +235,12 @@ export default function WidgetChooser({ obj, results, category }) {
                   <div>
                     <Link href="/manufacturing" passHref>
                       <a className="flex flex-col items-center no-underline">
-                        <Image src={Manufacturing} width={50} height={50} />
+                        <Image
+                          src={Manufacturing}
+                          width={50}
+                          height={50}
+                          alt="Manufacturing Image"
+                        />
                         <h3 className="mt-4">Manufacturing</h3>
                       </a>
                     </Link>
@@ -243,7 +248,12 @@ export default function WidgetChooser({ obj, results, category }) {
                   <div>
                     <Link href="/design" passHref>
                       <a className="flex flex-col items-center no-underline">
-                        <Image src={Design} width={50} height={50} />
+                        <Image
+                          src={Design}
+                          width={50}
+                          height={50}
+                          alt="Design Image"
+                        />
                         <h3 className="mt-4">Design</h3>
                       </a>
                     </Link>
@@ -338,7 +348,7 @@ export default function WidgetChooser({ obj, results, category }) {
         <div className="relative">
           <div className="wide-load flex flex-col space-y-6">
             <div className="w-full justify-center flex flex-col items-center">
-              <Link href={obj.cta_link}>
+              <Link href={obj.cta_link} passHref>
                 <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
                   <div className="absolute inset-0">
                     <Image
@@ -419,10 +429,10 @@ export default function WidgetChooser({ obj, results, category }) {
                       <Title title={obj.title} added_class="learn-more " />
                     </a>
                   </Link>
-                  <Link href="/about">
+                  <Link href="/about" passHref>
                     <p className="cursor-pointer">Our Company</p>
                   </Link>
-                  <Link href="/faq">
+                  <Link href="/faq" passHref>
                     <p className="cursor-pointer">
                       Everything else about Natural Playgrounds
                     </p>
