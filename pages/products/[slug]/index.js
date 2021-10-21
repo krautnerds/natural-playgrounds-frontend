@@ -164,19 +164,25 @@ export default function Product({ product }) {
                   </div>
                 </form>
                 <div className="flex flex-col space-y-8 border-t-2 border-gray-100">
-                  {isLoggedIn &&
-                  (product.instructions_url || product.product_pdf_url) ? (
+                  {product.instructions_url || product.product_pdf_url ? (
                     <section aria-labelledby="details-heading" className="mt-4">
                       <h2 class="text-xl font-bold text-gray-900">
                         Additional details
                       </h2>
 
                       <div className="flex flex-col space-y-4 pt-4">
-                        {product.instructions_url && (
+                        {product.instructions_url && isLoggedIn ? (
                           <Link href={product.instructions_url} passHref>
                             <a className="text-lg cursor-pointer">
                               View Instructions
                             </a>
+                          </Link>
+                        ) : (
+                          <Link href={`/login/`} passHref>
+                            <div className="text-lg cursor-pointer">
+                              View Instructions{" "}
+                              <span className="underline">(must login)</span>
+                            </div>
                           </Link>
                         )}
                         {product.product_pdf_url && (
