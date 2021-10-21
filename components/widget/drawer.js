@@ -28,7 +28,7 @@ export default function Drawer({ product, three, category }) {
             </div>
           </div>
           <div>
-            <p className="font-light text-md pt-2">{category.name}</p>
+            <p className="text-xl font-bold pt-2">{category.name}</p>
           </div>
         </a>
       </Link>

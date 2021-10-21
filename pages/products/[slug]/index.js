@@ -81,7 +81,7 @@ export default function Product({ product }) {
                       <Image
                         src={image.image_url}
                         alt={`Product image of ${image.name}`}
-                        className="w-full h-full object-center object-cover sm:rounded-lg"
+                        className="w-full h-full sm:rounded-lg"
                         layout="fill"
                       />
                     </Tab.Panel>

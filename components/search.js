@@ -21,7 +21,7 @@ export default function Search({ results, category, topSeller }) {
       filterSelected(router.query.category_search);
       filterTop(router.query.category_search);
     }
-  });
+  }, [router.query.search, router.query.category_search]);
 
   const filterSearch = (value) => {
     setLoading(true);
