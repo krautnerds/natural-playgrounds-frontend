@@ -206,7 +206,7 @@ export default function WidgetChooser({ obj, results, category }) {
               <Title title="Shop our Store" />
             </div>
             <div>
-              <Store results={results} />
+              <Store category={category} />
             </div>
           </div>
         </div>

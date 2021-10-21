@@ -6,10 +6,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import Drawer from "./widget/drawer";
 import Link from "next/link";
-export default function Store({ results, selected, category }) {
-  const [localResults, setLocalResults] = useState(
-    selected ? selected : results
-  );
+export default function Store({ category }) {
   const [loading, setLoading] = useState(false);
 
   return (
@@ -24,15 +21,9 @@ export default function Store({ results, selected, category }) {
           </h2>
           {!loading ? (
             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-4">
-              {localResults.map((result, idx) => (
+              {category.map((result, idx) => (
                 <Fragment key={idx}>
-                  {result.products.map((product, productIdx) => (
-                    <Drawer
-                      product={product}
-                      category={result}
-                      key={productIdx}
-                    />
-                  ))}
+                  <Drawer category={result} key={idx} />
                 </Fragment>
               ))}
             </div>
