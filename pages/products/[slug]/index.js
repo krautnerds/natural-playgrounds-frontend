@@ -4,6 +4,7 @@ import { Tab } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCartSlide } from "../../../hooks/use-cart-slide.js";
+import { useAuthState } from "../../../hooks/auth.js";
 
 import { CartProvider, useCart } from "react-use-cart";
 
@@ -16,6 +17,7 @@ export default function Product({ product }) {
   const [optionName, setOptionName] = useState("");
   const [price, setPrice] = useState(0);
   const { cartSlide, updateCartSlide } = useCartSlide();
+  const { isLoggedIn } = useAuthState();
 
   useEffect(() => {
     for (var i in product.options) {
@@ -162,7 +164,8 @@ export default function Product({ product }) {
                   </div>
                 </form>
                 <div className="flex flex-col space-y-8 border-t-2 border-gray-100">
-                  {product.instructions_url || product.product_pdf_url ? (
+                  {isLoggedIn &&
+                  (product.instructions_url || product.product_pdf_url) ? (
                     <section aria-labelledby="details-heading" className="mt-4">
                       <h2 class="text-xl font-bold text-gray-900">
                         Additional details

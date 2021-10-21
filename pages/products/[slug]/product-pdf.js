@@ -23,7 +23,7 @@ export default function Instructions({ product }) {
               <h1>{product.name}</h1>
             </Link>
           </div>
-          <div>
+          <div className="w-1/4">
             <ReactToPrint
               trigger={() => (
                 <button className="flex flex-row space-x-2 items-center button py-4 px-2">
