@@ -316,9 +316,9 @@ const Profile = (props) => {
 
                       <div className="mt-6 flow-root px-4 sm:mt-10 sm:px-0">
                         <div className="-my-6 divide-y divide-gray-200 sm:-my-10">
-                          {order.items.map((product) => (
+                          {order.items.map((product, productIdx) => (
                             <div
-                              key={product.id}
+                              key={productIdx}
                               className="flex py-6 sm:py-10"
                             >
                               <div className="min-w-0 flex-1 lg:flex lg:flex-col">
@@ -348,14 +348,16 @@ const Profile = (props) => {
                                       View Product
                                     </a>
                                   </div>
-                                  <div className="mt-2 flex text-sm font-medium sm:mt-4">
-                                    <a
-                                      href={product.href}
-                                      className="text-i-600 hover:text-i-500"
-                                    >
-                                      View Instructions
-                                    </a>
-                                  </div>
+                                  {product.instructions_url && (
+                                    <div className="mt-2 flex text-sm font-medium sm:mt-4">
+                                      <a
+                                        href={product.instructions_url}
+                                        className="text-i-600 hover:text-i-500"
+                                      >
+                                        View Instructions
+                                      </a>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                               <div className="ml-4 flex-shrink-0 sm:m-0 sm:mr-6 sm:order-first relative  w-20 h-20  sm:w-40 sm:h-40 lg:w-52 lg:h-52">

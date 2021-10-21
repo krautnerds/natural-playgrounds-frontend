@@ -5,8 +5,9 @@ import Link from "next/link";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 
-export default function Instructions({ product }) {
+const Instructions = ({ product }) => {
   const instructions = useRef(null);
+
   const pageStyle = `
   @page {
     size: 80mm 50mm;
@@ -55,7 +56,7 @@ export default function Instructions({ product }) {
             />
           </div>
         </div>
-        <div className="prose w-full print:px-12" ref={instructions}>
+        <div className="w-full print:px-12" ref={instructions}>
           <div
             className="mt-1 text-lg font-medium text-gray-900"
             dangerouslySetInnerHTML={{
@@ -66,7 +67,7 @@ export default function Instructions({ product }) {
       </div>
     </main>
   );
-}
+};
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
@@ -96,3 +97,5 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
+
+export default Instructions;

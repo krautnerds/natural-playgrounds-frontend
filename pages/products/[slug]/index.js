@@ -32,9 +32,9 @@ export default function Product({ product }) {
       </Head>
       <div className="max-w-2xl mx-auto lg:max-w-none">
         {/* Product */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 lg:items-start">
           {/* Image gallery */}
-          <div className="h-full">
+          <div className="h-full w-full md:w-2/5">
             <Tab.Group as="div" className="flex flex-col-reverse">
               {/* Image selector */}
               <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
@@ -127,71 +127,81 @@ export default function Product({ product }) {
                   </div>
 
                   <div className="mt-10 flex flex-col-reverse sm:flex-row">
-                    {price > 0 ? (
-                      <button
-                        type="button"
-                        className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"
-                        onClick={() => {
-                          addItem({
-                            id: option,
-                            quantity: 1,
-                            price: price,
-                            slug: product.slug,
-                            option: optionName,
-                            name: product.name,
-                            image: product.image_url,
-                            weight: product.weight,
-                          });
-                          updateCartSlide(true);
-                        }}
-                      >
-                        Add to Cart
-                      </button>
-                    ) : (
-                      <div className="max-w-xs flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full cursor-not-allowed">
-                        Select an option to add to cart
-                      </div>
-                    )}
-
+                    <div className="w-full sm:w-1/2">
+                      {price > 0 ? (
+                        <button
+                          type="button"
+                          className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"
+                          onClick={() => {
+                            addItem({
+                              id: option,
+                              quantity: 1,
+                              price: price,
+                              slug: product.slug,
+                              option: optionName,
+                              name: product.name,
+                              image: product.image_url,
+                              weight: product.weight,
+                            });
+                            updateCartSlide(true);
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      ) : (
+                        <div className="max-w-xs flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full cursor-not-allowed">
+                          Select an option to add to cart
+                        </div>
+                      )}
+                    </div>
                     {price > 0 && (
-                      <div className="ml-4 h-full flex flex-col items-center align-center text-2xl pt-2 w-16">
+                      <div className="ml-4 h-full flex flex-col items-center align-center text-2xl pt-2 w-full sm:w-1/2">
                         ${price}
                       </div>
                     )}
                   </div>
                 </form>
-                {product.instructions_url || product.product_pdf_url ? (
-                  <section aria-labelledby="details-heading" className="mt-12">
-                    <h2 class="text-xl font-bold text-gray-900">
-                      Additional details
-                    </h2>
+                <div className="flex flex-col space-y-8 border-t-2 border-gray-100">
+                  {product.instructions_url || product.product_pdf_url ? (
+                    <section aria-labelledby="details-heading" className="mt-4">
+                      <h2 class="text-xl font-bold text-gray-900">
+                        Additional details
+                      </h2>
 
-                    <div className="flex flex-col space-y-4 pt-4">
-                      {product.instructions_url && (
-                        <Link href={product.instructions_url} passHref>
-                          <a className="text-lg cursor-pointer">
-                            View Instructions
-                          </a>
-                        </Link>
-                      )}
-                      {product.product_pdf_url && (
-                        <Link href={product.product_pdf_url} passHref>
-                          <a className="text-lg cursor-pointer">
-                            View PDF Product Sheet
-                          </a>
-                        </Link>
-                      )}
-                    </div>
-                  </section>
-                ) : (
-                  ""
-                )}
+                      <div className="flex flex-col space-y-4 pt-4">
+                        {product.instructions_url && (
+                          <Link href={product.instructions_url} passHref>
+                            <a className="text-lg cursor-pointer">
+                              View Instructions
+                            </a>
+                          </Link>
+                        )}
+                        {product.product_pdf_url && (
+                          <Link href={product.product_pdf_url} passHref>
+                            <a className="text-lg cursor-pointer">
+                              View PDF Product Sheet
+                            </a>
+                          </Link>
+                        )}
+                      </div>
+                    </section>
+                  ) : (
+                    ""
+                  )}
+                  <div>
+                    <h2 class="text-xl font-bold text-gray-900">Dimensions</h2>
+                    <div
+                      className="text-base text-gray-700 space-y-6"
+                      dangerouslySetInnerHTML={{ __html: product.dimensions }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Product info */}
-          <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
+          <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0 w-full md:w-3/5">
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
               {product.name}
             </h1>
@@ -264,7 +274,7 @@ export default function Product({ product }) {
         {product.og.length > 0 && (
           <section
             aria-labelledby="related-heading"
-            className="mt-5 border-t border-gray-200 py-16 px-4 sm:px-0"
+            className="mt-10 border-t-2 border-gray-700 py-8 px-4 sm:px-0"
           >
             <h2
               id="related-heading"

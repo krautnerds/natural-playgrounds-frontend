@@ -2,17 +2,14 @@ import Head from "next/head";
 import { PrinterIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Link from "next/link";
-import { jsPDF } from "jspdf";
+import { useRef } from "react";
+import ReactToPrint from "react-to-print";
 
 export default function Instructions({ product }) {
-  const savePDF = () => {
-    var doc = new jsPDF();
-    doc.text("Hello world!", 10, 10);
-    doc.save("a4.pdf");
-  };
+  const productPDF = useRef(null);
 
   return (
-    <main className="max-w-6xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
+    <main className="max-w-6xl mx-auto sm:pt-16 sm:px-6 lg:px-8 print:m-8">
       <Head>
         <title>{product.name}</title>
       </Head>
@@ -27,16 +24,21 @@ export default function Instructions({ product }) {
             </Link>
           </div>
           <div>
-            <button
-              onClick={() => savePDF()}
-              className="flex flex-row space-x-2 items-center button py-4 px-2"
-            >
-              <PrinterIcon className="h-6 w-6 text-white" aria-hidden="true" />
-              <p className="text-white text-md">Save as PDF</p>
-            </button>
+            <ReactToPrint
+              trigger={() => (
+                <button className="flex flex-row space-x-2 items-center button py-4 px-2">
+                  <PrinterIcon
+                    className="h-6 w-6 text-white"
+                    aria-hidden="true"
+                  />
+                  <p className="text-white text-md">Save as PDF</p>
+                </button>
+              )}
+              content={() => productPDF.current}
+            />
           </div>
         </div>
-        <div className="prose">
+        <div className="w-full print:px-12" ref={productPDF}>
           <div
             className="mt-1 text-lg font-medium text-gray-900"
             dangerouslySetInnerHTML={{

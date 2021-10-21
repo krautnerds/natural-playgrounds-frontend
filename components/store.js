@@ -14,61 +14,23 @@ export default function Store({ results, selected, category }) {
 
   return (
     <main className="">
-      <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
-        <aside>
-          <h2 className="sr-only">Filters</h2>
-
-          <div className="sticky top-16">
-            <h3 className="text-xl uppercase text-blue-green font-normal pb-4">
-              Browse Categories
-            </h3>
-            <form className="space-y-6 max-h-96 overflow-scroll p-2">
-              {category &&
-                category.map((option, optionIdx) => (
-                  <Link
-                    href={{
-                      pathname: "/products",
-                      query: { category_search: option.name },
-                    }}
-                    key={optionIdx}
-                    passHref
-                  >
-                    <a className="flex items-center cursor-pointer no-underline">
-                      <label
-                        htmlFor={`${optionIdx}`}
-                        className="text-sm text-gray-600 flex flex-row w-full"
-                      >
-                        <div className="flex-1">{option.name}</div>
-                        <div className="flex justify-end">
-                          <PlusSmIcon
-                            className="ml-1 mr-2 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </div>
-                      </label>
-                    </a>
-                  </Link>
-                ))}
-            </form>
-          </div>
-        </aside>
+      <div className="pt-12 pb-24 lg:grid grid-cols-1 lg:gap-x-8">
         <section
           aria-labelledby="product-heading"
-          className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3"
+          className="mt-6 lg:mt-0 col-span-1"
         >
           <h2 id="product-heading" className="sr-only">
             Products
           </h2>
           {!loading ? (
-            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-4">
               {localResults.map((result, idx) => (
                 <Fragment key={idx}>
-                  {result.products.map((product, pIdx) => (
+                  {result.products.map((product, productIdx) => (
                     <Drawer
                       product={product}
                       category={result}
-                      key={idx}
-                      three={(idx + 1) % 3}
+                      key={productIdx}
                     />
                   ))}
                 </Fragment>

@@ -2,95 +2,36 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 export default function Drawer({ product, three, category }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [transitionExit, setTransitionExit] = useState(false);
-  const handleExit = () => {
-    setTransitionExit(true);
-    setIsOpen(false);
-    setTimeout(() => {
-      setTransitionExit(false);
-      // timeout should be less than animation time otherwise state might still be true
-      // after animation ends and drawer appears for few milliseconds
-    }, 1500);
-  };
   return (
-    <div className="gray-outline">
-      <div
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-        className="relative"
+    <div className="gray-outline cursor-pointer">
+      <Link
+        href={{
+          pathname: "/products/",
+          query: { category_search: category.name },
+        }}
+        passHref
       >
-        <div
-          onClick={() => setIsOpen(!isOpen)}
-          className={`${three === 0 ? "ml-2" : "mr-2"}`}
-        >
+        <a className="no-underline">
           <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-            {isOpen ? (
-              <div>
-                {product.image_url ? (
-                  <Image
-                    src={product.image_url}
-                    alt={`Product Image for ${product.name}`}
-                    className="w-full h-full object-center object-cover group-hover:opacity-75"
-                    layout="fill"
-                    priority={true}
-                  />
-                ) : (
-                  <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
-                )}
-              </div>
-            ) : (
-              <div>
-                {category.image_url ? (
-                  <Image
-                    src={category.image_url}
-                    alt={`Category Image for ${category.name}`}
-                    className="w-full h-full object-center object-cover group-hover:opacity-75"
-                    layout="fill"
-                    priority={true}
-                  />
-                ) : (
-                  <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
-                )}
-              </div>
-            )}
+            <div>
+              {category.image_url ? (
+                <Image
+                  src={category.image_url}
+                  alt={`Category Image for ${category.name}`}
+                  className="w-full h-full object-center object-cover group-hover:opacity-75"
+                  layout="fill"
+                  priority={true}
+                />
+              ) : (
+                <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
+              )}
+            </div>
           </div>
           <div>
             <p className="font-light text-md pt-2">{category.name}</p>
           </div>
-        </div>
-        {isOpen && (
-          <div
-            className={`flex flex-row drawer_container ${
-              transitionExit ? "exit" : ""
-            } ${three === 0 ? "right" : "left"}`}
-          >
-            <div
-              onClick={handleExit}
-              className={`drawer ${
-                transitionExit ? "exit" : ""
-              } flex flex-col justify-start space-y-4`}
-            >
-              <Link href={product.link} passHref>
-                <h3 className="uppercase text-blue-green font-normal text-xl text-center cursor-pointer">
-                  {product.name}
-                </h3>
-              </Link>
-              <Link
-                href={{
-                  pathname: "/products",
-                  query: { category_search: category.name },
-                }}
-                passHref
-              >
-                <a className="button no-underline text-center">
-                  View {category.name}
-                </a>
-              </Link>
-            </div>
-          </div>
-        )}
-      </div>
+        </a>
+      </Link>
     </div>
   );
 }

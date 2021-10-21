@@ -1,5 +1,7 @@
 import { useState, createContext, useContext, useEffect } from "react";
+
 export const AuthContext = createContext();
+
 export function useAuthState() {
   const [isLoggedIn, updateIsLoggedIn] = useState(false);
   const [userToken, updateUserToken] = useState("");

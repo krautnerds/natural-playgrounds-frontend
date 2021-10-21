@@ -6,9 +6,10 @@ import Loader from "react-loader-spinner";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Search({ results, category }) {
+export default function Search({ results, category, topSeller }) {
   const [localResults, setLocalResults] = useState(results);
   const [filterable, setFilterable] = useState([]);
+  const [selling, setSelling] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -18,8 +19,9 @@ export default function Search({ results, category }) {
     }
     if (router.query.category_search) {
       filterSelected(router.query.category_search);
+      filterTop(router.query.category_search);
     }
-  }, [router.query]);
+  }, [router.query.search, router.query.category_search]);
 
   const filterSearch = (value) => {
     setLoading(true);
@@ -35,22 +37,43 @@ export default function Search({ results, category }) {
 
     setLoading(false);
   };
+  const filterTop = (value) => {
+    setLoading(true);
+    if (value) {
+      let sellingList = [];
+      topSeller.filter(function (_result) {
+        if (_result.name && _result.name === value) {
+          _result.products.filter(function (_product) {
+            sellingList.push(_product);
+          });
+        }
+      });
+      setSelling(sellingList);
+    }
+
+    setLoading(false);
+  };
 
   const filterSelected = (value) => {
     // Save the filters
-    var local_filters = [...filterable];
-    var index = local_filters.indexOf(value);
+    var localFilters = [...filterable];
+    var index = localFilters.indexOf(value);
     if (index === -1) {
-      local_filters.push(value);
+      localFilters.push(value);
     } else {
-      local_filters.splice(index, 1);
+      localFilters.splice(index, 1);
     }
-    setFilterable(local_filters);
+    console.log(localFilters.length);
+    if (localFilters.length === 1) {
+      filterTop(localFilters[0]);
+    } else setSelling([]);
+
+    setFilterable(localFilters);
     // Now Filter the data
     let filteredResults = [];
     setLoading(true);
-    if (local_filters.length !== 0) {
-      local_filters.filter(function (_filter) {
+    if (localFilters.length !== 0) {
+      localFilters.filter(function (_filter) {
         results.filter(function (_result) {
           _result.category.filter(function (_category) {
             if (_category.name.includes(_filter)) {
@@ -119,36 +142,93 @@ export default function Search({ results, category }) {
             Products
           </h2>
           {!loading ? (
-            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-              {localResults.map((product, productIdx) => (
-                <Link key={productIdx} href={product.link} className="group">
-                  <a>
-                    <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                      {product.image_url ? (
-                        <Image
-                          src={product.image_url}
-                          alt={`Product Image for ${product.name}`}
-                          className="w-full h-full object-center object-cover group-hover:opacity-75"
-                          layout="fill"
+            <div className="flex flex-col space-y-4">
+              {selling && selling.length > 0 && (
+                <div className="flex flex-col border-b-4 border-light-green pb-4 space-y-4">
+                  <h2 className="text-2xl">Top Selling Product</h2>
+                  <div className="grid grid-cols-1 gap-7">
+                    {selling.map((seller, sellerIdx) => (
+                      <div className="grid grid-cols-3 gap-7">
+                        <div className="col-span-1">
+                          <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                            {seller.image_url ? (
+                              <Image
+                                src={seller.image_url}
+                                alt={`Image for ${seller.name}`}
+                                className="w-full h-full object-center object-cover group-hover:opacity-75"
+                                layout="fill"
+                              />
+                            ) : (
+                              <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
+                            )}
+                          </div>
+                        </div>
+                        <div className="col-span-2  flex flex-col h-full justify-between">
+                          <Link
+                            key={sellerIdx}
+                            href={seller.link}
+                            className="group"
+                          >
+                            <a className="no-underline">
+                              <h3 className="text-2xl font-extrabold tracking-tight  text-gray-700">
+                                {seller.name}
+                              </h3>
+                            </a>
+                          </Link>
+                          {seller.meta_description && (
+                            <div
+                              className="mt-1 text-lg font-medium text-gray-900"
+                              dangerouslySetInnerHTML={{
+                                __html: seller.meta_description,
+                              }}
+                            />
+                          )}
+                          <div class="flex-1 flex items-end">
+                            <button
+                              type="button"
+                              className="max-w-xs flex-1 bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500 sm:w-full"
+                            >
+                              Add to Cart
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
+                {localResults.map((product, productIdx) => (
+                  <Link key={productIdx} href={product.link} className="group">
+                    <a>
+                      <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                        {product.image_url ? (
+                          <Image
+                            src={product.image_url}
+                            alt={`Product Image for ${product.name}`}
+                            className="w-full h-full object-center object-cover group-hover:opacity-75"
+                            layout="fill"
+                          />
+                        ) : (
+                          <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
+                        )}
+                      </div>
+                      <h3 className="mt-4 text-sm text-gray-700">
+                        {product.name}
+                      </h3>
+                      {product.search_description && (
+                        <div
+                          className="mt-1 text-lg font-medium text-gray-900"
+                          dangerouslySetInnerHTML={{
+                            __html: product.search_description,
+                          }}
                         />
-                      ) : (
-                        <div className="w-full h-full object-center object-cover sm:w-full sm:h-full"></div>
                       )}
-                    </div>
-                    <h3 className="mt-4 text-sm text-gray-700">
-                      {product.name}
-                    </h3>
-                    {product.search_description && (
-                      <div
-                        className="mt-1 text-lg font-medium text-gray-900"
-                        dangerouslySetInnerHTML={{
-                          __html: product.search_description,
-                        }}
-                      />
-                    )}
-                  </a>
-                </Link>
-              ))}
+                    </a>
+                  </Link>
+                ))}
+              </div>
             </div>
           ) : (
             <div className="h-screen flex justify-center align-center items-center">
