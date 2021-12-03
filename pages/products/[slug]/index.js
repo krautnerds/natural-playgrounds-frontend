@@ -171,7 +171,7 @@ export default function Product({ product }) {
 
                       <div className="flex flex-col space-y-4 pt-4">
                         {product.instructions_url && (
-                          <>
+                          <div>
                             {loggedIn ? (
                               <Link href={product.instructions_url} passHref>
                                 <a className="text-lg cursor-pointer">
@@ -188,15 +188,17 @@ export default function Product({ product }) {
                                 </div>
                               </Link>
                             )}
-                          </>
+                          </div>
                         )}
-                        {product.product_pdf_url && (
-                          <Link href={product.product_pdf_url} passHref>
-                            <a className="text-lg cursor-pointer">
-                              View PDF Product Sheet
-                            </a>
-                          </Link>
-                        )}
+                        <div>
+                          {product.product_pdf_url && (
+                            <Link href={product.product_pdf_url} passHref>
+                              <a className="text-lg cursor-pointer">
+                                View PDF Product Sheet
+                              </a>
+                            </Link>
+                          )}
+                        </div>
                       </div>
                     </section>
                   ) : (
