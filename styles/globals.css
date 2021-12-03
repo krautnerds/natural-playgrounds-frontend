@@ -15,7 +15,8 @@
 
 body,
 p,
-a {
+a,
+li {
   @apply font-body font-light;
 }
 
@@ -296,4 +297,11 @@ blockquote.testimonial:after {
 
 .drawer.exit {
   animation: drawerTransitionExit 0.6s;
+}
+
+ol {
+  @apply list-decimal list-inside;
+}
+li {
+  @apply my-2
 }

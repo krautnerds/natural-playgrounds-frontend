@@ -58,7 +58,7 @@ const Instructions = ({ product }) => {
         </div>
         <div className="w-full print:px-12" ref={instructions}>
           <div
-            className="mt-1 text-lg font-medium text-gray-900"
+            className="mt-1 font-medium text-gray-900"
             dangerouslySetInnerHTML={{
               __html: product.instructions,
             }}
