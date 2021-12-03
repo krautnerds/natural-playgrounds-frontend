@@ -41,7 +41,7 @@ const Instructions = ({ product }) => {
               <h1>{product.name}</h1>
             </Link>
           </div>
-          <div className="w-1/4">
+          <div className="w-1/4 flex justify-end">
             <ReactToPrint
               trigger={() => (
                 <button className="flex flex-row space-x-2 items-center button py-4 px-2">

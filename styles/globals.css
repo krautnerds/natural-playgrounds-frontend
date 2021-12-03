@@ -305,3 +305,7 @@ ol {
 li {
   @apply my-2
 }
+
+li ul{
+  @apply ml-4
+}
