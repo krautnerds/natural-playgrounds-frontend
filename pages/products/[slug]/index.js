@@ -4,8 +4,7 @@ import { Tab } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCartSlide } from "../../../hooks/use-cart-slide.js";
-import { useAuthState } from "../../../hooks/auth.js";
-
+import cookie from "js-cookie";
 import { CartProvider, useCart } from "react-use-cart";
 
 function classNames(...classes) {
@@ -17,7 +16,7 @@ export default function Product({ product }) {
   const [optionName, setOptionName] = useState("");
   const [price, setPrice] = useState(0);
   const { cartSlide, updateCartSlide } = useCartSlide();
-  const { isLoggedIn } = useAuthState();
+  const [loggedIn, setLoggedIn] = useState(cookie.get("token"));
 
   useEffect(() => {
     for (var i in product.options) {
@@ -151,7 +150,7 @@ export default function Product({ product }) {
                           Add to Cart
                         </button>
                       ) : (
-                        <div className="max-w-xs flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full cursor-not-allowed">
+                        <div className="max-w-xs flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full cursor-not-allowed text-center">
                           Select an option to add to cart
                         </div>
                       )}
@@ -171,19 +170,25 @@ export default function Product({ product }) {
                       </h2>
 
                       <div className="flex flex-col space-y-4 pt-4">
-                        {product.instructions_url && isLoggedIn ? (
-                          <Link href={product.instructions_url} passHref>
-                            <a className="text-lg cursor-pointer">
-                              View Instructions
-                            </a>
-                          </Link>
-                        ) : (
-                          <Link href={`/login/`} passHref>
-                            <div className="text-lg cursor-pointer">
-                              View Instructions{" "}
-                              <span className="underline">(must login)</span>
-                            </div>
-                          </Link>
+                        {product.instructions_url && (
+                          <>
+                            {loggedIn ? (
+                              <Link href={product.instructions_url} passHref>
+                                <a className="text-lg cursor-pointer">
+                                  View Instructions
+                                </a>
+                              </Link>
+                            ) : (
+                              <Link href={`/login/`} passHref>
+                                <div className="text-lg cursor-pointer">
+                                  View Instructions{" "}
+                                  <span className="underline">
+                                    (must login)
+                                  </span>
+                                </div>
+                              </Link>
+                            )}
+                          </>
                         )}
                         {product.product_pdf_url && (
                           <Link href={product.product_pdf_url} passHref>
