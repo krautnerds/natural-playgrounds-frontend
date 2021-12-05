@@ -318,6 +318,10 @@ p strong {
   @apply mt-0
 }
 
+.prose>:first-child {
+  @apply my-0
+}
+
 .space-x-reverse-important {
   @apply space-x-reverse !important;
 }
