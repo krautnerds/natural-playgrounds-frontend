@@ -381,6 +381,9 @@ export default function WidgetChooser({ obj, results, category }) {
       )}
       {obj.widget_type === "Full Width Image" && (
         <div>
+          <div className="w-full justify-start flex flex-col items-start">
+            <Title title={obj.title} added_class="full-text" />
+          </div>
           <div className="relative h-[600px]">
             <div className="absolute inset-0">
               {obj.image_one_url && (
