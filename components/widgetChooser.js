@@ -13,20 +13,20 @@ import YoutubeEmbed from "./widget/youtube";
 import ContactUs from "./widget/contact_us";
 export default function WidgetChooser({ obj, results, category }) {
   return (
-    <>
+    <div className={obj.margin}>
       {obj.widget_type === "Image/Text" && (
         <div className="relative">
           <div
             className={`wide-load flex flex-col ${
               obj.structure === "Text Right"
                 ? "md:flex-row"
-                : "md:flex-row-reverse"
-            } md:space-x-12`}
+                : "md:flex-row-reverse space-x-reverse-important"
+            } space-y-8 md:space-y-0 md:space-x-12`}
           >
             <div className="w-full md:w-1/2 h-full items-center align-center justify-center flex flex-col space-y-8">
               {obj.image_one_url && (
                 <div className="w-full flex justify-start">
-                  <div className="relative w-full h-96">
+                  <div className="relative w-full h-full">
                     {obj.image_one_url && (
                       <NaturalImage obj={obj} image={obj.image_one_url} />
                     )}
@@ -35,7 +35,7 @@ export default function WidgetChooser({ obj, results, category }) {
               )}
               {obj.image_two_url && (
                 <div className="w-full  flex justify-start">
-                  <div className="relative w-full h-96">
+                  <div className="relative w-full h-full">
                     {obj.image_two_url && (
                       <NaturalImage obj={obj} image={obj.image_two_url} />
                     )}
@@ -55,31 +55,33 @@ export default function WidgetChooser({ obj, results, category }) {
             className={`wide-load flex flex-col ${
               obj.structure === "Text Right"
                 ? "md:flex-row"
-                : "md:flex-row-reverse"
-            } md:space-x-12`}
+                : "md:flex-row-reverse space-x-reverse-important"
+            } space-y-8 md:space-y-0 md:space-x-12`}
           >
             <div className="w-full md:w-1/2 h-full">
               <Text title={obj.title} content={obj.content} />
             </div>
-            <div className="w-full md:w-1/2 flex flex-col justify-center items-center py-8">
-              <Title title={obj.cta_title} added_class="text-center" />
-              <div className="py-4 flex">
-                <Link href={obj.cta_link} passHref>
-                  <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
-                    <div className="absolute inset-0">
-                      <Image
-                        className="w-full h-full object-cover"
-                        src={Bark}
-                        alt="CTA Bark"
-                      />
-                    </div>
-                    <p className="relative font-bold text-lg uppercase">
-                      {obj.cta_text}
-                    </p>
-                  </a>
-                </Link>
+            {obj.cta_link && (
+              <div className="w-full md:w-1/2 flex flex-col justify-center items-center py-8">
+                <Title title={obj.cta_title} added_class="text-center" />
+                <div className="py-4 flex">
+                  <Link href={obj.cta_link} passHref>
+                    <a className="relative border-8 border-dark-green px-16 py-6 overflow-hidden no-underline">
+                      <div className="absolute inset-0">
+                        <Image
+                          className="w-full h-full object-cover"
+                          src={Bark}
+                          alt="CTA Bark"
+                        />
+                      </div>
+                      <p className="relative font-bold text-lg uppercase">
+                        {obj.cta_text}
+                      </p>
+                    </a>
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}
@@ -379,7 +381,7 @@ export default function WidgetChooser({ obj, results, category }) {
       )}
       {obj.widget_type === "Full Width Image" && (
         <div>
-          <div className="relative h-[400px]">
+          <div className="relative h-[600px]">
             <div className="absolute inset-0">
               {obj.image_one_url && (
                 <Image
@@ -510,6 +512,6 @@ export default function WidgetChooser({ obj, results, category }) {
           className={`${obj.green_bottom ? "green-bottom-border" : ""}`}
         ></div>
       )}
-    </>
+    </div>
   );
 }

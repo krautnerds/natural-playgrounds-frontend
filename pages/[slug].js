@@ -14,10 +14,7 @@ export default function Page({ page, results, selected, category }) {
         <meta property="og:type" content="article" />
       </Head>
       <Hero title={page.title} sub_title={page.sub_title} />
-      <div
-        className="flex flex-col space-y-16 relative"
-        style={{ minHeight: "600px" }}
-      >
+      <div className="flex flex-col relative" style={{ minHeight: "600px" }}>
         {page.widgets &&
           page.widgets.map((object, i) => (
             <WidgetChooser

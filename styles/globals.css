@@ -309,3 +309,15 @@ li {
 li ul{
   @apply ml-4
 }
+
+p strong {
+  @apply text-lg text-dark-green !important;
+}
+
+.prose ul{
+  @apply mt-0
+}
+
+.space-x-reverse-important {
+  @apply space-x-reverse !important;
+}

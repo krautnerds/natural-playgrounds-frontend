@@ -4,7 +4,7 @@ export default function Text({ title, content, added_class }) {
     <>
       <Title title={title} />
       <div
-        className={`${added_class}`}
+        className={`${added_class} prose`}
         dangerouslySetInnerHTML={{ __html: content }}
       ></div>
     </>
