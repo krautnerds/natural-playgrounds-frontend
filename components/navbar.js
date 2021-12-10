@@ -166,6 +166,7 @@ export default function Example() {
                         }
                         aria-current={item.current ? "page" : undefined}
                         href={item.href}
+                        key={item.href}
                       >
                         {item.name}
                       </a>
