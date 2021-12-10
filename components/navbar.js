@@ -160,16 +160,15 @@ export default function Example() {
                     aria-label="Global"
                   >
                     {navigation.map((item) => (
-                      <Link href={item.href} key={item.name} passHref>
-                        <a
-                          className={
-                            "rounded-md py-2 px-3 inline-flex items-center text-sm uppercase font-medium text-white  no-underline"
-                          }
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      </Link>
+                      <a
+                        className={
+                          "rounded-md py-2 px-3 inline-flex items-center text-sm uppercase font-medium text-white  no-underline"
+                        }
+                        aria-current={item.current ? "page" : undefined}
+                        href={item.href}
+                      >
+                        {item.name}
+                      </a>
                     ))}
                   </nav>
                 </div>

@@ -14,7 +14,7 @@ function classNames(...classes) {
 const Profile = (props) => {
   const [billing, setBilling] = useState();
   const [shipping, setShipping] = useState();
-  const [billingShippingSame, setBillingShippingSame] = useState(false);
+  const [billingShippingSame, setBillingShippingSame] = useState(props.same_as);
   const [userEmail, setUserEmail] = useState(props.email);
   const [firstName, setFirstName] = useState(props.first_name);
   const [lastName, setLastName] = useState(props.last_name);

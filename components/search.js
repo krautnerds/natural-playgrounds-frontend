@@ -27,11 +27,13 @@ export default function Search({ results, category, topSeller }) {
     setLoading(true);
     if (value) {
       let filteredResults = [];
+      let lower = value.toLowerCase();
       results.filter(function (_result) {
-        if (_result.description && _result.description.includes(value)) {
+        if (_result.search && _result.search.includes(lower)) {
           filteredResults.push(_result);
         }
       });
+      console.log(filteredResults);
       setLocalResults(filteredResults);
     }
 
@@ -105,35 +107,36 @@ export default function Search({ results, category, topSeller }) {
             <h3 className="text-2xl font-medium leading-6 text-gray-900 pb-4">
               Select a Category
             </h3>
-            <form className="space-y-6 max-h-96 overflow-scroll">
-              {category.map((option, optionIdx) => (
-                <div key={optionIdx} className="flex items-center">
-                  <input
-                    id={`${optionIdx}`}
-                    name={`${option.name}`}
-                    type="checkbox"
-                    onChange={(event) => filterSelected(option.name)}
-                    className="focus:ring-dark-green h-4 w-4 text-dark-green border-gray-300 rounded"
-                    checked={filterable.includes(option.name) && true}
-                  />
-                  <label
-                    htmlFor={`${optionIdx}`}
-                    className="ml-3 text-sm text-gray-600 flex flex-row w-full"
-                  >
-                    <div className="flex-1">{option.name}</div>
-                    <div className="flex justify-end">
-                      <PlusSmIcon
-                        className="ml-1 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </label>
-                </div>
-              ))}
+            <form className="overflow-scroll">
+              <div className="max-h-screen overflow-scroll space-y-6">
+                {category.map((option, optionIdx) => (
+                  <div key={optionIdx} className="flex items-center">
+                    <input
+                      id={`${optionIdx}`}
+                      name={`${option.name}`}
+                      type="checkbox"
+                      onChange={(event) => filterSelected(option.name)}
+                      className="focus:ring-dark-green h-4 w-4 text-dark-green border-gray-300 rounded"
+                      checked={filterable.includes(option.name) && true}
+                    />
+                    <label
+                      htmlFor={`${optionIdx}`}
+                      className="ml-3 text-sm text-gray-600 flex flex-row w-full"
+                    >
+                      <div className="flex-1">{option.name}</div>
+                      <div className="flex justify-end">
+                        <PlusSmIcon
+                          className="ml-1 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </label>
+                  </div>
+                ))}
+              </div>
             </form>
           </div>
         </aside>
-
         <section
           aria-labelledby="product-heading"
           className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3 max-h-screen overflow-scroll"
@@ -217,14 +220,6 @@ export default function Search({ results, category, topSeller }) {
                       <h3 className="mt-4 text-sm text-gray-700">
                         {product.name}
                       </h3>
-                      {product.search_description && (
-                        <div
-                          className="mt-1 text-lg font-medium text-gray-900"
-                          dangerouslySetInnerHTML={{
-                            __html: product.search_description,
-                          }}
-                        />
-                      )}
                     </a>
                   </Link>
                 ))}

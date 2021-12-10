@@ -190,14 +190,16 @@ const Checkout = (props) => {
                     </label>
                     <div className="mt-1">
                       <input
-                        type="text"
+                        type="tel"
                         name="fax"
                         id="fax"
                         autoComplete="tel"
                         defaultValue={fax}
                         onChange={(e) => setFax(e.target.value)}
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
                       />
+                      <p className="text-xs">Format ###-###-####</p>
                     </div>
                   </div>
                   <div className="sm:col-span-1">
@@ -209,15 +211,17 @@ const Checkout = (props) => {
                     </label>
                     <div className="mt-1">
                       <input
-                        type="text"
+                        type="tel"
                         name="phone"
                         id="phone"
                         required={true}
                         defaultValue={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         autoComplete="tel"
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                         className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2 border-2"
                       />
+                      <p className="text-xs">Format ###-###-####</p>
                     </div>
                   </div>
                 </div>
@@ -344,7 +348,7 @@ const Checkout = (props) => {
               </div>
               <div className="mt-10 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">Payment</h2>
-
+                
                 <div className="mt-6 grid grid-cols-3 gap-y-6 gap-x-4">
                   <div className="col-span-3">
                     <label
