@@ -6,7 +6,7 @@ export default function NaturalImage({ obj, image, alt_text }) {
         <Image
           className="object-cover shadow-lg"
           src={image}
-          alt={alt_text}
+          alt={"alt"}
           layout="fill"
         />
       )}
